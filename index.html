@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datacore - Your Own Superintelligence</title>
+    <title>Datacore - Own Your Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -71,13 +71,8 @@
             right: 0;
             z-index: 100;
             background: transparent;
-            border-bottom: 1px solid var(--card-border);
         }
 
-        [data-theme="light"] nav,
-        [data-theme="light"] footer {
-            border: none;
-        }
 
         nav .container {
             display: flex;
@@ -119,53 +114,68 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
+            padding: 9px 24px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.3s;
             cursor: pointer;
-            border: none;
+            border: 1px solid;
         }
 
         .btn-primary {
-            background: var(--accent);
-            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(100, 100, 100, 0.5);
+            color: var(--text-secondary) !important;
         }
 
         .btn-primary:hover {
-            background: var(--accent-hover);
-            box-shadow: 0 0 20px var(--accent-glow);
+            background: rgba(59, 130, 246, 0.4);
+            border-color: rgba(59, 130, 246, 0.6);
             color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
         }
 
         .btn-secondary {
             background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-color: rgba(100, 100, 100, 0.3);
         }
 
         .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
+            border-color: rgba(59, 130, 246, 0.5);
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .btn-primary {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(100, 100, 100, 0.3);
+            color: var(--text-secondary) !important;
+        }
+
+        [data-theme="light"] .btn-primary:hover {
+            background: rgba(37, 99, 235, 0.15);
+            border-color: rgba(37, 99, 235, 0.4);
+            color: var(--accent) !important;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
         }
 
         [data-theme="light"] .btn-secondary {
-            background: rgba(255, 255, 255, 0.6);
-            border-color: var(--accent);
-            color: var(--accent);
+            background: transparent;
+            border-color: rgba(100, 100, 100, 0.2);
         }
 
         [data-theme="light"] .btn-secondary:hover {
-            background: var(--accent);
-            color: #ffffff;
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         /* Theme Toggle */
         .theme-toggle {
             position: fixed;
-            top: 20px;
+            top: 12px;
             right: 24px;
             z-index: 101;
             background: var(--bg-tertiary);
@@ -310,7 +320,6 @@
             position: relative;
             z-index: 2;
             padding: 16px 0;
-            border-top: 1px solid var(--card-border);
             text-align: center;
         }
 
@@ -321,6 +330,14 @@
 
         footer a:hover {
             color: var(--text-primary);
+        }
+
+        .footer-tagline {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            opacity: 0.7;
         }
 
         .footer-line {
@@ -376,9 +393,10 @@
 
         .hero h1 {
             font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
+            font-weight: 300;
             line-height: 1.1;
             margin-bottom: 24px;
+            letter-spacing: -0.02em;
         }
 
         .hero h1 .highlight {
@@ -426,8 +444,10 @@
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 300;
             margin-bottom: 16px;
+            letter-spacing: -0.01em;
         }
 
         .section-header p {
@@ -472,6 +492,7 @@
 
         .feature-card h3 {
             font-size: 1.25rem;
+            font-weight: 500;
             margin-bottom: 12px;
         }
 
@@ -507,6 +528,7 @@
 
         .evolution-stage h3 {
             font-size: 1.25rem;
+            font-weight: 500;
             margin-bottom: 8px;
         }
 
@@ -522,17 +544,67 @@
             margin-top: 12px;
         }
 
+        .easter-egg {
+            text-align: center;
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 32px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .easter-egg:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            text-align: center;
+        }
+
+        .philosophy-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .philosophy-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .philosophy-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .philosophy-content strong {
+            color: var(--accent);
+        }
+
+        .philosophy-content a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .philosophy-content a:hover {
+            text-decoration: underline;
+        }
+
         /* Movement Section */
         .movement {
             text-align: center;
         }
 
         .movement-quote {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 600;
-            max-width: 900px;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 400;
+            max-width: 700px;
             margin: 0 auto 48px;
-            line-height: 1.3;
+            line-height: 1.5;
+            color: var(--text-secondary);
         }
 
         .movement-quote .highlight {
@@ -558,7 +630,7 @@
 
         .comparison-row.header {
             background: var(--bg-tertiary);
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .comparison-cell {
@@ -585,8 +657,10 @@
         }
 
         .cta h2 {
-            font-size: 2.5rem;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 300;
             margin-bottom: 16px;
+            letter-spacing: -0.01em;
         }
 
         .cta p {
@@ -598,23 +672,56 @@
             margin-right: auto;
         }
 
-        .cta-code {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px 32px;
-            max-width: 500px;
-            margin: 0 auto 40px;
-            text-align: left;
+        .waitlist-form {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            max-width: 450px;
+            margin: 0 auto;
+            flex-wrap: wrap;
         }
 
-        .cta-code .comment {
+        .waitlist-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 9px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 100, 100, 0.3);
+            border-radius: 100px;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            transition: all 0.3s;
+        }
+
+        [data-theme="light"] .waitlist-input {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .waitlist-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .waitlist-input::placeholder {
             color: var(--text-muted);
         }
 
-        .cta-code .command {
+        .waitlist-response {
+            max-width: 500px;
+            margin: 24px auto 0;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            min-height: 24px;
+        }
+
+        .waitlist-response.success {
             color: var(--success);
+        }
+
+        .waitlist-response.error {
+            color: #ef4444;
         }
 
         /* Footer styles consolidated above (lines 216-240) */
@@ -649,11 +756,11 @@
         <div class="container">
             <a href="#" class="logo">data<span>core</span></a>
             <div class="nav-links">
-                <a href="#features">Features</a>
+                <a href="#features">What It Is</a>
                 <a href="#evolution">How It Grows</a>
                 <a href="#movement">The Movement</a>
                 <a href="https://github.com/datacore-one" class="btn btn-secondary">GitHub</a>
-                <a href="#get-started" class="btn btn-primary">Get Started</a>
+                <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
             </div>
         </div>
     </nav>
@@ -669,16 +776,16 @@
                     <span class="dot"></span>
                     Open source & local-first
                 </div>
-                <h1>Your own <span class="highlight">superintelligence</span></h1>
+                <h1>Own your <span class="highlight">intelligence</span>.</h1>
                 <p class="subtitle">
-                    Cognitive infrastructure for human-AI collaboration. Intelligence that extends your own beyond natural limits.
+                    Cognitive infrastructure for human-AI collaboration.
                 </p>
                 <div class="tagline">
                     > Tag tasks before bed. Wake up to completed work.
                 </div>
                 <div class="hero-buttons">
-                    <a href="#get-started" class="btn btn-primary">
-                        Get Started
+                    <a href="#waitlist" class="btn btn-primary">
+                        Join Waitlist
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
@@ -694,7 +801,7 @@
     <section class="section" id="features">
         <div class="container">
             <div class="section-header">
-                <h2>Why Datacore?</h2>
+                <h2>Infrastructure for your extended mind.</h2>
                 <p>For those who write down more tasks than they finish.</p>
             </div>
             <div class="features-grid">
@@ -713,21 +820,6 @@
                     <h3>Future-Proof Architecture</h3>
                     <p>Built on plain text and open standards that outlive any AI provider. Your data works with whatever AI wins tomorrow.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#129504;</div>
-                    <h3>Your AI Finally Remembers</h3>
-                    <p>Insights from every AI conversation are captured automatically. Chatbots forget. Datacore doesn't. Context compounds over time.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128640;</div>
-                    <h3>Agents That Work 24/7</h3>
-                    <p>Research, writing, analysis, project tracking. Tag a task, and AI agents handle it while you live your life.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#127760;</div>
-                    <h3>Modular & Extensible</h3>
-                    <p>Start with the core. Add modules for trading, content, research. Build your own. The community contributes.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -735,7 +827,7 @@
     <section class="section evolution" id="evolution">
         <div class="container">
             <div class="section-header">
-                <h2>It grows with you</h2>
+                <h2>You don't adapt to it.<br>It becomes you.</h2>
                 <p>From tasks to wisdom. The relationship evolves.</p>
             </div>
             <div class="evolution-stages">
@@ -764,18 +856,27 @@
                     <div class="quote">"It acts on my behalf"</div>
                 </div>
             </div>
+            <p class="easter-egg">The software of you.</p>
+        </div>
+    </section>
+
+    <section class="section philosophy" id="philosophy">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everyone deserves sovereignty<br>over their own mind.</h2>
+            </div>
+            <div class="philosophy-content">
+                <p>Productivity, control, and meaning aren't separate domains — they're facets of the same underlying thing: <strong>agency</strong>. The ability to act in the world in accordance with who you actually are.</p>
+                <p>The product doesn't define what a person is. The person defines what the product becomes. Structure emerges from use — one person's Datacore becomes a task engine, another's becomes externalized thinking.</p>
+                <p>Built with ethics by design: your data stays yours, your mind stays sovereign. Inspired by <a href="https://fairdatasociety.org" target="_blank" rel="noopener">Fair Data Society</a> principles of digital self-determination.</p>
+            </div>
         </div>
     </section>
 
     <section class="section movement" id="movement">
         <div class="container">
-            <div class="section-header">
-                <h2>The Linux of the Mind</h2>
-                <p>We're building the counterparty to corporate AGI.</p>
-            </div>
             <p class="movement-quote">
-                "They're building one AI to rule them all.<br>
-                <span class="highlight">We're building one AI for each of us.</span>"
+                Superintelligence is coming. The question isn't if — it's <span class="highlight">who builds it</span> and <span class="highlight">who it serves</span>.
             </p>
             <div class="comparison-table">
                 <div class="comparison-row header">
@@ -806,24 +907,18 @@
         </div>
     </section>
 
-    <section class="section cta" id="get-started">
+    <section class="section cta" id="waitlist">
         <div class="container">
-            <h2>Own your superintelligence</h2>
+            <h2>Own your intelligence.</h2>
             <p>Start with tasks. Stay for the transformation.</p>
-            <div class="cta-code">
-                <div class="comment"># Clone and start</div>
-                <div class="command">git clone git@github.com:YOUR_USERNAME/datacore.git ~/Data</div>
-                <div class="command">cd ~/Data && claude</div>
-                <br>
-                <div class="comment"># Run your first day</div>
-                <div class="command">/gtd-daily-start</div>
+            <div class="waitlist-form">
+                <input type="email" id="waitlist-email" placeholder="your@email.com" class="waitlist-input">
+                <button id="waitlist-submit" class="btn btn-primary">Join Waitlist</button>
             </div>
-            <div class="hero-buttons" style="justify-content: center;">
-                <a href="https://github.com/datacore-one/datacore" class="btn btn-primary">
-                    Fork on GitHub
-                </a>
-                <a href="https://github.com/datacore-one/datacore#readme" class="btn btn-secondary">
-                    Read the Docs
+            <div class="waitlist-response" id="waitlist-response"></div>
+            <div class="hero-buttons" style="justify-content: center; margin-top: 32px;">
+                <a href="https://github.com/datacore-one/datacore" class="btn btn-secondary">
+                    View on GitHub
                 </a>
             </div>
         </div>
@@ -841,8 +936,10 @@
             <p class="footer-line">
                 <span class="stardate">Stardate <span id="stardate"></span></span> &middot;
                 <a href="https://github.com/datacore-one">GitHub</a> &middot;
+                <a href="https://x.com/datacoreone">X</a> &middot;
                 MIT License
             </p>
+            <p class="footer-tagline">Own your intelligence.</p>
         </div>
     </footer>
     <script>
@@ -856,10 +953,21 @@
         let time = 0;
         let scrollProgress = 0;
 
+        // Mouse tracking for nebula effect
+        const mouse = { x: 0.5, y: 0.5, targetX: 0.5, targetY: 0.5 };
+        window.addEventListener('mousemove', (e) => {
+            mouse.targetX = e.clientX / window.innerWidth;
+            mouse.targetY = e.clientY / window.innerHeight;
+        });
+
         // Theme-aware color function
         function getGeometryColor() {
             const style = getComputedStyle(document.documentElement);
             return style.getPropertyValue('--geometry-color').trim() || '59, 130, 246';
+        }
+
+        function isLightTheme() {
+            return document.documentElement.getAttribute('data-theme') === 'light';
         }
 
         let geometryColor = getGeometryColor();
@@ -874,6 +982,9 @@
         let timeInGraphicSection = 0;
         let fractalZoom = 0;
         let fractalActive = false;
+
+        // Random rotation directions for layers (1 or -1), persists per session
+        const rotationDirections = Array.from({ length: 8 }, () => Math.random() > 0.5 ? 1 : -1);
 
         // Neuron-like blinks - random flashes
         const blinks = [];
@@ -1149,6 +1260,10 @@
         function render() {
             time += 0.003;
 
+            // Smooth mouse movement
+            mouse.x += (mouse.targetX - mouse.x) * 0.02;
+            mouse.y += (mouse.targetY - mouse.y) * 0.02;
+
             // Easter egg: track time in graphic section (scroll > 90%)
             if (scrollProgress > 0.9) {
                 timeInGraphicSection += 0.016; // ~60fps
@@ -1173,14 +1288,56 @@
             spawnBlink();
             updateBlinks();
 
-            // Clear with transparent (let CSS background show through)
+            // Clear canvas
             ctx.clearRect(0, 0, width, height);
+
+            // Draw nebula gradients with slow pulsation
+            const lightTheme = isLightTheme();
+            const pulseFactor = 0.5 + Math.sin(time * 0.4) * 0.5; // Slow pulse between 0.0-1.0
+            const nebulaAlpha = (lightTheme ? 0.05 : 0.15) * pulseFactor;
+            const centerX = width / 2;
+            const centerY = height / 2;
+
+            // Multiple floating nebula clouds
+            for (let i = 0; i < 3; i++) {
+                const offsetX = Math.sin(time * 0.15 + i * 2) * 280 + (mouse.x - 0.5) * 70 * (i + 1) * 0.25;
+                const offsetY = Math.cos(time * 0.12 + i * 2.5) * 200 + (mouse.y - 0.5) * 70 * (i + 1) * 0.25;
+
+                const gradient = ctx.createRadialGradient(
+                    centerX + offsetX, centerY + offsetY, 0,
+                    centerX + offsetX, centerY + offsetY, 550 + i * 120
+                );
+
+                // Blue-purple hues with individual pulse offset
+                const hue = 220 + i * 18 + Math.sin(time * 0.3 + i) * 10;
+                const sat = lightTheme ? 45 : 65;
+                const light = lightTheme ? 50 : 32;
+                const individualPulse = 0.8 + Math.sin(time * 0.5 + i * 1.5) * 0.2;
+
+                gradient.addColorStop(0, `hsla(${hue}, ${sat}%, ${light}%, ${nebulaAlpha * individualPulse})`);
+                gradient.addColorStop(0.4, `hsla(${hue + 12}, ${sat - 8}%, ${light - 5}%, ${nebulaAlpha * 0.5 * individualPulse})`);
+                gradient.addColorStop(1, 'transparent');
+
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            }
+
+            // Core glow that follows mouse with pulsation
+            const coreGradient = ctx.createRadialGradient(
+                centerX + (mouse.x - 0.5) * 90, centerY + (mouse.y - 0.5) * 90, 0,
+                centerX + (mouse.x - 0.5) * 90, centerY + (mouse.y - 0.5) * 90, 380
+            );
+            const corePulse = 0.7 + Math.sin(time * 0.6) * 0.3;
+            const coreAlpha = (lightTheme ? 0.035 : 0.07) * corePulse;
+            coreGradient.addColorStop(0, `hsla(245, 65%, ${lightTheme ? 55 : 48}%, ${coreAlpha})`);
+            coreGradient.addColorStop(0.5, `hsla(230, 45%, 38%, ${coreAlpha * 0.35})`);
+            coreGradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = coreGradient;
+            ctx.fillRect(0, 0, width, height);
 
             // Draw blinks first (behind geometry)
             drawBlinks();
 
-            const centerX = width / 2;
-            const centerY = height / 2;
             const baseSize = Math.min(width, height) * 0.38; // Scaled to fit screen with circle
 
             // Evolution based on scroll - 6 stages now
@@ -1266,7 +1423,7 @@
                 ]);
 
                 // Draw morphing shape (polygon to circle)
-                const coreRadius = baseSize * 0.35 * t;
+                const coreRadius = baseSize * 0.5 * t; // Fits inner square
                 ctx.beginPath();
                 if (shapeMorph > 0 && shapeMorph < 1) {
                     // Gradual morph: interpolate between polygon and circle
@@ -1301,7 +1458,7 @@
                 // Twinkle points on circle
                 if (circleTwinkle > 0) {
                     for (let i = 0; i < 4; i++) {
-                        const angle = (i * Math.PI / 2) + time * 0.5;
+                        const angle = (i * Math.PI / 2) + time * 0.5 * rotationDirections[0];
                         const tx = centerX + Math.cos(angle) * coreRadius;
                         const ty = centerY + Math.sin(angle) * coreRadius;
                         const twinkle = 0.5 + Math.sin(time * 3 + i * 1.5) * 0.5;
@@ -1370,7 +1527,7 @@
                 // Twinkle points on circle
                 if (circleTwinkle > 0) {
                     for (let i = 0; i < 4; i++) {
-                        const angle = (i * Math.PI / 2) + Math.PI / 4 + time * 0.4;
+                        const angle = (i * Math.PI / 2) + Math.PI / 4 + time * 0.4 * rotationDirections[1];
                         const tx = centerX + Math.cos(angle) * innerRadius;
                         const ty = centerY + Math.sin(angle) * innerRadius;
                         const twinkle = 0.5 + Math.sin(time * 2.8 + i * 1.7) * 0.5;
@@ -1452,7 +1609,7 @@
                 // Twinkle points on circle
                 if (circleTwinkle > 0) {
                     for (let i = 0; i < 6; i++) {
-                        const angle = (i * Math.PI / 3) + time * 0.3;
+                        const angle = (i * Math.PI / 3) + time * 0.3 * rotationDirections[2];
                         const tx = centerX + Math.cos(angle) * midRadius;
                         const ty = centerY + Math.sin(angle) * midRadius;
                         const twinkle = 0.5 + Math.sin(time * 2.5 + i * 1.2) * 0.5;
@@ -1539,7 +1696,7 @@
                 // Twinkle points on circle
                 if (circleTwinkle > 0) {
                     for (let i = 0; i < 8; i++) {
-                        const angle = (i * Math.PI / 4) + Math.PI / 8 + time * 0.25;
+                        const angle = (i * Math.PI / 4) + Math.PI / 8 + time * 0.25 * rotationDirections[3];
                         const tx = centerX + Math.cos(angle) * outerRadius;
                         const ty = centerY + Math.sin(angle) * outerRadius;
                         const twinkle = 0.5 + Math.sin(time * 2.2 + i * 0.9) * 0.5;
@@ -1643,7 +1800,7 @@
                 // Twinkle points on circle (most stars on outermost)
                 if (circleTwinkle > 0) {
                     for (let i = 0; i < 12; i++) {
-                        const angle = (i * Math.PI / 6) + time * 0.2;
+                        const angle = (i * Math.PI / 6) + time * 0.2 * rotationDirections[4];
                         const tx = centerX + Math.cos(angle) * outermostRadius;
                         const ty = centerY + Math.sin(angle) * outermostRadius;
                         const twinkle = 0.5 + Math.sin(time * 2 + i * 0.7) * 0.5;
@@ -1738,7 +1895,8 @@
                         // Alternate between square and diamond orientation
                         const isSquare = i % 2 === 0;
                         const shapeAlpha = 0.12 * (1 - eased * 0.5) * (0.5 + sizeMult * 0.5);
-                        const rot = rotation + (isSquare ? 0 : Math.PI / 4) + i * 0.05;
+                        // Random rotation direction per layer
+                        const rot = (rotation * rotationDirections[i]) + (isSquare ? 0 : Math.PI / 4) + i * 0.05;
 
                         ctx.strokeStyle = `rgba(${geometryColor}, ${shapeAlpha})`;
                         ctx.lineWidth = 1;
@@ -1786,7 +1944,7 @@
                 if (phase > 0.4 && phase < 0.9) {
                     const flowerProgress = (phase - 0.4) / 0.5;
                     const flowerAlpha = 0.22 * Math.sin(flowerProgress * Math.PI);
-                    const flowerRadius = baseSize * 0.22;
+                    const flowerRadius = baseSize * 0.175; // Aligned with sacred geometry layers
 
                     ctx.lineWidth = 1;
 
@@ -1910,13 +2068,13 @@
                     ctx.fillStyle = `rgba(255, 255, 255, ${glowAlpha})`;
                     ctx.fill();
 
-                    // Vulcan salute in sacred geometry style + quote
+                    // Vulcan salute in sacred geometry style + quote (fits within glow circle)
                     if (finalPhase > 0.3) {
                         const vulcanAlpha = Math.min(1, (finalPhase - 0.3) / 0.4);
 
-                        // Draw Vulcan salute as sacred geometry
-                        const handSize = baseSize * 0.15;
-                        const handY = centerY - baseSize * 0.25;
+                        // Draw Vulcan salute as sacred geometry - sized to fit within glow circle (0.35 * baseSize radius)
+                        const handSize = baseSize * 0.1;
+                        const handY = centerY - baseSize * 0.08;
 
                         ctx.strokeStyle = `rgba(${geometryColor}, ${vulcanAlpha * 0.6})`;
                         ctx.lineWidth = 1.5;
@@ -1969,13 +2127,13 @@
                         ctx.stroke();
                     }
 
-                    // Quote fades in with shine effect
+                    // Quote fades in with shine effect - positioned within glow circle
                     if (finalPhase > 0.5) {
                         const quoteAlpha = (finalPhase - 0.5) / 0.5;
-                        const textY = centerY + baseSize * 0.45;
+                        const textY = centerY + baseSize * 0.18;
                         const text = 'Live long and prosper.';
 
-                        ctx.font = 'italic 18px Inter, sans-serif';
+                        ctx.font = 'italic 14px Inter, sans-serif';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
 
@@ -2045,6 +2203,57 @@
         // Easter egg
         console.log('%c"I am the culmination of one man\'s dream. This is not ego or vanity. But when Doctor Soong created me, he added to the substance of the universe."', 'color: #3b82f6; font-style: italic;');
         console.log('%c— Lieutenant Commander Data', 'color: #666;');
+    })();
+
+    // Waitlist form handler
+    (function() {
+        const emailInput = document.getElementById('waitlist-email');
+        const submitBtn = document.getElementById('waitlist-submit');
+        const responseEl = document.getElementById('waitlist-response');
+
+        if (!submitBtn || !emailInput) return;
+
+        submitBtn.addEventListener('click', async () => {
+            const email = emailInput.value.trim();
+
+            if (!email || !email.includes('@')) {
+                responseEl.textContent = 'Please enter a valid email address.';
+                responseEl.className = 'waitlist-response error';
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Joining...';
+            responseEl.textContent = '';
+
+            try {
+                // TODO: Replace with actual API endpoint
+                // const response = await fetch('/api/waitlist', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ email, source: 'datacore.one' })
+                // });
+
+                // Placeholder success for now
+                await new Promise(resolve => setTimeout(resolve, 800));
+
+                responseEl.textContent = "Something is taking shape. We'll be in touch when it's ready to meet you.";
+                responseEl.className = 'waitlist-response success';
+                emailInput.value = '';
+                submitBtn.textContent = 'You\'re on the list';
+            } catch (error) {
+                responseEl.textContent = 'Something went wrong. Please try again.';
+                responseEl.className = 'waitlist-response error';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Join Waitlist';
+            }
+        });
+
+        emailInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                submitBtn.click();
+            }
+        });
     })();
 
     // Theme toggle
