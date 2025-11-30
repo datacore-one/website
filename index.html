@@ -1,0 +1,2082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datacore - Your Own Superintelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --border: #222222;
+            --success: #10b981;
+            --geometry-color: 59, 130, 246;
+            --geometry-glow: 59, 130, 246;
+            --card-bg: rgba(17, 17, 17, 0.6);
+            --card-border: rgba(34, 34, 34, 0.5);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f0f7ff;
+            --bg-secondary: #e6f0fa;
+            --bg-tertiary: #dbe8f5;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-glow: rgba(37, 99, 235, 0.15);
+            --border: #c7d9ed;
+            --success: #10b981;
+            --geometry-color: 59, 130, 246;
+            --geometry-glow: 59, 130, 246;
+            --card-bg: linear-gradient(135deg, rgba(224, 237, 255, 0.9) 0%, rgba(237, 244, 255, 0.95) 100%);
+            --card-border: rgba(199, 217, 237, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: transparent;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        [data-theme="light"] nav,
+        [data-theme="light"] footer {
+            border: none;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #ffffff !important;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 0 20px var(--accent-glow);
+            color: #ffffff !important;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        [data-theme="light"] .btn-secondary {
+            background: rgba(255, 255, 255, 0.6);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        [data-theme="light"] .btn-secondary:hover {
+            background: var(--accent);
+            color: #ffffff;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            z-index: 101;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: rotate(15deg);
+        }
+
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            position: absolute;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .theme-toggle .icon-sun {
+            opacity: 0;
+            transform: rotate(-90deg);
+        }
+
+        .theme-toggle .icon-moon {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        [data-theme="light"] .theme-toggle .icon-sun {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        [data-theme="light"] .theme-toggle .icon-moon {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #neural-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Make sections transparent so geometry shows through */
+        .hero, .features, .evolution, .movement {
+            background: transparent;
+        }
+
+        /* Graphic showcase - fully transparent to show geometry */
+        .graphic-showcase {
+            background: transparent !important;
+            min-height: 100vh;
+            padding-top: 80px; /* Account for fixed header */
+            padding-bottom: 80px; /* Space before footer */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .data-quote {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            max-width: 600px;
+            padding: 0 24px;
+        }
+
+        .data-quote .quote-text {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .data-quote .quote-attribution {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            opacity: 0.7;
+        }
+
+        .stardate {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            opacity: 0.7;
+        }
+
+        .data-sign-off {
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        .data-sign-off em {
+            color: var(--accent);
+            opacity: 0.7;
+        }
+
+        /* CTA semi-transparent so geometry shows through */
+        .cta {
+            background: var(--card-bg) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        footer {
+            background: transparent;
+            position: relative;
+            z-index: 2;
+            padding: 16px 0;
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-line {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .footer-line a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer-line a:hover {
+            color: var(--text-primary);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            max-width: 600px;
+        }
+
+        .hero .tagline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Features Section */
+        .section {
+            padding: 120px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Evolution Section */
+        .evolution-stages {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .evolution-stage {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .stage-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .evolution-stage h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .evolution-stage p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .evolution-stage .quote {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 12px;
+        }
+
+        /* Movement Section */
+        .movement {
+            text-align: center;
+        }
+
+        .movement-quote {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 600;
+            max-width: 900px;
+            margin: 0 auto 48px;
+            line-height: 1.3;
+        }
+
+        .movement-quote .highlight {
+            color: var(--accent);
+        }
+
+        .comparison-table {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: transparent;
+        }
+
+        .comparison-row.header {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+        }
+
+        .comparison-cell {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-row:last-child .comparison-cell {
+            border-bottom: none;
+        }
+
+        .comparison-cell.them {
+            color: var(--text-muted);
+        }
+
+        .comparison-cell.us {
+            color: var(--success);
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .cta p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 32px;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            text-align: left;
+        }
+
+        .cta-code .comment {
+            color: var(--text-muted);
+        }
+
+        .cta-code .command {
+            color: var(--success);
+        }
+
+        /* Footer styles consolidated above (lines 216-240) */
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .evolution-stages {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-cell {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span class="icon-sun">&#9728;</span>
+        <span class="icon-moon">&#9790;</span>
+    </button>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">data<span>core</span></a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#evolution">How It Grows</a>
+                <a href="#movement">The Movement</a>
+                <a href="https://github.com/datacore-one" class="btn btn-secondary">GitHub</a>
+                <a href="#get-started" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="canvas-container">
+        <canvas id="neural-canvas"></canvas>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Open source & local-first
+                </div>
+                <h1>Your own <span class="highlight">superintelligence</span></h1>
+                <p class="subtitle">
+                    Cognitive infrastructure for human-AI collaboration. Intelligence that extends your own beyond natural limits.
+                </p>
+                <div class="tagline">
+                    > Tag tasks before bed. Wake up to completed work.
+                </div>
+                <div class="hero-buttons">
+                    <a href="#get-started" class="btn btn-primary">
+                        Get Started
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/datacore-one/datacore" class="btn btn-secondary">
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Datacore?</h2>
+                <p>For those who write down more tasks than they finish.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&#9881;</div>
+                    <h3>AI That Does, Not Tracks</h3>
+                    <p>Project management apps track tasks. Datacore executes them. Your todo list becomes a delegation interface to AI agents that work while you rest.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128274;</div>
+                    <h3>Open Source, Local-First</h3>
+                    <p>Your extended mind shouldn't have a landlord. Your data on your machine, in plain text formats that you own forever.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128337;</div>
+                    <h3>Future-Proof Architecture</h3>
+                    <p>Built on plain text and open standards that outlive any AI provider. Your data works with whatever AI wins tomorrow.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#129504;</div>
+                    <h3>Your AI Finally Remembers</h3>
+                    <p>Insights from every AI conversation are captured automatically. Chatbots forget. Datacore doesn't. Context compounds over time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128640;</div>
+                    <h3>Agents That Work 24/7</h3>
+                    <p>Research, writing, analysis, project tracking. Tag a task, and AI agents handle it while you live your life.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#127760;</div>
+                    <h3>Modular & Extensible</h3>
+                    <p>Start with the core. Add modules for trading, content, research. Build your own. The community contributes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section evolution" id="evolution">
+        <div class="container">
+            <div class="section-header">
+                <h2>It grows with you</h2>
+                <p>From tasks to wisdom. The relationship evolves.</p>
+            </div>
+            <div class="evolution-stages">
+                <div class="evolution-stage">
+                    <div class="stage-number">Stage 1</div>
+                    <h3>Tasks</h3>
+                    <p>AI completes your work</p>
+                    <div class="quote">"My todos get done"</div>
+                </div>
+                <div class="evolution-stage">
+                    <div class="stage-number">Stage 2</div>
+                    <h3>Knowledge</h3>
+                    <p>Patterns accumulate</p>
+                    <div class="quote">"It knows my world"</div>
+                </div>
+                <div class="evolution-stage">
+                    <div class="stage-number">Stage 3</div>
+                    <h3>Wisdom</h3>
+                    <p>Insights emerge</p>
+                    <div class="quote">"It reflects my thinking"</div>
+                </div>
+                <div class="evolution-stage">
+                    <div class="stage-number">Stage 4</div>
+                    <h3>Agency</h3>
+                    <p>Custom agents emerge</p>
+                    <div class="quote">"It acts on my behalf"</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section movement" id="movement">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Linux of the Mind</h2>
+                <p>We're building the counterparty to corporate AGI.</p>
+            </div>
+            <p class="movement-quote">
+                "They're building one AI to rule them all.<br>
+                <span class="highlight">We're building one AI for each of us.</span>"
+            </p>
+            <div class="comparison-table">
+                <div class="comparison-row header">
+                    <div class="comparison-cell">Corporate AGI</div>
+                    <div class="comparison-cell">Personal Superintelligence</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell them">One AI for everyone</div>
+                    <div class="comparison-cell us">One AI for each of us</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell them">Your data trains their models</div>
+                    <div class="comparison-cell us">Your data stays yours</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell them">Rent access forever</div>
+                    <div class="comparison-cell us">Own it forever</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell them">Centralized control</div>
+                    <div class="comparison-cell us">Distributed ownership</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell them">Closed source</div>
+                    <div class="comparison-cell us">Open source</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section cta" id="get-started">
+        <div class="container">
+            <h2>Own your superintelligence</h2>
+            <p>Start with tasks. Stay for the transformation.</p>
+            <div class="cta-code">
+                <div class="comment"># Clone and start</div>
+                <div class="command">git clone git@github.com:YOUR_USERNAME/datacore.git ~/Data</div>
+                <div class="command">cd ~/Data && claude</div>
+                <br>
+                <div class="comment"># Run your first day</div>
+                <div class="command">/gtd-daily-start</div>
+            </div>
+            <div class="hero-buttons" style="justify-content: center;">
+                <a href="https://github.com/datacore-one/datacore" class="btn btn-primary">
+                    Fork on GitHub
+                </a>
+                <a href="https://github.com/datacore-one/datacore#readme" class="btn btn-secondary">
+                    Read the Docs
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section graphic-showcase" id="graphic">
+        <div class="data-quote">
+            <p class="quote-text">"I aspire to be better than I am."</p>
+            <p class="quote-attribution">Truly yours, Data</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-line">
+                <span class="stardate">Stardate <span id="stardate"></span></span> &middot;
+                <a href="https://github.com/datacore-one">GitHub</a> &middot;
+                MIT License
+            </p>
+        </div>
+    </footer>
+    <script>
+    // Sacred Geometry Tesseract - inspired by Mind Body Data
+    (function() {
+        const canvas = document.getElementById('neural-canvas');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let time = 0;
+        let scrollProgress = 0;
+
+        // Theme-aware color function
+        function getGeometryColor() {
+            const style = getComputedStyle(document.documentElement);
+            return style.getPropertyValue('--geometry-color').trim() || '59, 130, 246';
+        }
+
+        let geometryColor = getGeometryColor();
+
+        // Listen for theme changes
+        const observer = new MutationObserver(() => {
+            geometryColor = getGeometryColor();
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+        // Easter egg: fractal zoom after 5s in graphic section
+        let timeInGraphicSection = 0;
+        let fractalZoom = 0;
+        let fractalActive = false;
+
+        // Neuron-like blinks - random flashes
+        const blinks = [];
+        const maxBlinks = 15;
+
+        function spawnBlink() {
+            if (blinks.length < maxBlinks && Math.random() < 0.03) {
+                blinks.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    life: 1,
+                    decay: 0.02 + Math.random() * 0.03,
+                    size: 2 + Math.random() * 4
+                });
+            }
+        }
+
+        function updateBlinks() {
+            for (let i = blinks.length - 1; i >= 0; i--) {
+                blinks[i].life -= blinks[i].decay;
+                if (blinks[i].life <= 0) {
+                    blinks.splice(i, 1);
+                }
+            }
+        }
+
+        function drawBlinks() {
+            blinks.forEach(b => {
+                const alpha = b.life * 0.4;
+                const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.size * 3);
+                gradient.addColorStop(0, `rgba(${geometryColor}, ${alpha})`);
+                gradient.addColorStop(0.5, `rgba(${geometryColor}, ${alpha * 0.3})`);
+                gradient.addColorStop(1, `rgba(${geometryColor}, 0)`);
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.size * 3, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            });
+        }
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width * window.devicePixelRatio;
+            canvas.height = height * window.devicePixelRatio;
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        }
+
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function lerp(a, b, t) {
+            return a + (b - a) * t;
+        }
+
+        // Draw a shape that morphs from polygon to circle
+        function drawMorphingShape(ctx, points, cx, cy, morph, strokeStyle, lineWidth) {
+            if (morph <= 0) {
+                // Draw as polygon
+                ctx.beginPath();
+                points.forEach((p, i) => {
+                    if (i === 0) ctx.moveTo(p[0], p[1]);
+                    else ctx.lineTo(p[0], p[1]);
+                });
+                ctx.closePath();
+                ctx.strokeStyle = strokeStyle;
+                ctx.lineWidth = lineWidth;
+                ctx.stroke();
+            } else {
+                // Calculate radius from points
+                const radius = Math.sqrt(Math.pow(points[0][0] - cx, 2) + Math.pow(points[0][1] - cy, 2));
+
+                ctx.beginPath();
+                const segments = 64;
+                for (let i = 0; i <= segments; i++) {
+                    const angle = (i / segments) * Math.PI * 2;
+
+                    // Find which polygon edge we're on
+                    const segmentAngle = Math.PI * 2 / points.length;
+                    const polygonIndex = Math.floor(((angle + segmentAngle / 2) % (Math.PI * 2)) / segmentAngle);
+                    const nextIndex = (polygonIndex + 1) % points.length;
+
+                    // Interpolate along polygon edge
+                    const edgeStart = Math.atan2(points[polygonIndex][1] - cy, points[polygonIndex][0] - cx);
+                    const polyX = points[polygonIndex][0] + (points[nextIndex][0] - points[polygonIndex][0]) * ((angle - edgeStart + Math.PI * 2) % segmentAngle) / segmentAngle;
+                    const polyY = points[polygonIndex][1] + (points[nextIndex][1] - points[polygonIndex][1]) * ((angle - edgeStart + Math.PI * 2) % segmentAngle) / segmentAngle;
+
+                    // Circle point
+                    const circleX = cx + Math.cos(angle) * radius;
+                    const circleY = cy + Math.sin(angle) * radius;
+
+                    // Morph between them
+                    const x = lerp(polyX, circleX, morph);
+                    const y = lerp(polyY, circleY, morph);
+
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = strokeStyle;
+                ctx.lineWidth = lineWidth;
+                ctx.stroke();
+            }
+        }
+
+        // Draw flower of life pattern
+        function drawFlowerOfLife(cx, cy, radius, alpha, layers) {
+            ctx.strokeStyle = `rgba(${geometryColor}, ${alpha})`;
+            ctx.lineWidth = 1;
+
+            // Center circle
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            ctx.stroke();
+
+            if (layers < 1) return;
+
+            // First ring - 6 circles around center
+            for (let i = 0; i < 6; i++) {
+                const angle = (i * Math.PI * 2) / 6;
+                const x = cx + Math.cos(angle) * radius;
+                const y = cy + Math.sin(angle) * radius;
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            if (layers < 2) return;
+
+            // Second ring - 12 more circles
+            for (let i = 0; i < 12; i++) {
+                const angle = (i * Math.PI * 2) / 12 + Math.PI / 12;
+                const dist = radius * Math.sqrt(3);
+                const x = cx + Math.cos(angle) * dist;
+                const y = cy + Math.sin(angle) * dist;
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            if (layers < 3) return;
+
+            // Third ring - outer circles
+            for (let i = 0; i < 6; i++) {
+                const angle = (i * Math.PI * 2) / 6;
+                const x = cx + Math.cos(angle) * radius * 2;
+                const y = cy + Math.sin(angle) * radius * 2;
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        // Draw nested tesseract (fractal version)
+        function drawNestedTesseract(cx, cy, size, rotation, alpha, depth) {
+            if (depth <= 0 || alpha < 0.02) return;
+
+            const cos = Math.cos(rotation);
+            const sin = Math.sin(rotation);
+
+            function rotate(x, y) {
+                const dx = x - cx;
+                const dy = y - cy;
+                return [cx + dx * cos - dy * sin, cy + dx * sin + dy * cos];
+            }
+
+            // Draw square
+            const sq = [
+                rotate(cx - size, cy - size),
+                rotate(cx + size, cy - size),
+                rotate(cx + size, cy + size),
+                rotate(cx - size, cy + size)
+            ];
+
+            ctx.strokeStyle = `rgba(${geometryColor}, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            sq.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+            ctx.closePath();
+            ctx.stroke();
+
+            // Draw diamond
+            const dm = [
+                rotate(cx, cy - size),
+                rotate(cx + size, cy),
+                rotate(cx, cy + size),
+                rotate(cx - size, cy)
+            ];
+
+            ctx.beginPath();
+            dm.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+            ctx.closePath();
+            ctx.stroke();
+
+            // Recurse into corners
+            const nextSize = size * 0.45;
+            const nextAlpha = alpha * 0.7;
+            const nextRot = rotation + 0.1;
+
+            // Draw smaller tesseracts at each corner
+            sq.forEach(corner => {
+                drawNestedTesseract(corner[0], corner[1], nextSize, nextRot, nextAlpha, depth - 1);
+            });
+        }
+
+        // 2D Tesseract projection - nested squares with diagonals (like the reference image)
+        function getTesseractPoints(centerX, centerY, size, rotation) {
+            const cos = Math.cos(rotation);
+            const sin = Math.sin(rotation);
+
+            // Helper to rotate point around center
+            function rotate(x, y) {
+                const dx = x - centerX;
+                const dy = y - centerY;
+                return [
+                    centerX + dx * cos - dy * sin,
+                    centerY + dx * sin + dy * cos
+                ];
+            }
+
+            // Outermost diamond (new 6th layer)
+            const outermostSize = size * 1.15;
+            const outermost = [
+                rotate(centerX, centerY - outermostSize),
+                rotate(centerX + outermostSize, centerY),
+                rotate(centerX, centerY + outermostSize),
+                rotate(centerX - outermostSize, centerY)
+            ];
+
+            // Outer square
+            const outerSize = size * 0.85;
+            const outer = [
+                rotate(centerX - outerSize, centerY - outerSize),
+                rotate(centerX + outerSize, centerY - outerSize),
+                rotate(centerX + outerSize, centerY + outerSize),
+                rotate(centerX - outerSize, centerY + outerSize)
+            ];
+
+            // Middle diamond
+            const mid = [
+                rotate(centerX, centerY - size * 0.85),
+                rotate(centerX + size * 0.85, centerY),
+                rotate(centerX, centerY + size * 0.85),
+                rotate(centerX - size * 0.85, centerY)
+            ];
+
+            // Inner square
+            const innerSize = size * 0.5;
+            const inner = [
+                rotate(centerX - innerSize, centerY - innerSize),
+                rotate(centerX + innerSize, centerY - innerSize),
+                rotate(centerX + innerSize, centerY + innerSize),
+                rotate(centerX - innerSize, centerY + innerSize)
+            ];
+
+            // Innermost diamond
+            const coreSize = size * 0.35;
+            const core = [
+                rotate(centerX, centerY - coreSize),
+                rotate(centerX + coreSize, centerY),
+                rotate(centerX, centerY + coreSize),
+                rotate(centerX - coreSize, centerY)
+            ];
+
+            // Center point
+            const center = [centerX, centerY];
+
+            return { outermost, outer, mid, inner, core, center };
+        }
+
+        function render() {
+            time += 0.003;
+
+            // Easter egg: track time in graphic section (scroll > 90%)
+            if (scrollProgress > 0.9) {
+                timeInGraphicSection += 0.016; // ~60fps
+                if (timeInGraphicSection > 5 && !fractalActive) {
+                    fractalActive = true;
+                    console.log('%c✨ You found the easter egg! Entering the infinite...', 'color: #3b82f6; font-weight: bold;');
+                }
+                if (fractalActive) {
+                    // Slow journey - takes ~40 seconds to complete
+                    fractalZoom = Math.min(fractalZoom + 0.0004, 1);
+                }
+            } else {
+                timeInGraphicSection = 0;
+                if (fractalActive && fractalZoom > 0) {
+                    // Fade out faster when leaving
+                    fractalZoom = Math.max(fractalZoom - 0.008, 0);
+                    if (fractalZoom <= 0) fractalActive = false;
+                }
+            }
+
+            // Update and spawn blinks
+            spawnBlink();
+            updateBlinks();
+
+            // Clear with transparent (let CSS background show through)
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw blinks first (behind geometry)
+            drawBlinks();
+
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const baseSize = Math.min(width, height) * 0.38; // Scaled to fit screen with circle
+
+            // Evolution based on scroll - 6 stages now
+            const adjustedScroll = Math.min(1, scrollProgress * 1.5);
+            const evolutionStage = adjustedScroll * 6; // 0-6
+
+            // Very slow rotation
+            const rotation = time * 0.2;
+            const points = getTesseractPoints(centerX, centerY, baseSize, rotation);
+
+            // Animated glow when geometry is complete (scroll > 85%)
+            const glowIntensity = scrollProgress > 0.85
+                ? 0.5 + Math.sin(time * 2) * 0.3
+                : 0;
+
+            // Line style - intensify when in showcase section
+            const baseAlpha = 0.35 + glowIntensity * 0.2;
+            const brightAlpha = 0.5 + glowIntensity * 0.25;
+            const lineColor = `rgba(${geometryColor}, ${baseAlpha})`;
+            const lineColorBright = `rgba(${geometryColor}, ${brightAlpha})`;
+            const dotColor = `rgba(${geometryColor}, ${0.6 + glowIntensity * 0.3})`;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            // Morph factor for transforming rectangles to circles during easter egg
+            // Starts after flower of life completes (phase 0.85)
+            // At 0.0004 per frame @ 60fps, 0.075 phase = ~3 seconds
+            const shapeMorphRaw = fractalZoom > 0.85 ? Math.min(1, (fractalZoom - 0.85) / 0.075) : 0;
+            // Smooth ease-in-out for gradual transformation with slight momentum
+            const shapeMorph = shapeMorphRaw < 0.5
+                ? 2 * Math.pow(shapeMorphRaw, 2)
+                : 1 - Math.pow(-2 * shapeMorphRaw + 2, 2) / 2;
+
+            // Twinkle factor for circles at the end (after morph completes)
+            const circleTwinkle = shapeMorph > 0.7 ? Math.min(1, (shapeMorph - 0.7) / 0.3) : 0;
+
+            // Add glow effect when in showcase
+            if (glowIntensity > 0) {
+                ctx.shadowBlur = 15 + glowIntensity * 20;
+                ctx.shadowColor = `rgba(${geometryColor}, ${glowIntensity * 0.5})`;
+            } else {
+                ctx.shadowBlur = 0;
+            }
+
+            // Draw outer circle as progress indicator - draws out as you scroll
+            // Starts at top (-PI/2) and completes full circle by end of page
+            const circleProgress = scrollProgress; // 0 to 1 based on scroll
+            const startAngle = -Math.PI / 2; // Start at top
+            const endAngle = startAngle + (circleProgress * Math.PI * 2);
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, baseSize * 1.15, startAngle, endAngle);
+            ctx.strokeStyle = circleProgress > 0.9 ? lineColorBright : lineColor;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Small dot at the leading edge of the circle
+            if (circleProgress > 0.01 && circleProgress < 1) {
+                const dotX = centerX + Math.cos(endAngle) * baseSize * 1.15;
+                const dotY = centerY + Math.sin(endAngle) * baseSize * 1.15;
+                ctx.beginPath();
+                ctx.arc(dotX, dotY, 3, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${geometryColor}, 0.6)`;
+                ctx.fill();
+            }
+
+            // Stage 0-1: Center dot
+            if (evolutionStage >= 0) {
+                const dotOpacity = Math.min(1, evolutionStage);
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, 4, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${geometryColor}, ${dotOpacity * 0.6})`;
+                ctx.fill();
+            }
+
+            // Stage 1-2: Core diamond emerges
+            if (evolutionStage > 1) {
+                const t = easeInOutCubic(Math.min(1, evolutionStage - 1));
+                const core = points.core;
+                const coreScaled = core.map(p => [
+                    lerp(centerX, p[0], t),
+                    lerp(centerY, p[1], t)
+                ]);
+
+                // Draw morphing shape (polygon to circle)
+                const coreRadius = baseSize * 0.35 * t;
+                ctx.beginPath();
+                if (shapeMorph > 0 && shapeMorph < 1) {
+                    // Gradual morph: interpolate between polygon and circle
+                    const segments = 48;
+                    for (let i = 0; i <= segments; i++) {
+                        const angle = (i / segments) * Math.PI * 2;
+                        // Circle point
+                        const cx = centerX + Math.cos(angle) * coreRadius;
+                        const cy = centerY + Math.sin(angle) * coreRadius;
+                        // Find nearest polygon point (diamond shape)
+                        const idx = Math.floor((angle / (Math.PI * 2)) * 4 + 0.5) % 4;
+                        const nextIdx = (idx + 1) % 4;
+                        const progress = ((angle / (Math.PI * 2)) * 4 + 0.5) % 1;
+                        const px = lerp(coreScaled[idx][0], coreScaled[nextIdx][0], progress);
+                        const py = lerp(coreScaled[idx][1], coreScaled[nextIdx][1], progress);
+                        // Interpolate
+                        const x = lerp(px, cx, shapeMorph);
+                        const y = lerp(py, cy, shapeMorph);
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                } else if (shapeMorph >= 1) {
+                    ctx.arc(centerX, centerY, coreRadius, 0, Math.PI * 2);
+                } else {
+                    coreScaled.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+                }
+                ctx.closePath();
+                ctx.strokeStyle = lineColor;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                // Twinkle points on circle
+                if (circleTwinkle > 0) {
+                    for (let i = 0; i < 4; i++) {
+                        const angle = (i * Math.PI / 2) + time * 0.5;
+                        const tx = centerX + Math.cos(angle) * coreRadius;
+                        const ty = centerY + Math.sin(angle) * coreRadius;
+                        const twinkle = 0.5 + Math.sin(time * 3 + i * 1.5) * 0.5;
+
+                        const starGlow = ctx.createRadialGradient(tx, ty, 0, tx, ty, 6);
+                        starGlow.addColorStop(0, `rgba(255, 255, 255, ${circleTwinkle * twinkle * 0.8})`);
+                        starGlow.addColorStop(0.4, `rgba(${geometryColor}, ${circleTwinkle * twinkle * 0.4})`);
+                        starGlow.addColorStop(1, `rgba(${geometryColor}, 0)`);
+                        ctx.beginPath();
+                        ctx.arc(tx, ty, 6, 0, Math.PI * 2);
+                        ctx.fillStyle = starGlow;
+                        ctx.fill();
+                    }
+                }
+
+                // Core vertices (fade out during morph)
+                if (shapeMorph < 1) {
+                    const vertexAlpha = 1 - shapeMorph;
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath();
+                        ctx.arc(coreScaled[i][0], coreScaled[i][1], 3, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(${geometryColor}, ${(0.4 + glowIntensity * 0.3) * vertexAlpha})`;
+                        ctx.fill();
+                    }
+                }
+            }
+
+            // Stage 2-3: Inner square emerges
+            if (evolutionStage > 2) {
+                const t = easeInOutCubic(Math.min(1, evolutionStage - 2));
+                const inner = points.inner;
+                const innerScaled = inner.map(p => [
+                    lerp(centerX, p[0], t),
+                    lerp(centerY, p[1], t)
+                ]);
+
+                // Draw morphing shape (square to circle)
+                const innerRadius = baseSize * 0.5 * t;
+                ctx.beginPath();
+                if (shapeMorph > 0 && shapeMorph < 1) {
+                    const segments = 48;
+                    for (let i = 0; i <= segments; i++) {
+                        const angle = (i / segments) * Math.PI * 2;
+                        const cx = centerX + Math.cos(angle) * innerRadius;
+                        const cy = centerY + Math.sin(angle) * innerRadius;
+                        const idx = Math.floor((angle / (Math.PI * 2)) * 4 + 0.5) % 4;
+                        const nextIdx = (idx + 1) % 4;
+                        const progress = ((angle / (Math.PI * 2)) * 4 + 0.5) % 1;
+                        const px = lerp(innerScaled[idx][0], innerScaled[nextIdx][0], progress);
+                        const py = lerp(innerScaled[idx][1], innerScaled[nextIdx][1], progress);
+                        const x = lerp(px, cx, shapeMorph);
+                        const y = lerp(py, cy, shapeMorph);
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                } else if (shapeMorph >= 1) {
+                    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
+                } else {
+                    innerScaled.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+                }
+                ctx.closePath();
+                ctx.strokeStyle = lineColor;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                // Twinkle points on circle
+                if (circleTwinkle > 0) {
+                    for (let i = 0; i < 4; i++) {
+                        const angle = (i * Math.PI / 2) + Math.PI / 4 + time * 0.4;
+                        const tx = centerX + Math.cos(angle) * innerRadius;
+                        const ty = centerY + Math.sin(angle) * innerRadius;
+                        const twinkle = 0.5 + Math.sin(time * 2.8 + i * 1.7) * 0.5;
+
+                        const starGlow = ctx.createRadialGradient(tx, ty, 0, tx, ty, 6);
+                        starGlow.addColorStop(0, `rgba(255, 255, 255, ${circleTwinkle * twinkle * 0.8})`);
+                        starGlow.addColorStop(0.4, `rgba(${geometryColor}, ${circleTwinkle * twinkle * 0.4})`);
+                        starGlow.addColorStop(1, `rgba(${geometryColor}, 0)`);
+                        ctx.beginPath();
+                        ctx.arc(tx, ty, 6, 0, Math.PI * 2);
+                        ctx.fillStyle = starGlow;
+                        ctx.fill();
+                    }
+                }
+
+                // Connect inner to core (fade during morph)
+                if (shapeMorph < 1) {
+                    const core = points.core;
+                    const lineAlpha = baseAlpha * (1 - shapeMorph);
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(innerScaled[i][0], innerScaled[i][1]);
+                        ctx.lineTo(core[i][0], core[i][1]);
+                        ctx.strokeStyle = `rgba(${geometryColor}, ${lineAlpha})`;
+                        ctx.stroke();
+                    }
+                }
+
+                // Inner vertices (fade out during morph)
+                if (shapeMorph < 1) {
+                    const vertexAlpha = 1 - shapeMorph;
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath();
+                        ctx.arc(innerScaled[i][0], innerScaled[i][1], 3, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(${geometryColor}, ${(0.4 + glowIntensity * 0.3) * vertexAlpha})`;
+                        ctx.fill();
+                    }
+                }
+            }
+
+            // Stage 3-4: Middle diamond emerges
+            if (evolutionStage > 3) {
+                const t = easeInOutCubic(Math.min(1, evolutionStage - 3));
+                const mid = points.mid;
+                const midScaled = mid.map(p => [
+                    lerp(centerX, p[0], t),
+                    lerp(centerY, p[1], t)
+                ]);
+
+                // Draw morphing shape (diamond to circle)
+                const midRadius = baseSize * 0.85 * t;
+                ctx.beginPath();
+                if (shapeMorph > 0 && shapeMorph < 1) {
+                    const segments = 48;
+                    for (let i = 0; i <= segments; i++) {
+                        const angle = (i / segments) * Math.PI * 2;
+                        const cx = centerX + Math.cos(angle) * midRadius;
+                        const cy = centerY + Math.sin(angle) * midRadius;
+                        const idx = Math.floor((angle / (Math.PI * 2)) * 4 + 0.5) % 4;
+                        const nextIdx = (idx + 1) % 4;
+                        const progress = ((angle / (Math.PI * 2)) * 4 + 0.5) % 1;
+                        const px = lerp(midScaled[idx][0], midScaled[nextIdx][0], progress);
+                        const py = lerp(midScaled[idx][1], midScaled[nextIdx][1], progress);
+                        const x = lerp(px, cx, shapeMorph);
+                        const y = lerp(py, cy, shapeMorph);
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                } else if (shapeMorph >= 1) {
+                    ctx.arc(centerX, centerY, midRadius, 0, Math.PI * 2);
+                } else {
+                    midScaled.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+                }
+                ctx.closePath();
+                ctx.strokeStyle = lineColor;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                // Twinkle points on circle
+                if (circleTwinkle > 0) {
+                    for (let i = 0; i < 6; i++) {
+                        const angle = (i * Math.PI / 3) + time * 0.3;
+                        const tx = centerX + Math.cos(angle) * midRadius;
+                        const ty = centerY + Math.sin(angle) * midRadius;
+                        const twinkle = 0.5 + Math.sin(time * 2.5 + i * 1.2) * 0.5;
+
+                        const starGlow = ctx.createRadialGradient(tx, ty, 0, tx, ty, 6);
+                        starGlow.addColorStop(0, `rgba(255, 255, 255, ${circleTwinkle * twinkle * 0.7})`);
+                        starGlow.addColorStop(0.4, `rgba(${geometryColor}, ${circleTwinkle * twinkle * 0.35})`);
+                        starGlow.addColorStop(1, `rgba(${geometryColor}, 0)`);
+                        ctx.beginPath();
+                        ctx.arc(tx, ty, 6, 0, Math.PI * 2);
+                        ctx.fillStyle = starGlow;
+                        ctx.fill();
+                    }
+                }
+
+                // Connect mid to inner corners (fade during morph)
+                if (shapeMorph < 1) {
+                    const inner = points.inner;
+                    const lineAlpha = baseAlpha * (1 - shapeMorph);
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(midScaled[i][0], midScaled[i][1]);
+                        ctx.lineTo(inner[i][0], inner[i][1]);
+                        ctx.strokeStyle = `rgba(${geometryColor}, ${lineAlpha})`;
+                        ctx.stroke();
+
+                        ctx.beginPath();
+                        ctx.moveTo(midScaled[i][0], midScaled[i][1]);
+                        ctx.lineTo(inner[(i + 1) % 4][0], inner[(i + 1) % 4][1]);
+                        ctx.stroke();
+                    }
+                }
+
+                // Mid vertices (fade out during morph)
+                if (shapeMorph < 1) {
+                    const vertexAlpha = 1 - shapeMorph;
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath();
+                        ctx.arc(midScaled[i][0], midScaled[i][1], 3, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(${geometryColor}, ${(0.4 + glowIntensity * 0.3) * vertexAlpha})`;
+                        ctx.fill();
+                    }
+                }
+            }
+
+            // Stage 4-5: Outer square emerges
+            if (evolutionStage > 4) {
+                const t = easeInOutCubic(Math.min(1, evolutionStage - 4));
+                const outer = points.outer;
+                const outerScaled = outer.map(p => [
+                    lerp(centerX, p[0], t),
+                    lerp(centerY, p[1], t)
+                ]);
+
+                // Draw morphing shape (square to circle)
+                const outerRadius = baseSize * 0.85 * t;
+                ctx.beginPath();
+                if (shapeMorph > 0 && shapeMorph < 1) {
+                    const segments = 48;
+                    for (let i = 0; i <= segments; i++) {
+                        const angle = (i / segments) * Math.PI * 2;
+                        const cx = centerX + Math.cos(angle) * outerRadius;
+                        const cy = centerY + Math.sin(angle) * outerRadius;
+                        const idx = Math.floor((angle / (Math.PI * 2)) * 4 + 0.5) % 4;
+                        const nextIdx = (idx + 1) % 4;
+                        const progress = ((angle / (Math.PI * 2)) * 4 + 0.5) % 1;
+                        const px = lerp(outerScaled[idx][0], outerScaled[nextIdx][0], progress);
+                        const py = lerp(outerScaled[idx][1], outerScaled[nextIdx][1], progress);
+                        const x = lerp(px, cx, shapeMorph);
+                        const y = lerp(py, cy, shapeMorph);
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                } else if (shapeMorph >= 1) {
+                    ctx.arc(centerX, centerY, outerRadius, 0, Math.PI * 2);
+                } else {
+                    outerScaled.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+                }
+                ctx.closePath();
+                ctx.strokeStyle = lineColorBright;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Twinkle points on circle
+                if (circleTwinkle > 0) {
+                    for (let i = 0; i < 8; i++) {
+                        const angle = (i * Math.PI / 4) + Math.PI / 8 + time * 0.25;
+                        const tx = centerX + Math.cos(angle) * outerRadius;
+                        const ty = centerY + Math.sin(angle) * outerRadius;
+                        const twinkle = 0.5 + Math.sin(time * 2.2 + i * 0.9) * 0.5;
+
+                        const starGlow = ctx.createRadialGradient(tx, ty, 0, tx, ty, 7);
+                        starGlow.addColorStop(0, `rgba(255, 255, 255, ${circleTwinkle * twinkle * 0.7})`);
+                        starGlow.addColorStop(0.4, `rgba(${geometryColor}, ${circleTwinkle * twinkle * 0.35})`);
+                        starGlow.addColorStop(1, `rgba(${geometryColor}, 0)`);
+                        ctx.beginPath();
+                        ctx.arc(tx, ty, 7, 0, Math.PI * 2);
+                        ctx.fillStyle = starGlow;
+                        ctx.fill();
+                    }
+                }
+
+                // Connect outer to mid (fade during morph)
+                if (shapeMorph < 1) {
+                    const mid = points.mid;
+                    const lineAlpha = baseAlpha * (1 - shapeMorph);
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(outerScaled[i][0], outerScaled[i][1]);
+                        ctx.lineTo(mid[i][0], mid[i][1]);
+                        ctx.strokeStyle = `rgba(${geometryColor}, ${lineAlpha})`;
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                        ctx.beginPath();
+                        ctx.moveTo(outerScaled[i][0], outerScaled[i][1]);
+                        ctx.lineTo(mid[(i + 3) % 4][0], mid[(i + 3) % 4][1]);
+                        ctx.stroke();
+                    }
+                }
+
+                // Outer vertices (fade out during morph)
+                if (shapeMorph < 1) {
+                    const vertexAlpha = 1 - shapeMorph;
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath();
+                        ctx.arc(outerScaled[i][0], outerScaled[i][1], 4, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(${geometryColor}, ${(0.4 + glowIntensity * 0.3) * vertexAlpha})`;
+                        ctx.fill();
+                    }
+                }
+
+                // Diagonal lines through center (fade during morph)
+                if (shapeMorph < 1) {
+                    const lineAlpha = baseAlpha * (1 - shapeMorph);
+                    ctx.strokeStyle = `rgba(${geometryColor}, ${lineAlpha})`;
+
+                    ctx.beginPath();
+                    ctx.moveTo(outer[0][0], outer[0][1]);
+                    ctx.lineTo(outer[2][0], outer[2][1]);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(outer[1][0], outer[1][1]);
+                    ctx.lineTo(outer[3][0], outer[3][1]);
+                    ctx.stroke();
+                }
+            }
+
+            // Stage 5-6: Outermost diamond emerges (final layer)
+            if (evolutionStage > 5) {
+                const t = easeInOutCubic(Math.min(1, evolutionStage - 5));
+                const outermost = points.outermost;
+                const outermostScaled = outermost.map(p => [
+                    lerp(centerX, p[0], t),
+                    lerp(centerY, p[1], t)
+                ]);
+
+                // Draw morphing shape (diamond to circle)
+                const outermostRadius = baseSize * 1.15 * t;
+                ctx.beginPath();
+                if (shapeMorph > 0 && shapeMorph < 1) {
+                    const segments = 48;
+                    for (let i = 0; i <= segments; i++) {
+                        const angle = (i / segments) * Math.PI * 2;
+                        const cx = centerX + Math.cos(angle) * outermostRadius;
+                        const cy = centerY + Math.sin(angle) * outermostRadius;
+                        const idx = Math.floor((angle / (Math.PI * 2)) * 4 + 0.5) % 4;
+                        const nextIdx = (idx + 1) % 4;
+                        const progress = ((angle / (Math.PI * 2)) * 4 + 0.5) % 1;
+                        const px = lerp(outermostScaled[idx][0], outermostScaled[nextIdx][0], progress);
+                        const py = lerp(outermostScaled[idx][1], outermostScaled[nextIdx][1], progress);
+                        const x = lerp(px, cx, shapeMorph);
+                        const y = lerp(py, cy, shapeMorph);
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                } else if (shapeMorph >= 1) {
+                    ctx.arc(centerX, centerY, outermostRadius, 0, Math.PI * 2);
+                } else {
+                    outermostScaled.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+                }
+                ctx.closePath();
+                ctx.strokeStyle = lineColorBright;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Twinkle points on circle (most stars on outermost)
+                if (circleTwinkle > 0) {
+                    for (let i = 0; i < 12; i++) {
+                        const angle = (i * Math.PI / 6) + time * 0.2;
+                        const tx = centerX + Math.cos(angle) * outermostRadius;
+                        const ty = centerY + Math.sin(angle) * outermostRadius;
+                        const twinkle = 0.5 + Math.sin(time * 2 + i * 0.7) * 0.5;
+
+                        const starGlow = ctx.createRadialGradient(tx, ty, 0, tx, ty, 8);
+                        starGlow.addColorStop(0, `rgba(255, 255, 255, ${circleTwinkle * twinkle * 0.8})`);
+                        starGlow.addColorStop(0.4, `rgba(${geometryColor}, ${circleTwinkle * twinkle * 0.4})`);
+                        starGlow.addColorStop(1, `rgba(${geometryColor}, 0)`);
+                        ctx.beginPath();
+                        ctx.arc(tx, ty, 8, 0, Math.PI * 2);
+                        ctx.fillStyle = starGlow;
+                        ctx.fill();
+                    }
+                }
+
+                // Connect outermost to outer corners (fade during morph)
+                if (shapeMorph < 1) {
+                    const outer = points.outer;
+                    const lineAlpha = baseAlpha * (1 - shapeMorph);
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(outermostScaled[i][0], outermostScaled[i][1]);
+                        ctx.lineTo(outer[i][0], outer[i][1]);
+                        ctx.strokeStyle = `rgba(${geometryColor}, ${lineAlpha})`;
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                        ctx.beginPath();
+                        ctx.moveTo(outermostScaled[i][0], outermostScaled[i][1]);
+                        ctx.lineTo(outer[(i + 1) % 4][0], outer[(i + 1) % 4][1]);
+                        ctx.stroke();
+                    }
+                }
+
+                // Outermost vertices (fade out during morph)
+                if (shapeMorph < 1) {
+                    const vertexAlpha = 1 - shapeMorph;
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath();
+                        ctx.arc(outermostScaled[i][0], outermostScaled[i][1], 4, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(${geometryColor}, ${(0.4 + glowIntensity * 0.3) * vertexAlpha})`;
+                        ctx.fill();
+                    }
+                }
+            }
+
+            // Easter egg: Immersive journey after 5s in graphic section
+            if (fractalZoom > 0) {
+                const phase = fractalZoom;
+
+                // Fade out Data's quote when journey begins
+                const dataQuote = document.querySelector('.data-quote');
+                if (dataQuote) {
+                    dataQuote.style.opacity = Math.max(0, 1 - phase * 3);
+                }
+
+                // Journey phases:
+                // 0.0-0.15: Circle radiates inward (like the dot effect)
+                // 0.15-0.5: Hypercube gains more iterations, transforms to circles
+                // 0.5-0.8: Flower of life evolves smoothly
+                // 0.8-1.0: Convergence to radiating dot with quote
+
+                // Phase 1: Outer circle radiates inward (0-0.15)
+                if (phase < 0.2) {
+                    const radiateProgress = phase / 0.2;
+                    const numRings = 5;
+
+                    for (let i = 0; i < numRings; i++) {
+                        const ringPhase = (radiateProgress * 2 - i * 0.15) % 1;
+                        if (ringPhase > 0 && ringPhase < 1) {
+                            const ringRadius = baseSize * 1.15 * (1 - ringPhase * 0.8);
+                            const ringAlpha = Math.sin(ringPhase * Math.PI) * 0.2;
+
+                            ctx.beginPath();
+                            ctx.arc(centerX, centerY, ringRadius, 0, Math.PI * 2);
+                            ctx.strokeStyle = `rgba(${geometryColor}, ${ringAlpha})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // Phase 2: Hypercube with more iterations, transforms to circles (0.1-0.55)
+                if (phase > 0.1 && phase < 0.6) {
+                    const morphProgress = (phase - 0.1) / 0.45;
+                    const eased = easeInOutCubic(morphProgress);
+
+                    // More hypercube iterations - 8 layers of nested shapes
+                    const sizes = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.85, 1.0];
+                    sizes.forEach((sizeMult, i) => {
+                        const r = baseSize * sizeMult;
+                        // Alternate between square and diamond orientation
+                        const isSquare = i % 2 === 0;
+                        const shapeAlpha = 0.12 * (1 - eased * 0.5) * (0.5 + sizeMult * 0.5);
+                        const rot = rotation + (isSquare ? 0 : Math.PI / 4) + i * 0.05;
+
+                        ctx.strokeStyle = `rgba(${geometryColor}, ${shapeAlpha})`;
+                        ctx.lineWidth = 1;
+
+                        // Interpolate between square/diamond and circle
+                        ctx.beginPath();
+                        const segments = 64;
+                        for (let j = 0; j <= segments; j++) {
+                            const angle = (j / segments) * Math.PI * 2 - Math.PI / 4 + rot;
+
+                            // Square radius varies with angle, circle is constant
+                            const squareR = r / Math.max(Math.abs(Math.cos(angle - rot)), Math.abs(Math.sin(angle - rot)));
+                            const circleR = r;
+                            const currentR = lerp(squareR, circleR, eased);
+
+                            const x = centerX + Math.cos(angle) * currentR;
+                            const y = centerY + Math.sin(angle) * currentR;
+
+                            if (j === 0) ctx.moveTo(x, y);
+                            else ctx.lineTo(x, y);
+                        }
+                        ctx.stroke();
+                    });
+
+                    // Draw connecting lines between layers (fading as we morph)
+                    if (eased < 0.7) {
+                        const lineAlpha = 0.08 * (1 - eased / 0.7);
+                        ctx.strokeStyle = `rgba(${geometryColor}, ${lineAlpha})`;
+
+                        // Diagonal connections through center
+                        for (let i = 0; i < 4; i++) {
+                            const angle = (i * Math.PI / 2) + rotation;
+                            const innerR = baseSize * 0.2;
+                            const outerR = baseSize * 1.0;
+
+                            ctx.beginPath();
+                            ctx.moveTo(centerX + Math.cos(angle) * innerR, centerY + Math.sin(angle) * innerR);
+                            ctx.lineTo(centerX + Math.cos(angle) * outerR, centerY + Math.sin(angle) * outerR);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // Phase 3: Flower of life evolves smoothly (0.4-0.9)
+                if (phase > 0.4 && phase < 0.9) {
+                    const flowerProgress = (phase - 0.4) / 0.5;
+                    const flowerAlpha = 0.22 * Math.sin(flowerProgress * Math.PI);
+                    const flowerRadius = baseSize * 0.22;
+
+                    ctx.lineWidth = 1;
+
+                    // Helper to draw a circle with smooth completion
+                    function drawProgressCircle(cx, cy, r, completion, alpha) {
+                        if (completion <= 0) return;
+                        ctx.strokeStyle = `rgba(${geometryColor}, ${alpha})`;
+                        ctx.beginPath();
+                        // Start from top (-PI/2) for visual consistency
+                        const startAngle = -Math.PI / 2;
+                        const endAngle = startAngle + Math.PI * 2 * Math.min(1, completion);
+                        ctx.arc(cx, cy, r, startAngle, endAngle);
+                        ctx.stroke();
+                    }
+
+                    // Center circle - draws first (0-0.15)
+                    const centerCompletion = Math.min(1, flowerProgress / 0.15);
+                    drawProgressCircle(centerX, centerY, flowerRadius, centerCompletion, flowerAlpha);
+
+                    // First ring - 6 circles around center (0.1-0.5)
+                    if (flowerProgress > 0.1) {
+                        const ring1Progress = (flowerProgress - 0.1) / 0.4;
+
+                        for (let i = 0; i < 6; i++) {
+                            const circleStart = i / 6;
+                            const circleProgress = Math.max(0, Math.min(1, (ring1Progress - circleStart) * 6));
+
+                            if (circleProgress > 0) {
+                                const angle = (i * Math.PI * 2) / 6 - Math.PI / 2;
+                                const x = centerX + Math.cos(angle) * flowerRadius;
+                                const y = centerY + Math.sin(angle) * flowerRadius;
+
+                                // Smooth easing for each circle
+                                const easedProgress = easeInOutCubic(circleProgress);
+                                drawProgressCircle(x, y, flowerRadius, easedProgress, flowerAlpha);
+                            }
+                        }
+                    }
+
+                    // Second ring - 6 more circles at double distance (0.45-0.9)
+                    if (flowerProgress > 0.45) {
+                        const ring2Progress = (flowerProgress - 0.45) / 0.45;
+
+                        for (let i = 0; i < 6; i++) {
+                            const circleStart = i / 6;
+                            const circleProgress = Math.max(0, Math.min(1, (ring2Progress - circleStart) * 6));
+
+                            if (circleProgress > 0) {
+                                const angle = (i * Math.PI * 2) / 6;
+                                const x = centerX + Math.cos(angle) * flowerRadius * 2;
+                                const y = centerY + Math.sin(angle) * flowerRadius * 2;
+
+                                const easedProgress = easeInOutCubic(circleProgress);
+                                drawProgressCircle(x, y, flowerRadius, easedProgress, flowerAlpha * 0.85);
+                            }
+                        }
+                    }
+
+                    // Third ring - 12 circles in between (0.7-1.0) for fuller flower
+                    if (flowerProgress > 0.7) {
+                        const ring3Progress = (flowerProgress - 0.7) / 0.3;
+
+                        for (let i = 0; i < 6; i++) {
+                            const circleStart = i / 6;
+                            const circleProgress = Math.max(0, Math.min(1, (ring3Progress - circleStart) * 6));
+
+                            if (circleProgress > 0) {
+                                // Place between the second ring circles
+                                const angle = (i * Math.PI * 2) / 6 + Math.PI / 6;
+                                const dist = flowerRadius * Math.sqrt(3);
+                                const x = centerX + Math.cos(angle) * dist;
+                                const y = centerY + Math.sin(angle) * dist;
+
+                                const easedProgress = easeInOutCubic(circleProgress);
+                                drawProgressCircle(x, y, flowerRadius, easedProgress, flowerAlpha * 0.7);
+                            }
+                        }
+                    }
+                }
+
+                // Phase 4: Convergence to radiating dot (0.8-1.0)
+                if (phase > 0.75) {
+                    const finalPhase = (phase - 0.75) / 0.25;
+                    const pulse = 0.7 + Math.sin(time * 4) * 0.3;
+
+                    // Converging circles
+                    if (finalPhase < 0.6) {
+                        const convergeAlpha = 0.2 * (1 - finalPhase / 0.6);
+                        ctx.strokeStyle = `rgba(${geometryColor}, ${convergeAlpha})`;
+                        ctx.lineWidth = 1;
+
+                        for (let i = 0; i < 4; i++) {
+                            const radius = baseSize * (1 - finalPhase) * (0.3 + i * 0.2);
+                            if (radius > 5) {
+                                ctx.beginPath();
+                                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    // Radiating glow
+                    const glowAlpha = finalPhase * pulse;
+                    const gradient = ctx.createRadialGradient(
+                        centerX, centerY, 0,
+                        centerX, centerY, baseSize * 0.35
+                    );
+                    gradient.addColorStop(0, `rgba(${geometryColor}, ${glowAlpha * 0.9})`);
+                    gradient.addColorStop(0.2, `rgba(${geometryColor}, ${glowAlpha * 0.6})`);
+                    gradient.addColorStop(0.5, `rgba(${geometryColor}, ${glowAlpha * 0.15})`);
+                    gradient.addColorStop(1, `rgba(${geometryColor}, 0)`);
+
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, baseSize * 0.35, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Core dot
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, 5 + pulse * 5, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${glowAlpha})`;
+                    ctx.fill();
+
+                    // Vulcan salute in sacred geometry style + quote
+                    if (finalPhase > 0.3) {
+                        const vulcanAlpha = Math.min(1, (finalPhase - 0.3) / 0.4);
+
+                        // Draw Vulcan salute as sacred geometry
+                        const handSize = baseSize * 0.15;
+                        const handY = centerY - baseSize * 0.25;
+
+                        ctx.strokeStyle = `rgba(${geometryColor}, ${vulcanAlpha * 0.6})`;
+                        ctx.lineWidth = 1.5;
+                        ctx.lineCap = 'round';
+
+                        // Five fingers as lines emanating upward in V pattern
+                        const fingers = [
+                            { angle: -0.35, len: 1.0 },   // pinky
+                            { angle: -0.18, len: 1.1 },   // ring
+                            // gap for Vulcan split
+                            { angle: 0.18, len: 1.1 },    // middle
+                            { angle: 0.35, len: 1.0 },    // index
+                            { angle: 0.5, len: 0.7 },     // thumb
+                        ];
+
+                        fingers.forEach((f, i) => {
+                            const tipX = centerX + Math.sin(f.angle) * handSize * f.len;
+                            const tipY = handY - Math.cos(f.angle) * handSize * f.len;
+
+                            ctx.beginPath();
+                            ctx.moveTo(centerX, handY + handSize * 0.3);
+                            ctx.lineTo(tipX, tipY);
+                            ctx.stroke();
+
+                            // Twinkling star at fingertip
+                            const twinkle = 0.5 + Math.sin(time * 3 + i * 1.3) * 0.5;
+                            const starSize = 2 + twinkle * 2;
+
+                            // Star glow
+                            const starGlow = ctx.createRadialGradient(tipX, tipY, 0, tipX, tipY, starSize * 3);
+                            starGlow.addColorStop(0, `rgba(255, 255, 255, ${vulcanAlpha * twinkle * 0.9})`);
+                            starGlow.addColorStop(0.3, `rgba(${geometryColor}, ${vulcanAlpha * twinkle * 0.5})`);
+                            starGlow.addColorStop(1, `rgba(${geometryColor}, 0)`);
+
+                            ctx.beginPath();
+                            ctx.arc(tipX, tipY, starSize * 3, 0, Math.PI * 2);
+                            ctx.fillStyle = starGlow;
+                            ctx.fill();
+
+                            // Star core
+                            ctx.beginPath();
+                            ctx.arc(tipX, tipY, starSize * 0.5, 0, Math.PI * 2);
+                            ctx.fillStyle = `rgba(255, 255, 255, ${vulcanAlpha * (0.7 + twinkle * 0.3)})`;
+                            ctx.fill();
+                        });
+
+                        // Connecting arc at palm
+                        ctx.beginPath();
+                        ctx.arc(centerX, handY + handSize * 0.3, handSize * 0.25, Math.PI, 0);
+                        ctx.stroke();
+                    }
+
+                    // Quote fades in with shine effect
+                    if (finalPhase > 0.5) {
+                        const quoteAlpha = (finalPhase - 0.5) / 0.5;
+                        const textY = centerY + baseSize * 0.45;
+                        const text = 'Live long and prosper.';
+
+                        ctx.font = 'italic 18px Inter, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+
+                        // Base text
+                        ctx.fillStyle = `rgba(160, 160, 160, ${quoteAlpha * 0.85})`;
+                        ctx.fillText(text, centerX, textY);
+
+                        // Shine sweep effect
+                        const shinePos = ((time * 0.3) % 2) - 0.5; // -0.5 to 1.5, loops
+                        const textWidth = ctx.measureText(text).width;
+                        const shineX = centerX - textWidth / 2 + textWidth * shinePos;
+
+                        if (shinePos > 0 && shinePos < 1) {
+                            const shineGradient = ctx.createLinearGradient(
+                                shineX - 30, textY,
+                                shineX + 30, textY
+                            );
+                            shineGradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
+                            shineGradient.addColorStop(0.5, `rgba(255, 255, 255, ${quoteAlpha * 0.6})`);
+                            shineGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+                            ctx.fillStyle = shineGradient;
+                            ctx.fillText(text, centerX, textY);
+                        }
+                    }
+                }
+
+                ctx.shadowBlur = 0;
+            } else {
+                // Reset Data's quote visibility when not in easter egg
+                const dataQuote = document.querySelector('.data-quote');
+                if (dataQuote) {
+                    dataQuote.style.opacity = 1;
+                }
+            }
+
+            requestAnimationFrame(render);
+        }
+
+        function updateScrollProgress() {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress = Math.min(1, window.scrollY / scrollHeight);
+        }
+
+        window.addEventListener('scroll', updateScrollProgress);
+        window.addEventListener('resize', resize);
+
+        resize();
+        updateScrollProgress();
+        render();
+    })();
+
+    // Calculate Star Trek-style stardate
+    (function() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const startOfYear = new Date(year, 0, 1);
+        const endOfYear = new Date(year + 1, 0, 1);
+        const yearProgress = (now - startOfYear) / (endOfYear - startOfYear);
+        const stardate = ((year - 2000) * 1000 + yearProgress * 1000).toFixed(1);
+
+        const stardateEl = document.getElementById('stardate');
+        if (stardateEl) {
+            stardateEl.textContent = stardate;
+        }
+
+        // Easter egg
+        console.log('%c"I am the culmination of one man\'s dream. This is not ego or vanity. But when Doctor Soong created me, he added to the substance of the universe."', 'color: #3b82f6; font-style: italic;');
+        console.log('%c— Lieutenant Commander Data', 'color: #666;');
+    })();
+
+    // Theme toggle
+    (function() {
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Check for saved preference or system preference
+        const savedTheme = localStorage.getItem('datacore-theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+        } else if (!systemPrefersDark) {
+            html.setAttribute('data-theme', 'light');
+        }
+
+        toggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('datacore-theme', newTheme);
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('datacore-theme')) {
+                html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
