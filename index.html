@@ -3,7 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="bingbot" content="noindex, nofollow">
     <title>Datacore - Own Your Intelligence</title>
+
+    <!-- PostHog Analytics -->
+    <script src="https://eu-assets.i.posthog.com/static/array.js"></script>
+    <script>
+        posthog.init('phc_g3ufMVvHNkKydA8vas97Del135UNYEFUuM2Sp0bzDoD', {
+            api_host: 'https://eu.i.posthog.com',
+            capture_pageview: true,
+            capture_pageleave: 'if_capture_pageview'
+        });
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -756,10 +770,10 @@
         <div class="container">
             <a href="#" class="logo">data<span>core</span></a>
             <div class="nav-links">
+                <a href="features.html">Features</a>
                 <a href="#features">What It Is</a>
                 <a href="#evolution">How It Grows</a>
                 <a href="#movement">The Movement</a>
-                <a href="https://github.com/datacore-one" class="btn btn-secondary">GitHub</a>
                 <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
             </div>
         </div>
@@ -789,9 +803,6 @@
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
-                    </a>
-                    <a href="https://github.com/datacore-one/datacore" class="btn btn-secondary">
-                        View on GitHub
                     </a>
                 </div>
             </div>
@@ -917,9 +928,6 @@
             </div>
             <div class="waitlist-response" id="waitlist-response"></div>
             <div class="hero-buttons" style="justify-content: center; margin-top: 32px;">
-                <a href="https://github.com/datacore-one/datacore" class="btn btn-secondary">
-                    View on GitHub
-                </a>
             </div>
         </div>
     </section>
@@ -935,7 +943,6 @@
         <div class="container">
             <p class="footer-line">
                 <span class="stardate">Stardate <span id="stardate"></span></span> &middot;
-                <a href="https://github.com/datacore-one">GitHub</a> &middot;
                 <a href="https://x.com/datacoreone">X</a> &middot;
                 MIT License
             </p>
@@ -2213,6 +2220,18 @@
 
         if (!submitBtn || !emailInput) return;
 
+        // Get UTM params from URL
+        function getUTMParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                source: params.get('utm_source'),
+                medium: params.get('utm_medium'),
+                campaign: params.get('utm_campaign'),
+                content: params.get('utm_content'),
+                term: params.get('utm_term')
+            };
+        }
+
         submitBtn.addEventListener('click', async () => {
             const email = emailInput.value.trim();
 
@@ -2227,20 +2246,39 @@
             responseEl.textContent = '';
 
             try {
-                // TODO: Replace with actual API endpoint
-                // const response = await fetch('/api/waitlist', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify({ email, source: 'datacore.one' })
-                // });
+                const response = await fetch('/api/waitlist', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email,
+                        site: 'datacore',
+                        utm: getUTMParams()
+                    })
+                });
 
-                // Placeholder success for now
-                await new Promise(resolve => setTimeout(resolve, 800));
+                const data = await response.json();
 
-                responseEl.textContent = "Something is taking shape. We'll be in touch when it's ready to meet you.";
-                responseEl.className = 'waitlist-response success';
-                emailInput.value = '';
-                submitBtn.textContent = 'You\'re on the list';
+                if (response.ok) {
+                    // Track successful signup in PostHog
+                    if (window.posthog) {
+                        posthog.identify(email);
+                        posthog.capture('waitlist_signup', {
+                            site: 'datacore',
+                            ...getUTMParams()
+                        });
+                    }
+                    responseEl.textContent = data.response || "Something is taking shape. We'll be in touch when it's ready to meet you.";
+                    responseEl.className = 'waitlist-response success';
+                    emailInput.value = '';
+                    submitBtn.textContent = 'You\'re on the list';
+                } else if (response.status === 409) {
+                    // Already registered
+                    responseEl.textContent = data.response || "You're already on the list. We'll be in touch soon.";
+                    responseEl.className = 'waitlist-response success';
+                    submitBtn.textContent = 'Already registered';
+                } else {
+                    throw new Error(data.error || 'Unknown error');
+                }
             } catch (error) {
                 responseEl.textContent = 'Something went wrong. Please try again.';
                 responseEl.className = 'waitlist-response error';

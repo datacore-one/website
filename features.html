@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="bingbot" content="noindex, nofollow">
+    <title>Features - Datacore</title>
+
+    <!-- PostHog Analytics -->
+    <script src="https://eu-assets.i.posthog.com/static/array.js"></script>
+    <script>
+        posthog.init('phc_g3ufMVvHNkKydA8vas97Del135UNYEFUuM2Sp0bzDoD', {
+            api_host: 'https://eu.i.posthog.com',
+            capture_pageview: true,
+            capture_pageleave: 'if_capture_pageview'
+        });
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --border: #222222;
+            --success: #10b981;
+            --geometry-color: 59, 130, 246;
+            --geometry-glow: 59, 130, 246;
+            --card-bg: rgba(17, 17, 17, 0.6);
+            --card-border: rgba(34, 34, 34, 0.5);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f0f7ff;
+            --bg-secondary: #e6f0fa;
+            --bg-tertiary: #dbe8f5;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-glow: rgba(37, 99, 235, 0.15);
+            --border: #c7d9ed;
+            --success: #10b981;
+            --geometry-color: 59, 130, 246;
+            --geometry-glow: 59, 130, 246;
+            --card-bg: linear-gradient(135deg, rgba(224, 237, 255, 0.9) 0%, rgba(237, 244, 255, 0.95) 100%);
+            --card-border: rgba(199, 217, 237, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Geometry Canvas */
+        #geometry-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: transparent;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 24px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(100, 100, 100, 0.5);
+            color: var(--text-secondary) !important;
+        }
+
+        .btn-primary:hover {
+            background: rgba(59, 130, 246, 0.4);
+            border-color: rgba(59, 130, 246, 0.6);
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border-color: rgba(100, 100, 100, 0.3);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .btn-primary {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(100, 100, 100, 0.3);
+            color: var(--text-secondary) !important;
+        }
+
+        [data-theme="light"] .btn-primary:hover {
+            background: rgba(37, 99, 235, 0.15);
+            border-color: rgba(37, 99, 235, 0.4);
+            color: var(--accent) !important;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 12px;
+            right: 24px;
+            z-index: 101;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: rotate(15deg);
+        }
+
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            position: absolute;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .theme-toggle .icon-sun {
+            opacity: 0;
+            transform: rotate(-90deg);
+        }
+
+        .theme-toggle .icon-moon {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        [data-theme="light"] .theme-toggle .icon-sun {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        [data-theme="light"] .theme-toggle .icon-moon {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
+
+        /* Content positioning above canvas */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 100px;
+            text-align: center;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero .container {
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+            background: transparent;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+            font-weight: 400;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Feature Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding: 5px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        /* Command Preview */
+        .command-preview {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-top: 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        .command-preview .prompt {
+            color: var(--accent);
+            opacity: 0.7;
+        }
+
+        .command-preview .command {
+            color: var(--text-secondary);
+        }
+
+        /* Principles Section */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            margin-top: 48px;
+        }
+
+        @media (max-width: 900px) {
+            .principles-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        .principle {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .principle-icon {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            opacity: 0.7;
+        }
+
+        .principle h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .principle p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Agents Section */
+        .agents-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .agent-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            transition: border-color 0.2s;
+        }
+
+        [data-theme="light"] .agent-item {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .agent-item:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .agent-info h4 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 2px;
+        }
+
+        .agent-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Modules Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .module-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s;
+        }
+
+        .module-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .module-header h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .module-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .module-badge.coming-soon {
+            background: rgba(100, 100, 100, 0.2);
+            color: var(--text-muted);
+        }
+
+        .module-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+        }
+
+        /* DIPs Section */
+        .dips-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .dips-section h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .dips-section p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            line-height: 1.7;
+        }
+
+        .dips-section .command-preview {
+            display: inline-block;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .cta h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 300;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 28px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            background: transparent;
+            padding: 24px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-line {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .stardate {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            opacity: 0.7;
+        }
+
+        .footer-tagline {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .agents-section {
+                padding: 24px;
+            }
+
+            .dips-section {
+                padding: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="geometry-canvas"></canvas>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span class="icon-sun">&#9728;</span>
+        <span class="icon-moon">&#9790;</span>
+    </button>
+
+    <div class="content">
+        <nav>
+            <div class="container">
+                <a href="index.html" class="logo">data<span>core</span></a>
+                <div class="nav-links">
+                    <a href="features.html" class="active">Features</a>
+                    <a href="index.html#features">What It Is</a>
+                    <a href="index.html#evolution">How It Grows</a>
+                    <a href="index.html#movement">The Movement</a>
+                    <a href="index.html#waitlist" class="btn btn-primary">Join Waitlist</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <h1>Less management. More space for what matters.</h1>
+                <p class="subtitle">
+                    Datacore handles the overhead automatically. Knowledge surfaces when you need it.
+                    Tasks run themselves. You get to focus on expression, not administration.
+                </p>
+            </div>
+        </section>
+
+        <!-- Core Principles -->
+        <section class="section" id="principles">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How it works</h2>
+                    <p>Simple principles, quietly applied.</p>
+                </div>
+
+                <div class="principles-grid">
+                    <div class="principle">
+                        <div class="principle-icon">&#9881;</div>
+                        <h3>Automatic</h3>
+                        <p>Tasks tagged for AI run overnight. Morning brings completed work, not more todos.</p>
+                    </div>
+                    <div class="principle">
+                        <div class="principle-icon">&#8734;</div>
+                        <h3>Always available</h3>
+                        <p>Knowledge surfaces when relevant. No searching, no remembering where you put things.</p>
+                    </div>
+                    <div class="principle">
+                        <div class="principle-icon">&#10227;</div>
+                        <h3>Self-evolving</h3>
+                        <p>Learns from each session. Validates its own state. Fixes drift before you notice it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Features -->
+        <section class="section" id="core">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What you get</h2>
+                    <p>Practical tools that stay out of the way.</p>
+                </div>
+
+                <div class="features-grid">
+                    <!-- AI Agents -->
+                    <div class="feature-card">
+                        <h3>AI Agents</h3>
+                        <p>Tag a task with :AI: and it runs without you. Content gets written, research gets done, data gets analyzed.</p>
+                        <ul class="feature-list">
+                            <li>Runs while you sleep</li>
+                            <li>Research, writing, analysis, project tracking</li>
+                            <li>Escalates what needs human judgment</li>
+                        </ul>
+                        <div class="command-preview">
+                            <span class="prompt">*</span> <span class="command">TODO Research market trends :AI:research:</span>
+                        </div>
+                    </div>
+
+                    <!-- Slash Commands -->
+                    <div class="feature-card">
+                        <h3>Slash Commands</h3>
+                        <p>One command handles an entire workflow. Morning planning, session wrap-up, overnight delegation.</p>
+                        <ul class="feature-list">
+                            <li>/today - Daily briefing</li>
+                            <li>/wrap-up - Capture session work</li>
+                            <li>/tomorrow - Delegate and prepare</li>
+                        </ul>
+                        <div class="command-preview">
+                            <span class="prompt">$</span> <span class="command">/tomorrow</span>
+                        </div>
+                    </div>
+
+                    <!-- Knowledge System -->
+                    <div class="feature-card">
+                        <h3>Knowledge System</h3>
+                        <p>Notes link themselves. Ideas compound. What you learned last month shows up when it's relevant today.</p>
+                        <ul class="feature-list">
+                            <li>Zettelkasten-based permanent notes</li>
+                            <li>Progressive summarization</li>
+                            <li>Automatic linking</li>
+                        </ul>
+                        <div class="command-preview">
+                            <span class="prompt">></span> <span class="command">[[Personal Data Sovereignty]]</span>
+                        </div>
+                    </div>
+
+                    <!-- Workspaces -->
+                    <div class="feature-card">
+                        <h3>Spaces</h3>
+                        <p>Personal life, team work, side projects. Each with its own agents, its own context. One system.</p>
+                        <ul class="feature-list">
+                            <li>Isolated contexts, shared infrastructure</li>
+                            <li>Layered permissions (public/space/private)</li>
+                            <li>Git-based sync and collaboration</li>
+                        </ul>
+                        <div class="command-preview">
+                            <span class="prompt">~/Data/</span> <span class="command">0-personal/ 1-team/ 2-project/</span>
+                        </div>
+                    </div>
+
+                    <!-- Learning System -->
+                    <div class="feature-card">
+                        <h3>Learning</h3>
+                        <p>Each session makes the next one better. Patterns extracted, preferences remembered, mistakes avoided.</p>
+                        <ul class="feature-list">
+                            <li>Automatic pattern extraction</li>
+                            <li>Corrections prevent repeat errors</li>
+                            <li>Compounds silently over time</li>
+                        </ul>
+                        <div class="command-preview">
+                            <span class="prompt">.datacore/learning/</span> <span class="command">patterns.md</span>
+                        </div>
+                    </div>
+
+                    <!-- Modules -->
+                    <div class="feature-card">
+                        <h3>Modules</h3>
+                        <p>Domain-specific workflows that plug in. Trading, campaigns, research. Build your own.</p>
+                        <ul class="feature-list">
+                            <li>Self-contained agent + command bundles</li>
+                            <li>Share modules easily</li>
+                            <li>Simple structure, no framework</li>
+                        </ul>
+                        <div class="command-preview">
+                            <span class="prompt">.datacore/modules/</span> <span class="command">trading/ campaigns/</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agents -->
+        <section class="section" id="agents">
+            <div class="container">
+                <div class="section-header">
+                    <h2>17 Agents</h2>
+                    <p>Each handles a specific type of work.</p>
+                </div>
+
+                <div class="agents-section">
+                    <div class="agents-grid">
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>ai-task-executor</h4>
+                                <p>Routes tasks to specialized agents</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>gtd-inbox-coordinator</h4>
+                                <p>Orchestrates inbox processing</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>gtd-inbox-processor</h4>
+                                <p>Processes single entries</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>gtd-content-writer</h4>
+                                <p>Blog, email, documentation</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>gtd-data-analyzer</h4>
+                                <p>Metrics and reports</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>gtd-project-manager</h4>
+                                <p>Tracking and escalation</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>gtd-research-processor</h4>
+                                <p>URL analysis, zettel creation</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>conversation-processor</h4>
+                                <p>ChatGPT export processing</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>research-link-processor</h4>
+                                <p>Batch URL processing</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>archiver</h4>
+                                <p>Content organization</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>scaffolding-auditor</h4>
+                                <p>Space validation</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>context-maintainer</h4>
+                                <p>Context sync and validation</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>session-learning</h4>
+                                <p>Pattern extraction</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>landing-generator</h4>
+                                <p>Landing page creation</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>module-registrar</h4>
+                                <p>Module installation</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>emergency-stop-trader</h4>
+                                <p>Trading crisis intervention</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modules Section -->
+        <section class="section" id="modules">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Modules</h2>
+                    <p>Domain-specific extensions.</p>
+                </div>
+
+                <div class="modules-grid">
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Trading</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Position management, risk monitoring, performance tracking.</p>
+                        <ul class="feature-list">
+                            <li>/start-trading - Pre-market check</li>
+                            <li>/validate-trade - Entry validation</li>
+                            <li>/check-position-health - Risk metrics</li>
+                            <li>Wyckoff cycle analysis</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Campaigns</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Landing page lifecycle with analytics and deployment.</p>
+                        <ul class="feature-list">
+                            <li>Landing page generation</li>
+                            <li>PostHog integration</li>
+                            <li>DigitalOcean deployment</li>
+                            <li>A/B test optimization</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Research</h3>
+                            <span class="module-badge coming-soon">Coming</span>
+                        </div>
+                        <p>Academic workflows with literature review and citation management.</p>
+                        <ul class="feature-list">
+                            <li>Paper ingestion</li>
+                            <li>Literature notes</li>
+                            <li>Citation graphs</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Build your own</h3>
+                            <span class="module-badge">Template</span>
+                        </div>
+                        <p>Simple structure. Your agents, your commands, your templates.</p>
+                        <div class="command-preview">
+                            <span class="command">module.yaml<br>agents/<br>commands/<br>templates/</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIPs Section -->
+        <section class="section" id="dips">
+            <div class="container">
+                <div class="dips-section">
+                    <h3>Datacore Improvement Proposals (DIPs)</h3>
+                    <p>
+                        The system evolves through documented proposals. Each DIP captures a problem,
+                        proposes a solution, and tracks implementation. Open, versioned, reviewable.
+                    </p>
+                    <div class="command-preview">
+                        <span class="prompt">.datacore/dips/</span> <span class="command">DIP-0001.md DIP-0002.md DIP-0003.md</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta">
+            <div class="container">
+                <h2>Less overhead. More you.</h2>
+                <p>Start with one command. See where it goes.</p>
+                <div class="cta-buttons">
+                    <a href="index.html#waitlist" class="btn btn-primary">Join Waitlist</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p class="footer-line">
+                    <span class="stardate">Stardate <span id="stardate"></span></span> &middot;
+                    <a href="https://x.com/datacoreone">X</a> &middot;
+                    MIT License
+                </p>
+                <p class="footer-tagline">Own your intelligence.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+    // Theme toggle
+    (function() {
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+        } else if (!systemPrefersDark) {
+            html.setAttribute('data-theme', 'light');
+        }
+
+        toggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+    })();
+
+    // Stardate calculator
+    (function() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const start = new Date(year, 0, 0);
+        const diff = now - start;
+        const oneDay = 1000 * 60 * 60 * 24;
+        const dayOfYear = Math.floor(diff / oneDay);
+        const stardate = (year - 2000) * 1000 + dayOfYear;
+        const el = document.getElementById('stardate');
+        if (el) el.textContent = stardate.toFixed(1);
+    })();
+
+    // Sacred Geometry - Flower of Life progression with neurons
+    (function() {
+        const canvas = document.getElementById('geometry-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let scrollProgress = 0;
+
+        function getGeometryColor() {
+            const style = getComputedStyle(document.documentElement);
+            return style.getPropertyValue('--geometry-color').trim() || '59, 130, 246';
+        }
+
+        let geometryColor = getGeometryColor();
+
+        // Update color on theme change
+        const observer = new MutationObserver(() => {
+            geometryColor = getGeometryColor();
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+        // Neuron-like blinks
+        const blinks = [];
+        const maxBlinks = 12;
+
+        function spawnBlink() {
+            if (blinks.length < maxBlinks && Math.random() < 0.025) {
+                blinks.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    life: 1,
+                    decay: 0.02 + Math.random() * 0.03,
+                    size: 2 + Math.random() * 3
+                });
+            }
+        }
+
+        function updateBlinks() {
+            for (let i = blinks.length - 1; i >= 0; i--) {
+                blinks[i].life -= blinks[i].decay;
+                if (blinks[i].life <= 0) {
+                    blinks.splice(i, 1);
+                }
+            }
+        }
+
+        function drawBlinks() {
+            blinks.forEach(b => {
+                const alpha = b.life * 0.35;
+                const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.size * 3);
+                gradient.addColorStop(0, `rgba(${geometryColor}, ${alpha})`);
+                gradient.addColorStop(0.5, `rgba(${geometryColor}, ${alpha * 0.3})`);
+                gradient.addColorStop(1, `rgba(${geometryColor}, 0)`);
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.size * 3, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            });
+        }
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function drawFlowerOfLife(progress) {
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw neurons first (behind geometry)
+            spawnBlink();
+            updateBlinks();
+            drawBlinks();
+
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const baseRadius = Math.min(width, height) * 0.12;
+
+            ctx.lineWidth = 1;
+            const baseAlpha = 0.22;
+
+            // Time-based animation - slow, hypnotic
+            const time = Date.now() / 1000;
+            const pulse = 0.5 + 0.5 * Math.sin(time * 0.8); // Very slow pulse
+
+            // Glow phase (starts at 70%, smooth transition)
+            const glowPhase = progress > 0.7 ? Math.min(1, (progress - 0.7) / 0.25) : 0;
+            const glowEased = easeInOutCubic(glowPhase);
+
+            // Helper to draw a circle with smooth completion
+            function drawCircle(cx, cy, r, completion, alpha) {
+                if (completion <= 0) return;
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(${geometryColor}, ${alpha})`;
+                const endAngle = -Math.PI / 2 + (completion * Math.PI * 2);
+                ctx.arc(cx, cy, r, -Math.PI / 2, endAngle);
+                ctx.stroke();
+            }
+
+            // Draw center dot (consistent throughout)
+            function drawCenterDot() {
+                const dotSize = 4;
+                const baseOpacity = 0.35 + pulse * 0.1;
+                const glowBoost = glowEased * pulse * 0.5;
+
+                // Radiating glow (fades in at end)
+                if (glowEased > 0) {
+                    const glowRadius = baseRadius * 0.5;
+                    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, glowRadius);
+                    const glowAlpha = glowEased * (0.4 + pulse * 0.3);
+                    gradient.addColorStop(0, `rgba(${geometryColor}, ${glowAlpha * 0.6})`);
+                    gradient.addColorStop(0.4, `rgba(${geometryColor}, ${glowAlpha * 0.2})`);
+                    gradient.addColorStop(1, `rgba(${geometryColor}, 0)`);
+
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, glowRadius, 0, Math.PI * 2);
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                }
+
+                // Dot glow halo
+                const haloSize = dotSize * 3;
+                const dotGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, haloSize);
+                dotGlow.addColorStop(0, `rgba(${geometryColor}, ${baseOpacity + glowBoost})`);
+                dotGlow.addColorStop(0.4, `rgba(${geometryColor}, ${(baseOpacity + glowBoost) * 0.3})`);
+                dotGlow.addColorStop(1, `rgba(${geometryColor}, 0)`);
+
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, haloSize, 0, Math.PI * 2);
+                ctx.fillStyle = dotGlow;
+                ctx.fill();
+
+                // Core dot
+                const coreSize = dotSize + glowEased * pulse * 2;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, coreSize, 0, Math.PI * 2);
+                const whiteness = glowEased * pulse;
+                ctx.fillStyle = `rgba(${Math.round(59 + 196 * whiteness)}, ${Math.round(130 + 125 * whiteness)}, ${Math.round(246 + 9 * whiteness)}, ${baseOpacity + glowBoost})`;
+                ctx.fill();
+            }
+
+            // Draw glowing petals
+            function drawGlowingPetals() {
+                if (glowEased <= 0.1) return;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, baseRadius * 0.98, 0, Math.PI * 2);
+                ctx.clip();
+
+                const petalAlpha = glowEased * (0.15 + pulse * 0.2);
+                ctx.shadowColor = `rgba(${geometryColor}, ${glowEased * 0.5})`;
+                ctx.shadowBlur = 10 * glowEased;
+                ctx.strokeStyle = `rgba(${geometryColor}, ${petalAlpha})`;
+                ctx.lineWidth = 1.5;
+
+                for (let i = 0; i < 6; i++) {
+                    const angle = (i * Math.PI) / 3;
+                    const cx = centerX + Math.cos(angle) * baseRadius;
+                    const cy = centerY - Math.sin(angle) * baseRadius;
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, baseRadius, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+
+                ctx.restore();
+            }
+
+            // Always draw center dot first
+            drawCenterDot();
+
+            // Phase 1: Center circle (0 - 0.2)
+            if (progress >= 0.02) {
+                const p = Math.min(1, (progress - 0.02) / 0.18);
+                drawCircle(centerX, centerY, baseRadius, easeInOutCubic(p), baseAlpha);
+            }
+
+            // Phase 2: First ring of 6 circles (0.2 - 0.55)
+            if (progress >= 0.2) {
+                const ringProgress = (progress - 0.2) / 0.35;
+                for (let i = 0; i < 6; i++) {
+                    const circleStart = i / 6;
+                    const p = Math.max(0, Math.min(1, (ringProgress - circleStart) * 3));
+                    if (p > 0) {
+                        const angle = (i * Math.PI) / 3;
+                        const x = centerX + Math.cos(angle) * baseRadius;
+                        const y = centerY - Math.sin(angle) * baseRadius;
+                        drawCircle(x, y, baseRadius, easeInOutCubic(p), baseAlpha);
+                    }
+                }
+            }
+
+            // Phase 3: Second ring of 6 circles (0.55 - 0.9)
+            if (progress >= 0.55) {
+                const ringProgress = (progress - 0.55) / 0.35;
+                for (let i = 0; i < 6; i++) {
+                    const circleStart = i / 6;
+                    const p = Math.max(0, Math.min(1, (ringProgress - circleStart) * 3));
+                    if (p > 0) {
+                        const angle = (i * Math.PI) / 3 + Math.PI / 6;
+                        const x = centerX + Math.cos(angle) * baseRadius * Math.sqrt(3);
+                        const y = centerY - Math.sin(angle) * baseRadius * Math.sqrt(3);
+                        drawCircle(x, y, baseRadius, easeInOutCubic(p), baseAlpha * 0.7);
+                    }
+                }
+            }
+
+            // Draw glowing petals on top
+            drawGlowingPetals();
+        }
+
+        function animate() {
+            drawFlowerOfLife(scrollProgress);
+            requestAnimationFrame(animate);
+        }
+
+        function updateScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress = docHeight > 0 ? Math.min(1, scrollTop / docHeight) : 0;
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('scroll', updateScroll, { passive: true });
+        resize();
+        updateScroll();
+        animate();
+    })();
+    </script>
+</body>
+</html>
