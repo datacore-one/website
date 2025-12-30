@@ -467,6 +467,67 @@
             margin: 0;
         }
 
+        /* Agent Category Headers */
+        .agent-category {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .agent-category:first-child {
+            margin-top: 0;
+        }
+
+        /* Nightshift Highlight */
+        .nightshift-highlight {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 20px 24px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .nightshift-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .nightshift-names {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .nightshift-desc {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        /* Module Category Headers */
+        .module-category {
+            grid-column: 1 / -1;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 32px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .module-category:first-child {
+            margin-top: 0;
+        }
+
         /* Modules Grid */
         .modules-grid {
             display: grid;
@@ -612,6 +673,14 @@
             font-size: 0.9rem;
             margin-top: 8px;
             opacity: 0.7;
+        }
+
+        .footer-powered {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            opacity: 0.5;
+            margin-top: 8px;
         }
 
         /* Responsive */
@@ -791,11 +860,13 @@
         <section class="section" id="agents">
             <div class="container">
                 <div class="section-header">
-                    <h2>17 Agents</h2>
-                    <p>Each handles a specific type of work.</p>
+                    <h2>99 Agents</h2>
+                    <p>Organized by function. Each handles a specific type of work.</p>
                 </div>
 
                 <div class="agents-section">
+                    <!-- Task Routing -->
+                    <h4 class="agent-category">Task Routing</h4>
                     <div class="agents-grid">
                         <div class="agent-item">
                             <div class="agent-info">
@@ -812,25 +883,18 @@
                         <div class="agent-item">
                             <div class="agent-info">
                                 <h4>gtd-inbox-processor</h4>
-                                <p>Processes single entries</p>
+                                <p>Processes individual entries</p>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Content & Knowledge -->
+                    <h4 class="agent-category">Content & Knowledge</h4>
+                    <div class="agents-grid">
                         <div class="agent-item">
                             <div class="agent-info">
                                 <h4>gtd-content-writer</h4>
                                 <p>Blog, email, documentation</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>gtd-data-analyzer</h4>
-                                <p>Metrics and reports</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>gtd-project-manager</h4>
-                                <p>Tracking and escalation</p>
                             </div>
                         </div>
                         <div class="agent-item">
@@ -853,14 +917,31 @@
                         </div>
                         <div class="agent-item">
                             <div class="agent-info">
-                                <h4>archiver</h4>
-                                <p>Content organization</p>
+                                <h4>session-learning</h4>
+                                <p>Pattern extraction</p>
                             </div>
                         </div>
                         <div class="agent-item">
                             <div class="agent-info">
-                                <h4>scaffolding-auditor</h4>
-                                <p>Space validation</p>
+                                <h4>archiver</h4>
+                                <p>Content organization</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analysis & Tracking -->
+                    <h4 class="agent-category">Analysis & Tracking</h4>
+                    <div class="agents-grid">
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>gtd-data-analyzer</h4>
+                                <p>Metrics and reports</p>
+                            </div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-info">
+                                <h4>gtd-project-manager</h4>
+                                <p>Tracking and escalation</p>
                             </div>
                         </div>
                         <div class="agent-item">
@@ -869,22 +950,29 @@
                                 <p>Context sync and validation</p>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Nightshift Quality -->
+                    <h4 class="agent-category">Nightshift Quality Assurance</h4>
+                    <div class="nightshift-highlight">
+                        <p class="nightshift-count">nightshift-orchestrator + 20 evaluator personas</p>
+                        <p class="nightshift-names">Hemingway, Feynman, Bezos, Picard, Buffett, Dijkstra...</p>
+                        <p class="nightshift-desc">Each evaluates your work from a unique perspective before delivery.</p>
+                    </div>
+
+                    <!-- Domain Modules -->
+                    <h4 class="agent-category">Domain Specialists</h4>
+                    <div class="agents-grid">
                         <div class="agent-item">
                             <div class="agent-info">
-                                <h4>session-learning</h4>
-                                <p>Pattern extraction</p>
+                                <h4>40+ module agents</h4>
+                                <p>Meetings, CRM, trading, health, mail, news...</p>
                             </div>
                         </div>
                         <div class="agent-item">
                             <div class="agent-info">
                                 <h4>landing-generator</h4>
                                 <p>Landing page creation</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>module-registrar</h4>
-                                <p>Module installation</p>
                             </div>
                         </div>
                         <div class="agent-item">
@@ -907,29 +995,186 @@
                 </div>
 
                 <div class="modules-grid">
+                    <!-- Core Infrastructure -->
+                    <h4 class="module-category">Core Infrastructure</h4>
+
                     <div class="module-card">
                         <div class="module-header">
-                            <h3>Org</h3>
+                            <h3>Nightshift</h3>
                             <span class="module-badge">Available</span>
                         </div>
-                        <p>Autonomous knowledge-driven organisation. Teams that run on shared context.</p>
+                        <p>Autonomous overnight task execution with 20+ AI evaluator personas.</p>
                         <ul class="feature-list">
-                            <li>Shared knowledge base</li>
-                            <li>AI task execution (comms, product, dev)</li>
-                            <li>Space scaffolding and structure</li>
-                            <li>Cross-team context sync</li>
+                            <li>Tag tasks, wake up to completed work</li>
+                            <li>Multi-persona quality evaluation</li>
+                            <li>80% quality threshold gates</li>
+                            <li>Automatic retry and escalation</li>
                         </ul>
                     </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Datacortex</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Knowledge graph visualization and semantic search.</p>
+                        <ul class="feature-list">
+                            <li>Embeddings-based search</li>
+                            <li>Cross-space knowledge queries</li>
+                            <li>Visual concept mapping</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Outbox</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Content routing, archiving, and semantic search in archives.</p>
+                        <ul class="feature-list">
+                            <li>Intelligent content routing</li>
+                            <li>Archive with full-text search</li>
+                            <li>Delivery tracking</li>
+                        </ul>
+                    </div>
+
+                    <!-- Knowledge & Research -->
+                    <h4 class="module-category">Knowledge & Research</h4>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Research</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Automated research with literature notes and NotebookLM podcasts.</p>
+                        <ul class="feature-list">
+                            <li>URL analysis and zettel creation</li>
+                            <li>NotebookLM podcast generation</li>
+                            <li>Progressive summarization</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Grants</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Grant proposal writing for EU/NGI funding programs.</p>
+                        <ul class="feature-list">
+                            <li>Proposal structure templates</li>
+                            <li>Budget calculation</li>
+                            <li>Compliance checking</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>News</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>AI-scored news aggregation with tiered processing.</p>
+                        <ul class="feature-list">
+                            <li>Relevance scoring</li>
+                            <li>Daily digest generation</li>
+                            <li>Topic clustering</li>
+                        </ul>
+                    </div>
+
+                    <!-- Collaboration -->
+                    <h4 class="module-category">Collaboration</h4>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Meetings</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Standup generation, meeting prep, transcription processing.</p>
+                        <ul class="feature-list">
+                            <li>/standup from journal entries</li>
+                            <li>/meeting-prep with context</li>
+                            <li>Action item extraction</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>CRM</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Network intelligence - people, companies, relationships.</p>
+                        <ul class="feature-list">
+                            <li>Entity extraction from notes</li>
+                            <li>Relationship scoring</li>
+                            <li>Interaction tracking</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Mail</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Email classification and prioritization.</p>
+                        <ul class="feature-list">
+                            <li>Gmail integration</li>
+                            <li>Priority scoring</li>
+                            <li>Action suggestions</li>
+                        </ul>
+                    </div>
+
+                    <!-- Finance & Personal -->
+                    <h4 class="module-category">Finance & Personal</h4>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Trading</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Position management, risk monitoring, Wyckoff analysis.</p>
+                        <ul class="feature-list">
+                            <li>/start-trading - Pre-market check</li>
+                            <li>/validate-trade - Entry validation</li>
+                            <li>/check-position-health - Risk metrics</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Personal Finance</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Crypto tracking across Kraken, Gate.io, Etherscan.</p>
+                        <ul class="feature-list">
+                            <li>Multi-exchange holdings</li>
+                            <li>Loan reconciliation</li>
+                            <li>Transaction history</li>
+                        </ul>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-header">
+                            <h3>Health</h3>
+                            <span class="module-badge">Available</span>
+                        </div>
+                        <p>Oura/HealthKit sync, biometrics, prevention scheduling.</p>
+                        <ul class="feature-list">
+                            <li>Sleep and activity tracking</li>
+                            <li>Prevention reminders</li>
+                            <li>Routine optimization</li>
+                        </ul>
+                    </div>
+
+                    <!-- Content & Access -->
+                    <h4 class="module-category">Content & Access</h4>
 
                     <div class="module-card">
                         <div class="module-header">
                             <h3>Campaigns</h3>
                             <span class="module-badge">Available</span>
                         </div>
-                        <p>Landing page lifecycle with analytics and deployment.</p>
+                        <p>Landing pages, A/B testing, PostHog analytics.</p>
                         <ul class="feature-list">
                             <li>Landing page generation</li>
-                            <li>PostHog integration</li>
                             <li>DigitalOcean deployment</li>
                             <li>A/B test optimization</li>
                         </ul>
@@ -937,30 +1182,32 @@
 
                     <div class="module-card">
                         <div class="module-header">
-                            <h3>Research</h3>
-                            <span class="module-badge coming-soon">Coming</span>
+                            <h3>Slides</h3>
+                            <span class="module-badge">Available</span>
                         </div>
-                        <p>Academic workflows with literature review and citation management.</p>
+                        <p>Gamma.app presentation generation.</p>
                         <ul class="feature-list">
-                            <li>Paper ingestion</li>
-                            <li>Literature notes</li>
-                            <li>Citation graphs</li>
+                            <li>Content to slides</li>
+                            <li>Theme management</li>
+                            <li>Export to PDF/PPTX</li>
                         </ul>
                     </div>
 
                     <div class="module-card">
                         <div class="module-header">
-                            <h3>Trading</h3>
+                            <h3>Telegram</h3>
                             <span class="module-badge">Available</span>
                         </div>
-                        <p>Position management, risk monitoring, performance tracking.</p>
+                        <p>Mobile access to Datacore via Telegram bot.</p>
                         <ul class="feature-list">
-                            <li>/start-trading - Pre-market check</li>
-                            <li>/validate-trade - Entry validation</li>
-                            <li>/check-position-health - Risk metrics</li>
-                            <li>Wyckoff cycle analysis</li>
+                            <li>Quick capture on mobile</li>
+                            <li>Command execution</li>
+                            <li>Status notifications</li>
                         </ul>
                     </div>
+
+                    <!-- Build Your Own -->
+                    <h4 class="module-category">Extensibility</h4>
 
                     <div class="module-card">
                         <div class="module-header">
@@ -1006,11 +1253,9 @@
         <footer>
             <div class="container">
                 <p class="footer-line">
-                    <span class="stardate">Stardate <span id="stardate"></span></span> &middot;
-                    <a href="https://x.com/datacoreone">X</a> &middot;
-                    MIT License
+                    <span class="stardate">Stardate <span id="stardate"></span></span>
                 </p>
-                <p class="footer-tagline">Own your intelligence.</p>
+                <p class="footer-powered">Created and powered by Datacore</p>
             </div>
         </footer>
     </div>
