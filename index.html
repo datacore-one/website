@@ -604,18 +604,72 @@
 
         /* Network Roadmap */
         .network-phases {
-            display: flex;
-            flex-direction: column;
-            gap: 64px;
-            max-width: 900px;
-            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            position: relative;
         }
 
         .network-phase {
-            display: grid;
-            grid-template-columns: 160px 1fr;
-            gap: 40px;
-            align-items: start;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        /* Phase-specific colored top borders */
+        .network-phase:nth-child(1) {
+            border-top: 3px solid var(--success);
+        }
+
+        .network-phase:nth-child(2) {
+            border-top: 3px solid #f59e0b;
+        }
+
+        .network-phase:nth-child(3) {
+            border-top: 3px solid var(--accent);
+        }
+
+        /* Phase-specific hover glow effects */
+        .network-phase:nth-child(1):hover {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+            border-top-color: var(--success);
+            transform: translateY(-4px);
+        }
+
+        .network-phase:nth-child(2):hover {
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.15);
+            border-color: rgba(245, 158, 11, 0.3);
+            border-top-color: #f59e0b;
+            transform: translateY(-4px);
+        }
+
+        .network-phase:nth-child(3):hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+            border-top-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        /* Connecting arrows between cards */
+        .network-phase:not(:last-child)::after {
+            content: '\2192';
+            position: absolute;
+            right: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            z-index: 3;
         }
 
         .phase-visual {
@@ -623,11 +677,12 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
+            margin-bottom: 20px;
         }
 
         .phase-visual svg {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
         }
 
         .phase-status {
@@ -670,21 +725,21 @@
         }
 
         .phase-content h3 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 500;
             margin-bottom: 12px;
         }
 
         .phase-content p {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 0.9rem;
             line-height: 1.7;
             margin-bottom: 12px;
         }
 
         .phase-quote {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--accent);
             opacity: 0.7;
             margin-top: 8px;
@@ -779,19 +834,17 @@
 
         /* Responsive: roadmap */
         @media (max-width: 768px) {
-            .network-phase {
+            .network-phases {
                 grid-template-columns: 1fr;
-                gap: 24px;
             }
 
-            .phase-visual {
-                flex-direction: row;
-                justify-content: flex-start;
+            .network-phase:not(:last-child)::after {
+                display: none;
             }
 
             .phase-visual svg {
-                width: 80px;
-                height: 80px;
+                width: 100px;
+                height: 100px;
             }
 
             .integrations-grid {
