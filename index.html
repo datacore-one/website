@@ -993,14 +993,11 @@
                 <div class="tagline">
                     > Tag tasks before bed. Wake up to completed work.
                 </div>
-                <div class="hero-buttons">
-                    <a href="#waitlist" class="btn btn-primary">
-                        Get Early Access
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
+                <div class="waitlist-form" id="hero-waitlist-form">
+                    <input type="email" placeholder="your@email.com" class="waitlist-input" data-waitlist-email>
+                    <button class="btn btn-primary" data-waitlist-submit>Get Early Access</button>
                 </div>
+                <div class="waitlist-response" data-waitlist-response></div>
             </div>
         </div>
     </section>
@@ -1187,11 +1184,11 @@
         <div class="container" style="text-align: center;">
             <h2>Own your intelligence.</h2>
             <p>Start with memory. Stay for the network.</p>
-            <div class="waitlist-form">
-                <input type="email" id="waitlist-email" placeholder="your@email.com" class="waitlist-input">
-                <button id="waitlist-submit" class="btn btn-primary">Get Early Access</button>
+            <div class="waitlist-form" id="cta-waitlist-form">
+                <input type="email" placeholder="your@email.com" class="waitlist-input" data-waitlist-email>
+                <button class="btn btn-primary" data-waitlist-submit>Get Early Access</button>
             </div>
-            <div class="waitlist-response" id="waitlist-response"></div>
+            <div class="waitlist-response" data-waitlist-response></div>
         </div>
     </section>
 
@@ -2501,6 +2498,79 @@
             if (!localStorage.getItem('datacore-theme')) {
                 html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
             }
+        });
+    })();
+
+    // Waitlist signup
+    (function() {
+        const API_URL = window.location.hostname === 'localhost'
+            ? 'https://datacore.one/api/waitlist'
+            : '/api/waitlist';
+
+        function getUTMParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                source: params.get('utm_source'),
+                medium: params.get('utm_medium'),
+                campaign: params.get('utm_campaign'),
+                content: params.get('utm_content'),
+                term: params.get('utm_term')
+            };
+        }
+
+        document.querySelectorAll('[data-waitlist-submit]').forEach(btn => {
+            const form = btn.closest('.waitlist-form');
+            const input = form.querySelector('[data-waitlist-email]');
+            const response = form.nextElementSibling;
+
+            async function submit() {
+                const email = input.value.trim();
+                if (!email || !email.includes('@')) {
+                    response.textContent = 'Please enter a valid email.';
+                    response.className = 'waitlist-response error';
+                    return;
+                }
+
+                btn.disabled = true;
+                btn.textContent = 'Sending...';
+
+                try {
+                    const res = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            email,
+                            site: 'datacore',
+                            utm: getUTMParams()
+                        })
+                    });
+
+                    const data = await res.json();
+
+                    if (res.ok) {
+                        response.textContent = data.response;
+                        response.className = 'waitlist-response success';
+                        input.value = '';
+                        if (typeof posthog !== 'undefined') {
+                            posthog.capture('waitlist_signup', { site: 'datacore' });
+                        }
+                    } else {
+                        response.textContent = data.response || data.error;
+                        response.className = 'waitlist-response ' + (res.status === 409 ? 'success' : 'error');
+                    }
+                } catch (err) {
+                    response.textContent = 'Something went wrong. Try again.';
+                    response.className = 'waitlist-response error';
+                }
+
+                btn.disabled = false;
+                btn.textContent = 'Get Early Access';
+            }
+
+            btn.addEventListener('click', submit);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') submit();
+            });
         });
     })();
     </script>
