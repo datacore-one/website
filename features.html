@@ -683,6 +683,101 @@
             margin-top: 8px;
         }
 
+        /* Evolution Steps */
+        .evolution-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .evolution-step {
+            text-align: center;
+            padding: 24px 20px;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .evolution-step .step-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .evolution-step h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .evolution-step p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .evolution-arrow {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            padding: 0 4px;
+        }
+
+        /* Complement Section */
+        .complement-section {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .complement-section .pull-quote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .complement-section p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        /* DIP Stats */
+        .dip-stats {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .dip-stat {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px 32px;
+            text-align: center;
+        }
+
+        .dip-stat-number {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .dip-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -695,6 +790,15 @@
 
             .dips-section {
                 padding: 28px;
+            }
+
+            .evolution-arrow {
+                display: none;
+            }
+
+            .evolution-steps {
+                flex-direction: column;
+                gap: 8px;
             }
         }
     </style>
@@ -713,10 +817,10 @@
                 <a href="index.html" class="logo">data<span>core</span></a>
                 <div class="nav-links">
                     <a href="features.html" class="active">Features</a>
-                    <a href="index.html#features">What It Is</a>
-                    <a href="index.html#evolution">How It Grows</a>
-                    <a href="index.html#movement">The Movement</a>
-                    <a href="index.html#waitlist" class="btn btn-primary">Join Waitlist</a>
+                    <a href="index.html#network">The Network</a>
+                    <a href="index.html#works-with">Works With</a>
+                    <a href="index.html#philosophy">Philosophy</a>
+                    <a href="https://github.com/datacore-one/mcp" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
                 </div>
             </div>
         </nav>
@@ -724,10 +828,10 @@
         <!-- Hero -->
         <section class="hero">
             <div class="container">
-                <h1>Less management. More space for what matters.</h1>
+                <h1>The complete AI operating system.</h1>
                 <p class="subtitle">
-                    Datacore handles the overhead automatically. Knowledge surfaces when you need it.
-                    Tasks run themselves. You get to focus on expression, not administration.
+                    99 agents. 23+ modules. Local-first. Open source.
+                    Everything your AI needs to go from chat assistant to autonomous collaborator.
                 </p>
             </div>
         </section>
@@ -755,6 +859,47 @@
                         <div class="principle-icon">&#10227;</div>
                         <h3>Self-evolving</h3>
                         <p>Learns from each session. Validates its own state. Fixes drift before you notice it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evolution -->
+        <section class="section" id="evolution">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How it evolves</h2>
+                    <p>Each capability builds on the last.</p>
+                </div>
+                <div class="evolution-steps">
+                    <div class="evolution-step">
+                        <div class="step-icon">&#128172;</div>
+                        <h3>Memory</h3>
+                        <p>AI remembers</p>
+                    </div>
+                    <span class="evolution-arrow">&#8594;</span>
+                    <div class="evolution-step">
+                        <div class="step-icon">&#9745;</div>
+                        <h3>Tasks</h3>
+                        <p>AI executes</p>
+                    </div>
+                    <span class="evolution-arrow">&#8594;</span>
+                    <div class="evolution-step">
+                        <div class="step-icon">&#128218;</div>
+                        <h3>Knowledge</h3>
+                        <p>AI organizes</p>
+                    </div>
+                    <span class="evolution-arrow">&#8594;</span>
+                    <div class="evolution-step">
+                        <div class="step-icon">&#128161;</div>
+                        <h3>Wisdom</h3>
+                        <p>AI advises</p>
+                    </div>
+                    <span class="evolution-arrow">&#8594;</span>
+                    <div class="evolution-step">
+                        <div class="step-icon">&#9889;</div>
+                        <h3>Agency</h3>
+                        <p>AI acts</p>
                     </div>
                 </div>
             </div>
@@ -1223,17 +1368,41 @@
             </div>
         </section>
 
+        <!-- Complement, Don't Compete -->
+        <section class="section" id="complement">
+            <div class="container">
+                <div class="complement-section">
+                    <p class="pull-quote">"We don't build agents. We make their knowledge valuable."</p>
+                    <p>Datacore doesn't replace your AI tools. It gives them memory, context, and accumulated wisdom. Use Claude, GPT, Gemini, local models — Datacore makes all of them better by making none of them start from zero.</p>
+                    <p>Your investment compounds across every tool you use.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- DIPs Section -->
         <section class="section" id="dips">
             <div class="container">
+                <div class="section-header">
+                    <h2>Community-evolved. Spec-driven.</h2>
+                    <p>Every capability starts as a Datacore Improvement Proposal.</p>
+                </div>
                 <div class="dips-section">
-                    <h3>Datacore Improvement Proposals (DIPs)</h3>
+                    <div class="dip-stats">
+                        <div class="dip-stat">
+                            <span class="dip-stat-number">21+</span>
+                            <span class="dip-stat-label">Active DIPs</span>
+                        </div>
+                        <div class="dip-stat">
+                            <span class="dip-stat-number">4</span>
+                            <span class="dip-stat-label">Privacy Layers</span>
+                        </div>
+                    </div>
                     <p>
-                        The system evolves through documented proposals. Each DIP captures a problem,
-                        proposes a solution, and tracks implementation. Open, versioned, reviewable.
+                        No feature ships without a spec. No spec ships without review. Governance rails
+                        that make contribution frictionless and quality inevitable.
                     </p>
                     <div class="command-preview">
-                        <span class="prompt">.datacore/dips/</span> <span class="command">DIP-0001.md DIP-0002.md DIP-0003.md</span>
+                        <span class="prompt">.datacore/dips/</span> <span class="command">DIP-0001.md ... DIP-0021.md</span>
                     </div>
                 </div>
             </div>
@@ -1242,10 +1411,10 @@
         <!-- CTA -->
         <section class="cta">
             <div class="container">
-                <h2>Less overhead. More you.</h2>
-                <p>Start with one command. See where it goes.</p>
+                <h2>Own your intelligence.</h2>
+                <p>Start with memory. Build from there.</p>
                 <div class="cta-buttons">
-                    <a href="index.html#waitlist" class="btn btn-primary">Join Waitlist</a>
+                    <a href="https://github.com/datacore-one/mcp" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
                 </div>
             </div>
         </section>
@@ -1266,7 +1435,7 @@
         const toggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
 
-        const savedTheme = localStorage.getItem('theme');
+        const savedTheme = localStorage.getItem('datacore-theme');
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         if (savedTheme) {
@@ -1279,7 +1448,7 @@
             const current = html.getAttribute('data-theme');
             const next = current === 'light' ? 'dark' : 'light';
             html.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
+            localStorage.setItem('datacore-theme', next);
         });
     })();
 
