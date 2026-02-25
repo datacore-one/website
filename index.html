@@ -991,7 +991,7 @@
                     AI infrastructure that learns, compounds, and works for you. Runs entirely on your machine. Not a chatbot — a growing intelligence you own.
                 </p>
                 <div class="tagline">
-                    > npm install -g @datacore-one/mcp
+                    > Tag tasks before bed. Wake up to completed work.
                 </div>
                 <div class="hero-buttons">
                     <a href="#waitlist" class="btn btn-primary">
@@ -1132,7 +1132,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>Memory is Phase 1. Here's the rest.</h2>
-                <p>Start lightweight or install the complete AI operating system.</p>
+                <p>Start lightweight or go all in.</p>
             </div>
             <div class="install-modes-grid">
                 <div class="install-mode-card">
@@ -1144,9 +1144,12 @@
                         <li>Works with Claude Code, Cursor, Windsurf</li>
                         <li>Knowledge packs from the community</li>
                     </ul>
-                    <div class="install-block">
-                        <div class="line"><span class="command">npx datacore init</span></div>
-                    </div>
+                    <a href="#waitlist" class="btn btn-primary" style="align-self: flex-start;">
+                        Get Early Access
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
                 </div>
                 <div class="install-mode-card install-mode-full">
                     <span class="install-mode-badge full">Full System</span>
@@ -1180,23 +1183,15 @@
         </div>
     </section>
 
-    <section class="section cta" id="get-started">
+    <section class="section cta" id="waitlist">
         <div class="container" style="text-align: center;">
             <h2>Own your intelligence.</h2>
             <p>Start with memory. Stay for the network.</p>
-            <div class="install-block">
-                <div class="line"><span class="command">npm install -g @datacore-one/mcp</span></div>
-                <div class="line"><span class="command">datacore-mcp</span></div>
-                <div class="line"><span class="comment"># Your AI now has memory. That's Phase 1.</span></div>
+            <div class="waitlist-form">
+                <input type="email" id="waitlist-email" placeholder="your@email.com" class="waitlist-input">
+                <button id="waitlist-submit" class="btn btn-primary">Get Early Access</button>
             </div>
-            <div class="hero-buttons" style="justify-content: center; margin-top: 32px;">
-                <a href="https://github.com/datacore-one/mcp" class="btn btn-primary" target="_blank" rel="noopener">
-                    View on GitHub
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
-            </div>
+            <div class="waitlist-response" id="waitlist-response"></div>
         </div>
     </section>
 
