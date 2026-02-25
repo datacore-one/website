@@ -465,6 +465,7 @@
         #network,
         #works-with,
         #distinction,
+        #install-modes,
         #philosophy {
             background: var(--section-bg);
             backdrop-filter: blur(8px);
@@ -832,6 +833,105 @@
             color: var(--success);
         }
 
+        /* Install Modes */
+        .install-modes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .install-mode-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+        }
+
+        .install-mode-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .install-mode-card.install-mode-full {
+            border-top: 3px solid var(--accent);
+        }
+
+        .install-mode-badge {
+            display: inline-flex;
+            align-self: flex-start;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            margin-bottom: 16px;
+        }
+
+        .install-mode-badge.full {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .install-mode-card h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .install-mode-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .install-mode-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px 0;
+            flex-grow: 1;
+        }
+
+        .install-mode-features li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .install-mode-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .install-mode-card.install-mode-full .install-mode-features li::before {
+            background: var(--accent);
+        }
+
+        .install-mode-card .install-block {
+            margin: 0;
+            max-width: none;
+        }
+
         /* Responsive: roadmap */
         @media (max-width: 768px) {
             .network-phases {
@@ -848,6 +948,10 @@
             }
 
             .integrations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .install-modes-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -1020,6 +1124,46 @@
                 <p class="pull-quote">Engrams don't make AI smarter. They make it experienced.</p>
                 <p>Same model, same reasoning engine. But instead of amnesia between sessions, your AI accumulates operational wisdom. You curate the abstractions. AI handles retrieval and application at scale. Neither alone is enough. Together, something new emerges.</p>
                 <p>This is collective intelligence, not superintelligence. The same mechanism that makes science work: shared, curated, falsifiable knowledge units building on each other.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="install-modes">
+        <div class="container">
+            <div class="section-header">
+                <h2>Memory is Phase 1. Here's the rest.</h2>
+                <p>Start lightweight or install the complete AI operating system.</p>
+            </div>
+            <div class="install-modes-grid">
+                <div class="install-mode-card">
+                    <span class="install-mode-badge">MCP Server</span>
+                    <h3>AI Memory Layer</h3>
+                    <p>Persistent memory for any AI tool. Install in 30 seconds.</p>
+                    <ul class="install-mode-features">
+                        <li>Engrams that persist across sessions</li>
+                        <li>Works with Claude Code, Cursor, Windsurf</li>
+                        <li>Knowledge packs from the community</li>
+                    </ul>
+                    <div class="install-block">
+                        <div class="line"><span class="command">npx datacore init</span></div>
+                    </div>
+                </div>
+                <div class="install-mode-card install-mode-full">
+                    <span class="install-mode-badge full">Full System</span>
+                    <h3>AI Operating System</h3>
+                    <p>99 agents. 23+ modules. Complete cognitive infrastructure.</p>
+                    <ul class="install-mode-features">
+                        <li>GTD task execution while you sleep</li>
+                        <li>Modular: trading, research, CRM, health</li>
+                        <li>Overnight AI work via nightshift</li>
+                    </ul>
+                    <a href="features.html" class="btn btn-primary" style="align-self: flex-start;">
+                        Explore Features
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
