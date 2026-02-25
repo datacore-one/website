@@ -38,6 +38,7 @@
             --geometry-glow: 59, 130, 246;
             --card-bg: rgba(17, 17, 17, 0.6);
             --card-border: rgba(34, 34, 34, 0.5);
+            --section-bg: rgba(10, 10, 10, 0.7);
         }
 
         [data-theme="light"] {
@@ -56,13 +57,10 @@
             --geometry-glow: 59, 130, 246;
             --card-bg: linear-gradient(135deg, rgba(224, 237, 255, 0.9) 0%, rgba(237, 244, 255, 0.95) 100%);
             --card-border: rgba(199, 217, 237, 0.3);
+            --section-bg: rgba(240, 247, 255, 0.8);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -77,7 +75,7 @@
             padding: 0 24px;
         }
 
-        /* Geometry Canvas */
+        /* Geometry Canvas - reduced opacity on features page */
         #geometry-canvas {
             position: fixed;
             top: 0;
@@ -86,6 +84,7 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
+            opacity: 0.3;
         }
 
         /* Navigation */
@@ -113,9 +112,7 @@
             text-decoration: none;
         }
 
-        .logo span {
-            color: var(--accent);
-        }
+        .logo span { color: var(--accent); }
 
         .nav-links {
             display: flex;
@@ -131,10 +128,46 @@
         }
 
         .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--text-primary);
+        .nav-links a.active { color: var(--text-primary); }
+
+        /* Section nav pills */
+        .section-nav {
+            position: fixed;
+            top: 72px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99;
+            display: flex;
+            gap: 4px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 100px;
+            padding: 4px;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
+        .section-nav.visible { opacity: 1; }
+
+        .section-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.75rem;
+            padding: 6px 14px;
+            border-radius: 100px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .section-nav a:hover { color: var(--text-primary); }
+        .section-nav a.active {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -187,618 +220,578 @@
             box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
         }
 
-        /* Theme Toggle */
+        /* Theme toggle */
         .theme-toggle {
-            position: fixed;
-            top: 12px;
-            right: 24px;
-            z-index: 101;
-            background: var(--bg-tertiary);
+            background: none;
             border: 1px solid var(--border);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 8px 10px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
         }
 
         .theme-toggle:hover {
             border-color: var(--accent);
-            color: var(--accent);
-            transform: rotate(15deg);
+            color: var(--text-primary);
         }
 
-        .theme-toggle .icon-sun,
-        .theme-toggle .icon-moon {
-            position: absolute;
-            transition: opacity 0.3s, transform 0.3s;
-        }
-
-        .theme-toggle .icon-sun {
-            opacity: 0;
-            transform: rotate(-90deg);
-        }
-
-        .theme-toggle .icon-moon {
-            opacity: 1;
-            transform: rotate(0deg);
-        }
-
-        [data-theme="light"] .theme-toggle .icon-sun {
-            opacity: 1;
-            transform: rotate(0deg);
-        }
-
-        [data-theme="light"] .theme-toggle .icon-moon {
-            opacity: 0;
-            transform: rotate(90deg);
-        }
-
-        /* Content positioning above canvas */
-        .content {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding-top: 140px;
-            padding-bottom: 100px;
-            text-align: center;
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero .container {
-            width: 100%;
-        }
-
-        .hero h1 {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
-            font-weight: 300;
-            line-height: 1.3;
-            margin-bottom: 20px;
-            letter-spacing: -0.02em;
-        }
-
-        .hero .subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 560px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
+        [data-theme="light"] .theme-toggle .theme-icon::before { content: '☀️'; }
+        .theme-toggle .theme-icon::before { content: '🌙'; }
 
         /* Sections */
         .section {
+            position: relative;
+            z-index: 1;
             padding: 100px 0;
-            background: transparent;
+        }
+
+        .section-with-bg {
+            background: var(--section-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 64px;
         }
 
         .section-header h2 {
-            font-size: clamp(1.4rem, 2.5vw, 1.75rem);
-            font-weight: 400;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .hero-category {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* Before/After Split Screen */
+        .comparison {
+            position: relative;
+            z-index: 1;
+            padding: 40px 0 80px;
+        }
+
+        .comparison-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .comparison-panel {
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid var(--card-border);
+        }
+
+        .comparison-before {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            opacity: 0.6;
+        }
+
+        .comparison-after {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .comparison-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .comparison-after .comparison-label { color: var(--accent); }
+
+        .comparison-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .comparison-after .comparison-text { color: var(--text-primary); }
+
+        /* Mobile toggle for comparison */
+        .comparison-toggle {
+            display: none;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .comparison-toggle-btns {
+            display: inline-flex;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 100px;
+            padding: 3px;
+        }
+
+        .comparison-toggle-btn {
+            padding: 8px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            border-radius: 100px;
+            transition: all 0.2s;
+        }
+
+        .comparison-toggle-btn.active {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* Terminal mockups */
+        .terminal-window {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .terminal-window.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        [data-theme="light"] .terminal-window {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid #30363d;
+            gap: 8px;
+        }
+
+        [data-theme="light"] .terminal-header {
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom-color: #334155;
+        }
+
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot:nth-child(1) { background: #ff5f56; }
+        .terminal-dot:nth-child(2) { background: #ffbd2e; }
+        .terminal-dot:nth-child(3) { background: #27c93f; }
+
+        .terminal-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #8b949e;
+            margin-left: 8px;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.7rem, 2vw, 0.85rem);
+            line-height: 1.7;
+            color: #c9d1d9;
+        }
+
+        .terminal-body .prompt { color: var(--accent); }
+        .terminal-body .muted { color: #6e7681; }
+        .terminal-body .success { color: #3fb950; }
+        .terminal-body .highlight { color: #f0883e; }
+
+        /* Hero terminal (larger) */
+        .terminal-hero {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .terminal-hero .terminal-body {
+            padding: 24px;
+            font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+            line-height: 1.8;
+        }
+
+        /* Standard terminal */
+        .terminal-standard {
+            max-width: 600px;
+        }
+
+        /* Workflow section */
+        .workflow-step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .workflow-step:last-child { margin-bottom: 0; }
+
+        .workflow-step.reverse { direction: rtl; }
+        .workflow-step.reverse > * { direction: ltr; }
+
+        .workflow-annotation h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
             margin-bottom: 12px;
             letter-spacing: -0.01em;
         }
 
-        .section-header p {
-            color: var(--text-secondary);
+        .workflow-annotation p {
             font-size: 1rem;
-            max-width: 500px;
-            margin: 0 auto;
+            color: var(--text-secondary);
+            line-height: 1.7;
         }
 
-        /* Feature Grid */
-        .features-grid {
+        /* The compounding note */
+        .workflow-compound {
+            text-align: center;
+            max-width: 600px;
+            margin: 64px auto 0;
+            padding-top: 48px;
+            border-top: 1px solid var(--border);
+        }
+
+        .workflow-compound p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Three differentiators */
+        .diff-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
 
-        .feature-card {
+        .diff-card {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--card-border);
             border-radius: 16px;
-            padding: 28px;
-            transition: all 0.3s;
+            padding: 32px;
         }
 
-        .feature-card:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-
-        .feature-card h3 {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 14px;
-            line-height: 1.6;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .feature-list li {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            padding: 5px 0;
-            padding-left: 16px;
-            position: relative;
-        }
-
-        .feature-list li::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 50%;
-            opacity: 0.6;
-        }
-
-        /* Command Preview */
-        .command-preview {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 10px 12px;
-            margin-top: 14px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-        }
-
-        .command-preview .prompt {
-            color: var(--accent);
-            opacity: 0.7;
-        }
-
-        .command-preview .command {
-            color: var(--text-secondary);
-        }
-
-        /* Principles Section */
-        .principles-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 48px;
-            margin-top: 48px;
-        }
-
-        @media (max-width: 900px) {
-            .principles-grid {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-        }
-
-        .principle {
-            text-align: center;
-            padding: 24px;
-        }
-
-        .principle-icon {
-            font-size: 1.5rem;
+        .diff-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
             margin-bottom: 12px;
-            opacity: 0.7;
         }
 
-        .principle h3 {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .principle p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* Agents Section */
-        .agents-section {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 40px;
-        }
-
-        .agents-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 12px;
-        }
-
-        .agent-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            transition: border-color 0.2s;
-        }
-
-        [data-theme="light"] .agent-item {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .agent-item:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-
-        .agent-info h4 {
-            font-size: 0.85rem;
-            font-weight: 500;
-            font-family: 'JetBrains Mono', monospace;
-            margin-bottom: 2px;
-        }
-
-        .agent-info p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin: 0;
-        }
-
-        /* Agent Category Headers */
-        .agent-category {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 28px;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .agent-category:first-child {
-            margin-top: 0;
-        }
-
-        /* Nightshift Highlight */
-        .nightshift-highlight {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 12px;
-            padding: 20px 24px;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-
-        .nightshift-count {
-            font-family: 'JetBrains Mono', monospace;
+        .diff-card p {
             font-size: 0.95rem;
-            color: var(--accent);
-            margin-bottom: 8px;
-        }
-
-        .nightshift-names {
-            font-style: italic;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-        }
-
-        .nightshift-desc {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin: 0;
-        }
-
-        /* Module Category Headers */
-        .module-category {
-            grid-column: 1 / -1;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 32px;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .module-category:first-child {
-            margin-top: 0;
-        }
-
-        /* Modules Grid */
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
-
-        .module-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 28px;
-            transition: all 0.3s;
-        }
-
-        .module-card:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-
-        .module-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .module-header h3 {
-            font-size: 1.05rem;
-            font-weight: 500;
-        }
-
-        .module-badge {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--accent);
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-
-        .module-badge.coming-soon {
-            background: rgba(100, 100, 100, 0.2);
-            color: var(--text-muted);
-        }
-
-        .module-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 14px;
-        }
-
-        /* DIPs Section */
-        .dips-section {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .dips-section h3 {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-
-        .dips-section p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            max-width: 600px;
-            margin: 0 auto 20px;
             line-height: 1.7;
         }
 
-        .dips-section .command-preview {
-            display: inline-block;
-            margin: 0;
+        .diff-link {
+            text-align: center;
+            margin-top: 32px;
         }
 
-        /* CTA Section */
+        .diff-link a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .diff-link a:hover { color: var(--accent); }
+
+        /* Extend It section */
+        .extend-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .module-category {
+            margin-bottom: 24px;
+        }
+
+        .module-category h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .module-category ul {
+            list-style: none;
+        }
+
+        .module-category li {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            padding: 4px 0;
+        }
+
+        .module-category li strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .extend-governance h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .extend-governance p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .extend-governance a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .extend-governance a:hover { text-decoration: underline; }
+
+        /* CTA / Get Started */
         .cta {
+            position: relative;
+            z-index: 1;
             text-align: center;
             padding: 100px 0;
         }
 
         .cta h2 {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 300;
-            margin-bottom: 12px;
-        }
-
-        .cta p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 28px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* Footer */
-        footer {
-            background: transparent;
-            padding: 24px 0;
-            text-align: center;
-            border-top: 1px solid var(--border);
-        }
-
-        footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: var(--text-primary);
-        }
-
-        .footer-line {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .stardate {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--accent);
-            opacity: 0.7;
-        }
-
-        .footer-tagline {
-            font-style: italic;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 8px;
-            opacity: 0.7;
-        }
-
-        .footer-powered {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent);
-            opacity: 0.5;
-            margin-top: 8px;
-        }
-
-        /* Evolution Steps */
-        .evolution-steps {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
-            flex-wrap: wrap;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .evolution-step {
-            text-align: center;
-            padding: 24px 20px;
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .evolution-step .step-icon {
             font-size: 2rem;
-            margin-bottom: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
 
-        .evolution-step h3 {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 4px;
+        .cta-pathways {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 800px;
+            margin: 48px auto 0;
         }
 
-        .evolution-step p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .evolution-arrow {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            padding: 0 4px;
-        }
-
-        /* Complement Section */
-        .complement-section {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .complement-section .pull-quote {
-            font-size: 1.5rem;
-            font-weight: 300;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-            line-height: 1.4;
-            font-style: italic;
-        }
-
-        .complement-section p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
-
-        /* DIP Stats */
-        .dip-stats {
-            display: flex;
-            gap: 24px;
-            justify-content: center;
-            margin-bottom: 24px;
-        }
-
-        .dip-stat {
+        .cta-pathway {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 20px 32px;
-            text-align: center;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: left;
         }
 
-        .dip-stat-number {
-            display: block;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2rem;
+        .cta-pathway h3 {
+            font-size: 1.1rem;
             font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 4px;
+            margin-bottom: 12px;
         }
 
-        .dip-stat-label {
-            font-size: 0.85rem;
+        .cta-pathway p {
+            font-size: 0.9rem;
             color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Waitlist form */
+        .waitlist-form {
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .waitlist-form:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .waitlist-input {
+            flex: 1;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            min-width: 0;
+        }
+
+        .waitlist-input::placeholder { color: var(--text-muted); }
+
+        .waitlist-form .btn-primary {
+            border: none;
+            border-left: 1px solid var(--border);
+            border-radius: 0;
+            padding: 12px 20px;
+            white-space: nowrap;
+            font-size: 0.85rem;
+        }
+
+        .waitlist-response {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            min-height: 1.2em;
+        }
+
+        .waitlist-response.success { color: var(--success); }
+        .waitlist-response.error { color: #ef4444; }
+
+        .cta-pathway .code-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: gap 0.2s;
+        }
+
+        .cta-pathway .code-link:hover { gap: 12px; }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-line {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .footer-powered {
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .nav-links { display: none; }
+
+            .section-nav {
+                top: auto;
+                bottom: 16px;
+                gap: 2px;
+                padding: 3px;
+                max-width: calc(100vw - 32px);
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
 
-            .agents-section {
-                padding: 24px;
+            .section-nav a {
+                font-size: 0.65rem;
+                padding: 5px 10px;
             }
 
-            .dips-section {
-                padding: 28px;
+            .hero { min-height: 60vh; padding-top: 80px; }
+            .hero h1 { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+
+            .comparison-split { grid-template-columns: 1fr; }
+            .comparison-toggle { display: block; }
+            .comparison-before.hidden,
+            .comparison-after.hidden { display: none; }
+
+            .workflow-step,
+            .workflow-step.reverse {
+                grid-template-columns: 1fr;
+                direction: ltr;
+                gap: 24px;
             }
 
-            .evolution-arrow {
-                display: none;
-            }
+            .diff-grid { grid-template-columns: 1fr; }
 
-            .evolution-steps {
+            .extend-grid { grid-template-columns: 1fr; }
+
+            .cta-pathways { grid-template-columns: 1fr; }
+
+            .waitlist-form {
                 flex-direction: column;
-                gap: 8px;
+            }
+
+            .waitlist-form .btn-primary {
+                border-left: none;
+                border-top: 1px solid var(--border);
+                padding: 12px;
             }
         }
     </style>
@@ -806,615 +799,259 @@
 <body>
     <canvas id="geometry-canvas"></canvas>
 
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <span class="icon-sun">&#9728;</span>
-        <span class="icon-moon">&#9790;</span>
-    </button>
-
-    <div class="content">
-        <nav>
-            <div class="container">
-                <a href="index.html" class="logo">data<span>core</span></a>
-                <div class="nav-links">
-                    <a href="features.html" class="active">Features</a>
-                    <a href="index.html#network">The Network</a>
-                    <a href="index.html#works-with">Works With</a>
-                    <a href="index.html#philosophy">Philosophy</a>
-                    <a href="index.html#waitlist" class="btn btn-primary">Get Early Access</a>
-                </div>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">data<span>core</span></a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#workflow" class="active">Workflow</a>
+                <a href="#different">Differentiators</a>
+                <a href="#extend">Modules</a>
+                <button class="theme-toggle" id="theme-toggle"><span class="theme-icon"></span></button>
+                <a href="#get-started" class="btn btn-primary">Get Early Access</a>
             </div>
-        </nav>
+        </div>
+    </nav>
+
+    <!-- Section nav pills -->
+    <div class="section-nav" id="section-nav">
+        <a href="#hero">Top</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#different">Different</a>
+        <a href="#extend">Extend</a>
+        <a href="#get-started">Start</a>
+    </div>
+
+    <div id="content">
 
         <!-- Hero -->
-        <section class="hero">
+        <section class="hero" id="hero">
             <div class="container">
-                <h1>The complete AI second brain.</h1>
-                <p class="subtitle">
-                    99 agents. 23+ modules. Local-first. Open source.
-                    Everything your AI needs to go from chat assistant to second brain.
-                </p>
+                <p class="hero-category">AI second brain</p>
+                <h1>Every AI session starts from zero.<br>This one doesn't.</h1>
+                <p class="subtitle">Datacore remembers everything. So your AI never starts from zero.</p>
             </div>
         </section>
 
-        <!-- Core Principles -->
-        <section class="section" id="principles">
+        <!-- Before/After Split Screen -->
+        <section class="comparison" id="comparison">
             <div class="container">
-                <div class="section-header">
-                    <h2>How it works</h2>
-                    <p>Simple principles, quietly applied.</p>
+                <div class="comparison-toggle">
+                    <div class="comparison-toggle-btns">
+                        <button class="comparison-toggle-btn active" data-show="before">Before</button>
+                        <button class="comparison-toggle-btn" data-show="after">After</button>
+                    </div>
                 </div>
-
-                <div class="principles-grid">
-                    <div class="principle">
-                        <div class="principle-icon">&#9881;</div>
-                        <h3>Automatic</h3>
-                        <p>Tasks tagged for AI run overnight. Morning brings completed work, not more todos.</p>
+                <div class="comparison-split">
+                    <div class="comparison-panel comparison-before">
+                        <div class="comparison-label">Every other AI tool</div>
+                        <div class="comparison-text">
+                            "Hi! How can I help you today?"<br><br>
+                            Starting from zero. Again. You explain your project, your preferences, your context. For the fourth time this week.
+                        </div>
                     </div>
-                    <div class="principle">
-                        <div class="principle-icon">&#8734;</div>
-                        <h3>Always available</h3>
-                        <p>Knowledge surfaces when relevant. No searching, no remembering where you put things.</p>
-                    </div>
-                    <div class="principle">
-                        <div class="principle-icon">&#10227;</div>
-                        <h3>Self-evolving</h3>
-                        <p>Learns from each session. Validates its own state. Fixes drift before you notice it.</p>
+                    <div class="comparison-panel comparison-after">
+                        <div class="comparison-label">With Datacore</div>
+                        <div class="comparison-text">
+                            "Good morning. Your board deck is priority &mdash; I've drafted 3 slides based on yesterday's token economics work. The Filecoin research you requested is ready."<br><br>
+                            It knows your work. Because it was here yesterday.
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Evolution -->
-        <section class="section" id="evolution">
+        <!-- A Day with Datacore -->
+        <section class="section section-with-bg" id="workflow">
             <div class="container">
                 <div class="section-header">
-                    <h2>How it evolves</h2>
-                    <p>Each capability builds on the last.</p>
+                    <h2>A day with Datacore</h2>
+                    <p>Your AI works when you work. And when you sleep.</p>
                 </div>
-                <div class="evolution-steps">
-                    <div class="evolution-step">
-                        <div class="step-icon">&#128172;</div>
-                        <h3>Memory</h3>
-                        <p>AI remembers</p>
+
+                <!-- Morning -->
+                <div class="workflow-step">
+                    <div class="workflow-annotation">
+                        <h3>You sit down with coffee. In 10 seconds, you know exactly what matters today.</h3>
+                        <p>Your overnight work is done. Your priorities are surfaced. Your calendar is accounted for. You make decisions, not to-do lists.</p>
                     </div>
-                    <span class="evolution-arrow">&#8594;</span>
-                    <div class="evolution-step">
-                        <div class="step-icon">&#9745;</div>
-                        <h3>Tasks</h3>
-                        <p>AI executes</p>
+                    <div class="terminal-window terminal-hero">
+                        <div class="terminal-header">
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <span class="terminal-title">/today</span>
+                        </div>
+                        <div class="terminal-body">
+                            <span class="muted">Overnight:</span> Research on Filecoin vs Arweave <span class="success">complete</span>. Draft blog <span class="success">ready</span>.<br>
+                            <span class="muted">Priority:</span> Board deck <span class="highlight">(Thursday)</span>. 3 key slides need your decision.<br>
+                            <span class="muted">From yesterday:</span> Your token economics insight <span class="prompt">&rarr;</span> zettel, ready to cite.
+                        </div>
                     </div>
-                    <span class="evolution-arrow">&#8594;</span>
-                    <div class="evolution-step">
-                        <div class="step-icon">&#128218;</div>
-                        <h3>Knowledge</h3>
-                        <p>AI organizes</p>
+                </div>
+
+                <!-- Midday -->
+                <div class="workflow-step reverse">
+                    <div class="workflow-annotation">
+                        <h3>Seven things in your inbox. Two minutes later, zero.</h3>
+                        <p>You make the quick decisions. The system handles the routing. What's the next action? Where does it go? Done.</p>
                     </div>
-                    <span class="evolution-arrow">&#8594;</span>
-                    <div class="evolution-step">
-                        <div class="step-icon">&#128161;</div>
-                        <h3>Wisdom</h3>
-                        <p>AI advises</p>
+                    <div class="terminal-window terminal-standard">
+                        <div class="terminal-header">
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <span class="terminal-title">process inbox</span>
+                        </div>
+                        <div class="terminal-body">
+                            <span class="prompt">&rarr;</span> "Review investor deck" <span class="muted">&mdash; next action?</span> <span class="highlight">"Draft 3 key slides"</span><br>
+                            <span class="prompt">&rarr;</span> "Check staking rates" <span class="muted">&mdash;</span> tagged <span class="success">:AI:research:</span> for tonight<br>
+                            <span class="muted">5 more routed.</span> <span class="success">Inbox clear.</span>
+                        </div>
                     </div>
-                    <span class="evolution-arrow">&#8594;</span>
-                    <div class="evolution-step">
-                        <div class="step-icon">&#9889;</div>
-                        <h3>Agency</h3>
-                        <p>AI acts</p>
+                </div>
+
+                <!-- End of day -->
+                <div class="workflow-step">
+                    <div class="workflow-annotation">
+                        <h3>Everything you learned today is captured. Without you doing anything.</h3>
+                        <p>Your preferences, your insights, your decisions - all recorded as structured knowledge that makes tomorrow's session smarter than today's.</p>
                     </div>
+                    <div class="terminal-window terminal-standard">
+                        <div class="terminal-header">
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <span class="terminal-title">/wrap-up</span>
+                        </div>
+                        <div class="terminal-body">
+                            Journal updated. <span class="success">2 patterns learned</span>. 1 zettel created.<br>
+                            Tomorrow you'll remember what today's you figured out.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Night -->
+                <div class="workflow-step reverse">
+                    <div class="workflow-annotation">
+                        <h3>Tag it. Sleep. Wake up to finished work.</h3>
+                        <p>Research, writing, analysis - queued and executed overnight. Each output reviewed by 20 evaluator personas before it reaches you.</p>
+                    </div>
+                    <div class="terminal-window terminal-standard">
+                        <div class="terminal-header">
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <div class="terminal-dot"></div>
+                            <span class="terminal-title">/tomorrow</span>
+                        </div>
+                        <div class="terminal-body">
+                            <span class="success">4 tasks queued</span> for overnight execution.<br>
+                            Each reviewed by <span class="highlight">20 evaluator personas</span> before delivery.<br>
+                            <span class="muted">Results in tomorrow's /today briefing.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="workflow-compound">
+                    <p>Day 1, you explain your project. Day 30, it reminds you of the insight you had three weeks ago, right when you need it for today's meeting. Friday, your weekly review surfaces the three projects that stalled and the two commitments you almost forgot. Nothing is lost.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Core Features -->
-        <section class="section" id="core">
+        <!-- Three Things That Make This Different -->
+        <section class="section" id="different">
             <div class="container">
                 <div class="section-header">
-                    <h2>What you get</h2>
-                    <p>Practical tools that stay out of the way.</p>
+                    <h2>Three things that make this different</h2>
                 </div>
-
-                <div class="features-grid">
-                    <!-- AI Agents -->
-                    <div class="feature-card">
-                        <h3>AI Agents</h3>
-                        <p>Tag a task with :AI: and it runs without you. Content gets written, research gets done, data gets analyzed.</p>
-                        <ul class="feature-list">
-                            <li>Runs while you sleep</li>
-                            <li>Research, writing, analysis, project tracking</li>
-                            <li>Escalates what needs human judgment</li>
-                        </ul>
-                        <div class="command-preview">
-                            <span class="prompt">*</span> <span class="command">TODO Research market trends :AI:research:</span>
-                        </div>
+                <div class="diff-grid">
+                    <div class="diff-card">
+                        <h3>You explain your project once.</h3>
+                        <p>A month later, your AI surfaces that exact insight in the meeting where you need it. Not because it has a chat history - because it learned your preferences, your project context, your communication style as structured knowledge that compounds with every session.</p>
                     </div>
-
-                    <!-- Slash Commands -->
-                    <div class="feature-card">
-                        <h3>Slash Commands</h3>
-                        <p>One command handles an entire workflow. Morning planning, session wrap-up, overnight delegation.</p>
-                        <ul class="feature-list">
-                            <li>/today - Daily briefing</li>
-                            <li>/wrap-up - Capture session work</li>
-                            <li>/tomorrow - Delegate and prepare</li>
-                        </ul>
-                        <div class="command-preview">
-                            <span class="prompt">$</span> <span class="command">/tomorrow</span>
-                        </div>
+                    <div class="diff-card">
+                        <h3>You tag a task. You go to sleep. You wake up to finished work.</h3>
+                        <p>Research, writing, analysis done overnight. Each output reviewed by 20 evaluator personas - Hemingway checks clarity, Feynman checks first principles. Quality work, not hallucinations.</p>
                     </div>
-
-                    <!-- Knowledge System -->
-                    <div class="feature-card">
-                        <h3>Knowledge System</h3>
-                        <p>Notes link themselves. Ideas compound. What you learned last month shows up when it's relevant today.</p>
-                        <ul class="feature-list">
-                            <li>Zettelkasten-based permanent notes</li>
-                            <li>Progressive summarization</li>
-                            <li>Automatic linking</li>
-                        </ul>
-                        <div class="command-preview">
-                            <span class="prompt">></span> <span class="command">[[Personal Data Sovereignty]]</span>
-                        </div>
+                    <div class="diff-card">
+                        <h3>Your knowledge stays yours. Forever.</h3>
+                        <p>Plain text files on your machine. Markdown and org-mode you can read in any editor, in 50 years. Your insight from six months ago surfaces when it matters. The intelligence layer is open-source software you can inspect, modify, and host yourself.</p>
                     </div>
-
-                    <!-- Workspaces -->
-                    <div class="feature-card">
-                        <h3>Spaces</h3>
-                        <p>Personal life, team work, side projects. Each with its own agents, its own context. One system.</p>
-                        <ul class="feature-list">
-                            <li>Isolated contexts, shared infrastructure</li>
-                            <li>Layered permissions (public/space/private)</li>
-                            <li>Git-based sync and collaboration</li>
-                        </ul>
-                        <div class="command-preview">
-                            <span class="prompt">~/Data/</span> <span class="command">0-personal/ 1-team/ 2-project/</span>
-                        </div>
-                    </div>
-
-                    <!-- Learning System -->
-                    <div class="feature-card">
-                        <h3>Learning</h3>
-                        <p>Each session makes the next one better. Patterns extracted, preferences remembered, mistakes avoided.</p>
-                        <ul class="feature-list">
-                            <li>Automatic pattern extraction</li>
-                            <li>Corrections prevent repeat errors</li>
-                            <li>Compounds silently over time</li>
-                        </ul>
-                        <div class="command-preview">
-                            <span class="prompt">.datacore/learning/</span> <span class="command">patterns.md</span>
-                        </div>
-                    </div>
-
-                    <!-- Modules -->
-                    <div class="feature-card">
-                        <h3>Modules</h3>
-                        <p>Domain-specific workflows that plug in. Trading, campaigns, research. Build your own.</p>
-                        <ul class="feature-list">
-                            <li>Self-contained agent + command bundles</li>
-                            <li>Share modules easily</li>
-                            <li>Simple structure, no framework</li>
-                        </ul>
-                        <div class="command-preview">
-                            <span class="prompt">.datacore/modules/</span> <span class="command">trading/ campaigns/</span>
-                        </div>
-                    </div>
+                </div>
+                <div class="diff-link">
+                    <a href="https://github.com/datacore-one/datacore-dips" target="_blank" rel="noopener">See how it works: Open specifications on GitHub &rarr;</a>
                 </div>
             </div>
         </section>
 
-        <!-- Agents -->
-        <section class="section" id="agents">
+        <!-- Extend It -->
+        <section class="section section-with-bg" id="extend">
             <div class="container">
                 <div class="section-header">
-                    <h2>99 Agents</h2>
-                    <p>Organized by function. Each handles a specific type of work.</p>
+                    <h2>Extend it</h2>
+                    <p>Modules for your domain. Open specifications for everything.</p>
                 </div>
-
-                <div class="agents-section">
-                    <!-- Task Routing -->
-                    <h4 class="agent-category">Task Routing</h4>
-                    <div class="agents-grid">
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>ai-task-executor</h4>
-                                <p>Routes tasks to specialized agents</p>
-                            </div>
+                <div class="extend-grid">
+                    <div class="extend-modules">
+                        <div class="module-category">
+                            <h4>Work</h4>
+                            <ul>
+                                <li><strong>Meetings</strong> &mdash; auto-notes from transcripts</li>
+                                <li><strong>Mail</strong> &mdash; classify and prioritize</li>
+                                <li><strong>CRM</strong> &mdash; track relationship health</li>
+                                <li><strong>Campaigns</strong> &mdash; plan, execute, measure</li>
+                            </ul>
                         </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>gtd-inbox-coordinator</h4>
-                                <p>Orchestrates inbox processing</p>
-                            </div>
+                        <div class="module-category">
+                            <h4>Knowledge</h4>
+                            <ul>
+                                <li><strong>Research</strong> &mdash; multi-source synthesis</li>
+                                <li><strong>News</strong> &mdash; personalized daily digest</li>
+                                <li><strong>Datacortex</strong> &mdash; semantic search</li>
+                            </ul>
                         </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>gtd-inbox-processor</h4>
-                                <p>Processes individual entries</p>
-                            </div>
+                        <div class="module-category">
+                            <h4>Personal</h4>
+                            <ul>
+                                <li><strong>Trading</strong> &mdash; framework-driven journaling</li>
+                                <li><strong>Health</strong> &mdash; routine optimization</li>
+                                <li><strong>Finance</strong> &mdash; portfolio tracking</li>
+                            </ul>
                         </div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">11 of 23+ modules shown</p>
                     </div>
-
-                    <!-- Content & Knowledge -->
-                    <h4 class="agent-category">Content & Knowledge</h4>
-                    <div class="agents-grid">
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>gtd-content-writer</h4>
-                                <p>Blog, email, documentation</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>gtd-research-processor</h4>
-                                <p>URL analysis, zettel creation</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>conversation-processor</h4>
-                                <p>ChatGPT export processing</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>research-link-processor</h4>
-                                <p>Batch URL processing</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>session-learning</h4>
-                                <p>Pattern extraction</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>archiver</h4>
-                                <p>Content organization</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Analysis & Tracking -->
-                    <h4 class="agent-category">Analysis & Tracking</h4>
-                    <div class="agents-grid">
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>gtd-data-analyzer</h4>
-                                <p>Metrics and reports</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>gtd-project-manager</h4>
-                                <p>Tracking and escalation</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>context-maintainer</h4>
-                                <p>Context sync and validation</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Nightshift Quality -->
-                    <h4 class="agent-category">Nightshift Quality Assurance</h4>
-                    <div class="nightshift-highlight">
-                        <p class="nightshift-count">nightshift-orchestrator + 20 evaluator personas</p>
-                        <p class="nightshift-names">Hemingway, Feynman, Bezos, Picard, Buffett, Dijkstra...</p>
-                        <p class="nightshift-desc">Each evaluates your work from a unique perspective before delivery.</p>
-                    </div>
-
-                    <!-- Domain Modules -->
-                    <h4 class="agent-category">Domain Specialists</h4>
-                    <div class="agents-grid">
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>40+ module agents</h4>
-                                <p>Meetings, CRM, trading, health, mail, news...</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>landing-generator</h4>
-                                <p>Landing page creation</p>
-                            </div>
-                        </div>
-                        <div class="agent-item">
-                            <div class="agent-info">
-                                <h4>emergency-stop-trader</h4>
-                                <p>Trading crisis intervention</p>
-                            </div>
-                        </div>
+                    <div class="extend-governance">
+                        <h3>Built on open specifications</h3>
+                        <p>A growing library of Datacore Improvement Proposals defines every system behavior. 4 privacy layers protect your data. Designed for community governance &mdash; and we're building that community now.</p>
+                        <p>Every agent, every command, every workflow is documented, reviewable, and modifiable. Nothing is hidden. Nothing is proprietary.</p>
+                        <p>
+                            <a href="https://github.com/datacore-one/datacore-dips" target="_blank" rel="noopener">Read the DIPs &rarr;</a><br>
+                            <a href="https://github.com/datacore-one/datacore" target="_blank" rel="noopener">Explore the codebase &rarr;</a>
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Modules Section -->
-        <section class="section" id="modules">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Modules</h2>
-                    <p>Domain-specific extensions.</p>
-                </div>
-
-                <div class="modules-grid">
-                    <!-- Core Infrastructure -->
-                    <h4 class="module-category">Core Infrastructure</h4>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Nightshift</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Autonomous overnight task execution with 20+ AI evaluator personas.</p>
-                        <ul class="feature-list">
-                            <li>Tag tasks, wake up to completed work</li>
-                            <li>Multi-persona quality evaluation</li>
-                            <li>80% quality threshold gates</li>
-                            <li>Automatic retry and escalation</li>
-                        </ul>
-                    </div>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Datacortex</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Knowledge graph visualization and semantic search.</p>
-                        <ul class="feature-list">
-                            <li>Embeddings-based search</li>
-                            <li>Cross-space knowledge queries</li>
-                            <li>Visual concept mapping</li>
-                        </ul>
-                    </div>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Outbox</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Content routing, archiving, and semantic search in archives.</p>
-                        <ul class="feature-list">
-                            <li>Intelligent content routing</li>
-                            <li>Archive with full-text search</li>
-                            <li>Delivery tracking</li>
-                        </ul>
-                    </div>
-
-                    <!-- Knowledge & Research -->
-                    <h4 class="module-category">Knowledge & Research</h4>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Research</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Automated research with literature notes and NotebookLM podcasts.</p>
-                        <ul class="feature-list">
-                            <li>URL analysis and zettel creation</li>
-                            <li>NotebookLM podcast generation</li>
-                            <li>Progressive summarization</li>
-                        </ul>
-                    </div>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Grants</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Grant proposal writing for EU/NGI funding programs.</p>
-                        <ul class="feature-list">
-                            <li>Proposal structure templates</li>
-                            <li>Budget calculation</li>
-                            <li>Compliance checking</li>
-                        </ul>
-                    </div>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>News</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>AI-scored news aggregation with tiered processing.</p>
-                        <ul class="feature-list">
-                            <li>Relevance scoring</li>
-                            <li>Daily digest generation</li>
-                            <li>Topic clustering</li>
-                        </ul>
-                    </div>
-
-                    <!-- Collaboration -->
-                    <h4 class="module-category">Collaboration</h4>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Meetings</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Standup generation, meeting prep, transcription processing.</p>
-                        <ul class="feature-list">
-                            <li>/standup from journal entries</li>
-                            <li>/meeting-prep with context</li>
-                            <li>Action item extraction</li>
-                        </ul>
-                    </div>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>CRM</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Network intelligence - people, companies, relationships.</p>
-                        <ul class="feature-list">
-                            <li>Entity extraction from notes</li>
-                            <li>Relationship scoring</li>
-                            <li>Interaction tracking</li>
-                        </ul>
-                    </div>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Mail</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Email classification and prioritization.</p>
-                        <ul class="feature-list">
-                            <li>Gmail integration</li>
-                            <li>Priority scoring</li>
-                            <li>Action suggestions</li>
-                        </ul>
-                    </div>
-
-                    <!-- Finance & Personal -->
-                    <h4 class="module-category">Finance & Personal</h4>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Trading</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Position management, risk monitoring, Wyckoff analysis.</p>
-                        <ul class="feature-list">
-                            <li>/start-trading - Pre-market check</li>
-                            <li>/validate-trade - Entry validation</li>
-                            <li>/check-position-health - Risk metrics</li>
-                        </ul>
-                    </div>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Personal Finance</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Crypto tracking across Kraken, Gate.io, Etherscan.</p>
-                        <ul class="feature-list">
-                            <li>Multi-exchange holdings</li>
-                            <li>Loan reconciliation</li>
-                            <li>Transaction history</li>
-                        </ul>
-                    </div>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Health</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Oura/HealthKit sync, biometrics, prevention scheduling.</p>
-                        <ul class="feature-list">
-                            <li>Sleep and activity tracking</li>
-                            <li>Prevention reminders</li>
-                            <li>Routine optimization</li>
-                        </ul>
-                    </div>
-
-                    <!-- Content & Access -->
-                    <h4 class="module-category">Content & Access</h4>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Campaigns</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Landing pages, A/B testing, PostHog analytics.</p>
-                        <ul class="feature-list">
-                            <li>Landing page generation</li>
-                            <li>DigitalOcean deployment</li>
-                            <li>A/B test optimization</li>
-                        </ul>
-                    </div>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Slides</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Gamma.app presentation generation.</p>
-                        <ul class="feature-list">
-                            <li>Content to slides</li>
-                            <li>Theme management</li>
-                            <li>Export to PDF/PPTX</li>
-                        </ul>
-                    </div>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Telegram</h3>
-                            <span class="module-badge">Available</span>
-                        </div>
-                        <p>Mobile access to Datacore via Telegram bot.</p>
-                        <ul class="feature-list">
-                            <li>Quick capture on mobile</li>
-                            <li>Command execution</li>
-                            <li>Status notifications</li>
-                        </ul>
-                    </div>
-
-                    <!-- Build Your Own -->
-                    <h4 class="module-category">Extensibility</h4>
-
-                    <div class="module-card">
-                        <div class="module-header">
-                            <h3>Build your own</h3>
-                            <span class="module-badge">Template</span>
-                        </div>
-                        <p>Simple structure. Your agents, your commands, your templates.</p>
-                        <div class="command-preview">
-                            <span class="command">module.yaml<br>agents/<br>commands/<br>templates/</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Complement, Don't Compete -->
-        <section class="section" id="complement">
-            <div class="container">
-                <div class="complement-section">
-                    <p class="pull-quote">"We don't build agents. We make their knowledge valuable."</p>
-                    <p>Datacore doesn't replace your AI tools. It gives them memory, context, and accumulated wisdom. Use Claude, GPT, Gemini, local models — Datacore makes all of them better by making none of them start from zero.</p>
-                    <p>Your investment compounds across every tool you use.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- DIPs Section -->
-        <section class="section" id="dips">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Community-evolved. Spec-driven.</h2>
-                    <p>Every capability starts as a Datacore Improvement Proposal.</p>
-                </div>
-                <div class="dips-section">
-                    <div class="dip-stats">
-                        <div class="dip-stat">
-                            <span class="dip-stat-number">21+</span>
-                            <span class="dip-stat-label">Active DIPs</span>
-                        </div>
-                        <div class="dip-stat">
-                            <span class="dip-stat-number">4</span>
-                            <span class="dip-stat-label">Privacy Layers</span>
-                        </div>
-                    </div>
-                    <p>
-                        No feature ships without a spec. No spec ships without review. Governance rails
-                        that make contribution frictionless and quality inevitable.
-                    </p>
-                    <div class="command-preview">
-                        <span class="prompt">.datacore/dips/</span> <span class="command">DIP-0001.md ... DIP-0021.md</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="cta">
+        <!-- Get Started -->
+        <section class="cta" id="get-started">
             <div class="container">
                 <h2>Own your intelligence.</h2>
-                <p>Start with memory. Build from there.</p>
-                <div class="cta-buttons">
-                    <a href="index.html#waitlist" class="btn btn-primary">Get Early Access</a>
+                <div class="cta-pathways">
+                    <div class="cta-pathway">
+                        <h3>Get early access</h3>
+                        <p>No migration. No data import. Start a session, do your work. Datacore learns as you go.</p>
+                        <div class="waitlist-form">
+                            <input type="email" placeholder="your@email.com" class="waitlist-input" data-waitlist-email>
+                            <button class="btn btn-primary" data-waitlist-submit>Get Early Access</button>
+                        </div>
+                        <div class="waitlist-response" data-waitlist-response></div>
+                    </div>
+                    <div class="cta-pathway">
+                        <h3>Explore the code</h3>
+                        <p>Clone the repo. Read the specs. Build a module. Datacore is open-source software you can inspect, modify, and host yourself.</p>
+                        <a href="https://github.com/datacore-one/datacore" class="code-link" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1465,7 +1102,147 @@
         if (el) el.textContent = stardate.toFixed(1);
     })();
 
-    // Sacred Geometry - Flower of Life progression with neurons
+    // Section nav pills - show on scroll
+    (function() {
+        const nav = document.getElementById('section-nav');
+        const links = nav.querySelectorAll('a');
+        const sections = [];
+
+        links.forEach(link => {
+            const id = link.getAttribute('href').slice(1);
+            const section = document.getElementById(id);
+            if (section) sections.push({ el: section, link: link });
+        });
+
+        function update() {
+            const scrollTop = window.pageYOffset;
+            nav.classList.toggle('visible', scrollTop > 400);
+
+            let current = sections[0];
+            for (const s of sections) {
+                if (s.el.offsetTop - 200 <= scrollTop) current = s;
+            }
+            links.forEach(l => l.classList.remove('active'));
+            if (current) current.link.classList.add('active');
+        }
+
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+    })();
+
+    // Scroll-reveal for terminals only
+    (function() {
+        const terminals = document.querySelectorAll('.terminal-window');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        terminals.forEach(t => observer.observe(t));
+    })();
+
+    // Comparison toggle (mobile)
+    (function() {
+        const btns = document.querySelectorAll('.comparison-toggle-btn');
+        const before = document.querySelector('.comparison-before');
+        const after = document.querySelector('.comparison-after');
+
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const show = btn.dataset.show;
+                btns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                if (show === 'before') {
+                    before.classList.remove('hidden');
+                    after.classList.add('hidden');
+                } else {
+                    after.classList.remove('hidden');
+                    before.classList.add('hidden');
+                }
+            });
+        });
+    })();
+
+    // Waitlist signup
+    (function() {
+        const API_URL = window.location.hostname === 'localhost'
+            ? 'https://datacore.one/api/waitlist'
+            : '/api/waitlist';
+
+        function getUTMParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                source: params.get('utm_source'),
+                medium: params.get('utm_medium'),
+                campaign: params.get('utm_campaign'),
+                content: params.get('utm_content'),
+                term: params.get('utm_term')
+            };
+        }
+
+        document.querySelectorAll('[data-waitlist-submit]').forEach(btn => {
+            const form = btn.closest('.waitlist-form');
+            const input = form.querySelector('[data-waitlist-email]');
+            const response = form.nextElementSibling;
+
+            async function submit() {
+                const email = input.value.trim();
+                if (!email || !email.includes('@')) {
+                    response.textContent = 'Please enter a valid email.';
+                    response.className = 'waitlist-response error';
+                    return;
+                }
+
+                btn.disabled = true;
+                btn.textContent = 'Sending...';
+
+                try {
+                    const res = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            email,
+                            site: 'datacore',
+                            page: 'features',
+                            utm: getUTMParams()
+                        })
+                    });
+
+                    const data = await res.json();
+
+                    if (res.ok) {
+                        response.textContent = data.response;
+                        response.className = 'waitlist-response success';
+                        input.value = '';
+                        if (typeof posthog !== 'undefined') {
+                            posthog.capture('waitlist_signup', { site: 'datacore', page: 'features' });
+                        }
+                    } else {
+                        response.textContent = data.response || data.error;
+                        response.className = 'waitlist-response ' + (res.status === 409 ? 'success' : 'error');
+                    }
+                } catch (err) {
+                    response.textContent = 'Something went wrong. Try again.';
+                    response.className = 'waitlist-response error';
+                }
+
+                btn.disabled = false;
+                btn.textContent = 'Get Early Access';
+            }
+
+            btn.addEventListener('click', submit);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') submit();
+            });
+        });
+    })();
+
+    // Sacred Geometry - Flower of Life progression
     (function() {
         const canvas = document.getElementById('geometry-canvas');
         const ctx = canvas.getContext('2d');
@@ -1479,7 +1256,6 @@
 
         let geometryColor = getGeometryColor();
 
-        // Update color on theme change
         const observer = new MutationObserver(() => {
             geometryColor = getGeometryColor();
         });
@@ -1501,29 +1277,6 @@
             }
         }
 
-        function updateBlinks() {
-            for (let i = blinks.length - 1; i >= 0; i--) {
-                blinks[i].life -= blinks[i].decay;
-                if (blinks[i].life <= 0) {
-                    blinks.splice(i, 1);
-                }
-            }
-        }
-
-        function drawBlinks() {
-            blinks.forEach(b => {
-                const alpha = b.life * 0.35;
-                const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.size * 3);
-                gradient.addColorStop(0, `rgba(${geometryColor}, ${alpha})`);
-                gradient.addColorStop(0.5, `rgba(${geometryColor}, ${alpha * 0.3})`);
-                gradient.addColorStop(1, `rgba(${geometryColor}, 0)`);
-                ctx.beginPath();
-                ctx.arc(b.x, b.y, b.size * 3, 0, Math.PI * 2);
-                ctx.fillStyle = gradient;
-                ctx.fill();
-            });
-        }
-
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
@@ -1535,28 +1288,32 @@
 
         function drawFlowerOfLife(progress) {
             ctx.clearRect(0, 0, width, height);
+            ctx.lineWidth = 1;
 
-            // Draw neurons first (behind geometry)
+            // Draw neuron blinks
             spawnBlink();
-            updateBlinks();
-            drawBlinks();
+            for (let i = blinks.length - 1; i >= 0; i--) {
+                const b = blinks[i];
+                b.life -= b.decay;
+                if (b.life <= 0) { blinks.splice(i, 1); continue; }
+                const alpha = b.life * 0.15;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${geometryColor}, ${alpha})`;
+                ctx.fill();
+            }
 
+            // Position
             const centerX = width / 2;
             const centerY = height / 2;
-            const baseRadius = Math.min(width, height) * 0.12;
+            const baseRadius = Math.min(width, height) * 0.18;
+            const baseAlpha = 0.12 + progress * 0.08;
 
-            ctx.lineWidth = 1;
-            const baseAlpha = 0.22;
-
-            // Time-based animation - slow, hypnotic
             const time = Date.now() / 1000;
-            const pulse = 0.5 + 0.5 * Math.sin(time * 0.8); // Very slow pulse
-
-            // Glow phase (starts at 70%, smooth transition)
+            const pulse = 0.5 + 0.5 * Math.sin(time * 0.8);
             const glowPhase = progress > 0.7 ? Math.min(1, (progress - 0.7) / 0.25) : 0;
             const glowEased = easeInOutCubic(glowPhase);
 
-            // Helper to draw a circle with smooth completion
             function drawCircle(cx, cy, r, completion, alpha) {
                 if (completion <= 0) return;
                 ctx.beginPath();
@@ -1566,13 +1323,11 @@
                 ctx.stroke();
             }
 
-            // Draw center dot (consistent throughout)
             function drawCenterDot() {
                 const dotSize = 4;
                 const baseOpacity = 0.35 + pulse * 0.1;
                 const glowBoost = glowEased * pulse * 0.5;
 
-                // Radiating glow (fades in at end)
                 if (glowEased > 0) {
                     const glowRadius = baseRadius * 0.5;
                     const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, glowRadius);
@@ -1580,26 +1335,22 @@
                     gradient.addColorStop(0, `rgba(${geometryColor}, ${glowAlpha * 0.6})`);
                     gradient.addColorStop(0.4, `rgba(${geometryColor}, ${glowAlpha * 0.2})`);
                     gradient.addColorStop(1, `rgba(${geometryColor}, 0)`);
-
                     ctx.beginPath();
                     ctx.arc(centerX, centerY, glowRadius, 0, Math.PI * 2);
                     ctx.fillStyle = gradient;
                     ctx.fill();
                 }
 
-                // Dot glow halo
                 const haloSize = dotSize * 3;
                 const dotGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, haloSize);
                 dotGlow.addColorStop(0, `rgba(${geometryColor}, ${baseOpacity + glowBoost})`);
                 dotGlow.addColorStop(0.4, `rgba(${geometryColor}, ${(baseOpacity + glowBoost) * 0.3})`);
                 dotGlow.addColorStop(1, `rgba(${geometryColor}, 0)`);
-
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, haloSize, 0, Math.PI * 2);
                 ctx.fillStyle = dotGlow;
                 ctx.fill();
 
-                // Core dot
                 const coreSize = dotSize + glowEased * pulse * 2;
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, coreSize, 0, Math.PI * 2);
@@ -1608,21 +1359,17 @@
                 ctx.fill();
             }
 
-            // Draw glowing petals
             function drawGlowingPetals() {
                 if (glowEased <= 0.1) return;
-
                 ctx.save();
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, baseRadius * 0.98, 0, Math.PI * 2);
                 ctx.clip();
-
                 const petalAlpha = glowEased * (0.15 + pulse * 0.2);
                 ctx.shadowColor = `rgba(${geometryColor}, ${glowEased * 0.5})`;
                 ctx.shadowBlur = 10 * glowEased;
                 ctx.strokeStyle = `rgba(${geometryColor}, ${petalAlpha})`;
                 ctx.lineWidth = 1.5;
-
                 for (let i = 0; i < 6; i++) {
                     const angle = (i * Math.PI) / 3;
                     const cx = centerX + Math.cos(angle) * baseRadius;
@@ -1631,20 +1378,16 @@
                     ctx.arc(cx, cy, baseRadius, 0, Math.PI * 2);
                     ctx.stroke();
                 }
-
                 ctx.restore();
             }
 
-            // Always draw center dot first
             drawCenterDot();
 
-            // Phase 1: Center circle (0 - 0.2)
             if (progress >= 0.02) {
                 const p = Math.min(1, (progress - 0.02) / 0.18);
                 drawCircle(centerX, centerY, baseRadius, easeInOutCubic(p), baseAlpha);
             }
 
-            // Phase 2: First ring of 6 circles (0.2 - 0.55)
             if (progress >= 0.2) {
                 const ringProgress = (progress - 0.2) / 0.35;
                 for (let i = 0; i < 6; i++) {
@@ -1659,7 +1402,6 @@
                 }
             }
 
-            // Phase 3: Second ring of 6 circles (0.55 - 0.9)
             if (progress >= 0.55) {
                 const ringProgress = (progress - 0.55) / 0.35;
                 for (let i = 0; i < 6; i++) {
@@ -1674,7 +1416,6 @@
                 }
             }
 
-            // Draw glowing petals on top
             drawGlowingPetals();
         }
 
