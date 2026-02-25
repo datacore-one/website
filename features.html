@@ -220,25 +220,66 @@
             box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
         }
 
-        /* Theme toggle */
+        [data-theme="light"] .btn-secondary {
+            border-color: rgba(100, 100, 100, 0.2);
+        }
+
+        [data-theme="light"] .btn-secondary:hover {
+            border-color: rgba(37, 99, 235, 0.4);
+            color: var(--accent);
+        }
+
+        /* Theme toggle - fixed position, matches index.html */
         .theme-toggle {
-            background: none;
+            position: fixed;
+            top: 12px;
+            right: 24px;
+            z-index: 101;
+            background: var(--bg-tertiary);
             border: 1px solid var(--border);
-            color: var(--text-secondary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            padding: 8px 10px;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
         }
 
         .theme-toggle:hover {
             border-color: var(--accent);
-            color: var(--text-primary);
+            color: var(--accent);
+            transform: rotate(15deg);
         }
 
-        [data-theme="light"] .theme-toggle .theme-icon::before { content: '☀️'; }
-        .theme-toggle .theme-icon::before { content: '🌙'; }
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            position: absolute;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .theme-toggle .icon-sun {
+            opacity: 0;
+            transform: rotate(-90deg);
+        }
+
+        .theme-toggle .icon-moon {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        [data-theme="light"] .theme-toggle .icon-sun {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        [data-theme="light"] .theme-toggle .icon-moon {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
 
         /* Sections */
         .section {
@@ -807,20 +848,24 @@
                 <a href="#workflow" class="active">Workflow</a>
                 <a href="#different">Differentiators</a>
                 <a href="#extend">Modules</a>
-                <button class="theme-toggle" id="theme-toggle"><span class="theme-icon"></span></button>
                 <a href="#get-started" class="btn btn-primary">Get Early Access</a>
             </div>
         </div>
     </nav>
 
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span class="icon-sun">&#9728;</span>
+        <span class="icon-moon">&#9790;</span>
+    </button>
+
     <!-- Section nav pills -->
-    <div class="section-nav" id="section-nav">
+    <nav class="section-nav" id="section-nav" aria-label="Page sections">
         <a href="#hero">Top</a>
         <a href="#workflow">Workflow</a>
         <a href="#different">Different</a>
         <a href="#extend">Extend</a>
         <a href="#get-started">Start</a>
-    </div>
+    </nav>
 
     <div id="content">
 
@@ -838,8 +883,8 @@
             <div class="container">
                 <div class="comparison-toggle">
                     <div class="comparison-toggle-btns">
-                        <button class="comparison-toggle-btn active" data-show="before">Before</button>
-                        <button class="comparison-toggle-btn" data-show="after">After</button>
+                        <button class="comparison-toggle-btn active" data-show="before" aria-label="Show other AI tools (before Datacore)">Before</button>
+                        <button class="comparison-toggle-btn" data-show="after" aria-label="Show Datacore experience (after)">After</button>
                     </div>
                 </div>
                 <div class="comparison-split">
@@ -1023,7 +1068,7 @@
                     <div class="extend-governance">
                         <h3>Built on open specifications</h3>
                         <p>A growing library of Datacore Improvement Proposals defines every system behavior. 4 privacy layers protect your data. Designed for community governance &mdash; and we're building that community now.</p>
-                        <p>Every agent, every command, every workflow is documented, reviewable, and modifiable. Nothing is hidden. Nothing is proprietary.</p>
+                        <p>Every agent, every command, every workflow is documented, reviewable, and modifiable. Open source. Nothing is hidden. Nothing is proprietary.</p>
                         <p>
                             <a href="https://github.com/datacore-one/datacore-dips" target="_blank" rel="noopener">Read the DIPs &rarr;</a><br>
                             <a href="https://github.com/datacore-one/datacore" target="_blank" rel="noopener">Explore the codebase &rarr;</a>
@@ -1049,7 +1094,7 @@
                     </div>
                     <div class="cta-pathway">
                         <h3>Explore the code</h3>
-                        <p>Clone the repo. Read the specs. Build a module. Datacore is open-source software you can inspect, modify, and host yourself.</p>
+                        <p>Open source. Clone the repo. Read the specs. Build a module. Inspect, modify, and host it yourself.</p>
                         <a href="https://github.com/datacore-one/datacore" class="code-link" target="_blank" rel="noopener">View on GitHub &rarr;</a>
                     </div>
                 </div>
@@ -1087,19 +1132,29 @@
             html.setAttribute('data-theme', next);
             localStorage.setItem('datacore-theme', next);
         });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('datacore-theme')) {
+                html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
     })();
 
-    // Stardate calculator
+    // Stardate calculator (matches index.html)
     (function() {
         const now = new Date();
         const year = now.getFullYear();
-        const start = new Date(year, 0, 0);
-        const diff = now - start;
-        const oneDay = 1000 * 60 * 60 * 24;
-        const dayOfYear = Math.floor(diff / oneDay);
-        const stardate = (year - 2000) * 1000 + dayOfYear;
+        const startOfYear = new Date(year, 0, 1);
+        const endOfYear = new Date(year + 1, 0, 1);
+        const yearProgress = (now - startOfYear) / (endOfYear - startOfYear);
+        const stardate = ((year - 2000) * 1000 + yearProgress * 1000).toFixed(1);
         const el = document.getElementById('stardate');
-        if (el) el.textContent = stardate.toFixed(1);
+        if (el) el.textContent = stardate;
+
+        // Easter egg
+        console.log('%c"I am the culmination of one man\'s dream. This is not ego or vanity. But when Doctor Soong created me, he added to the substance of the universe."', 'color: #3b82f6; font-style: italic;');
+        console.log('%c\u2014 Lieutenant Commander Data', 'color: #666;');
     })();
 
     // Section nav pills - show on scroll
