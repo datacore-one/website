@@ -593,6 +593,72 @@
             margin-right: auto;
         }
 
+        .waitlist-form {
+            display: flex;
+            gap: 0;
+            max-width: 440px;
+            margin: 0 auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .waitlist-form:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .waitlist-input {
+            flex: 1;
+            padding: 14px 18px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            min-width: 0;
+        }
+
+        .waitlist-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .waitlist-form .btn-primary {
+            border: none;
+            border-left: 1px solid var(--border);
+            border-radius: 0;
+            padding: 14px 24px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+
+        .waitlist-form .btn-primary:hover {
+            box-shadow: none;
+        }
+
+        .waitlist-response {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            min-height: 1.2em;
+            text-align: center;
+        }
+
+        .waitlist-response.success {
+            color: var(--success);
+        }
+
+        .waitlist-response.error {
+            color: #ef4444;
+        }
+
+        #hero-waitlist-form {
+            margin: 0;
+        }
+
 
         /* Footer styles consolidated above (lines 216-240) */
 
@@ -953,6 +1019,17 @@
 
             .install-modes-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .waitlist-form {
+                flex-direction: column;
+                border-radius: 8px;
+            }
+
+            .waitlist-form .btn-primary {
+                border-left: none;
+                border-top: 1px solid var(--border);
+                padding: 14px;
             }
         }
     </style>
