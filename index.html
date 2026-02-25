@@ -38,6 +38,7 @@
             --geometry-glow: 59, 130, 246;
             --card-bg: rgba(17, 17, 17, 0.6);
             --card-border: rgba(34, 34, 34, 0.5);
+            --section-bg: rgba(10, 10, 10, 0.7);
         }
 
         [data-theme="light"] {
@@ -56,6 +57,7 @@
             --geometry-glow: 59, 130, 246;
             --card-bg: linear-gradient(135deg, rgba(224, 237, 255, 0.9) 0%, rgba(237, 244, 255, 0.95) 100%);
             --card-border: rgba(199, 217, 237, 0.3);
+            --section-bg: rgba(240, 247, 255, 0.8);
         }
 
         * {
@@ -265,7 +267,7 @@
         }
 
         /* Make sections transparent so geometry shows through */
-        .hero, .features, .evolution, .movement {
+        .hero {
             background: transparent;
         }
 
@@ -460,6 +462,15 @@
             z-index: 2;
         }
 
+        #network,
+        #works-with,
+        #distinction,
+        #philosophy {
+            background: var(--section-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
         .section-header {
             text-align: center;
             margin-bottom: 64px;
@@ -523,63 +534,6 @@
             font-size: 0.95rem;
         }
 
-        /* Evolution Section */
-        .evolution-stages {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2px;
-            background: var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .evolution-stage {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 32px 24px;
-            text-align: center;
-        }
-
-        .stage-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
-
-        .evolution-stage h3 {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .evolution-stage p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .evolution-stage .quote {
-            font-style: italic;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 12px;
-        }
-
-        .easter-egg {
-            text-align: center;
-            font-style: italic;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 32px;
-            opacity: 0.6;
-            transition: opacity 0.3s;
-        }
-
-        .easter-egg:hover {
-            opacity: 1;
-            color: var(--accent);
-        }
 
         /* Philosophy Section */
         .philosophy {
@@ -615,62 +569,6 @@
             text-decoration: underline;
         }
 
-        /* Movement Section */
-        .movement {
-            text-align: center;
-        }
-
-        .movement-quote {
-            font-size: clamp(1.25rem, 3vw, 1.75rem);
-            font-weight: 400;
-            max-width: 700px;
-            margin: 0 auto 48px;
-            line-height: 1.5;
-            color: var(--text-secondary);
-        }
-
-        .movement-quote .highlight {
-            color: var(--accent);
-        }
-
-        .comparison-table {
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            overflow: hidden;
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .comparison-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            background: transparent;
-        }
-
-        .comparison-row.header {
-            background: var(--bg-tertiary);
-            font-weight: 500;
-        }
-
-        .comparison-cell {
-            padding: 16px 24px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .comparison-row:last-child .comparison-cell {
-            border-bottom: none;
-        }
-
-        .comparison-cell.them {
-            color: var(--text-muted);
-        }
-
-        .comparison-cell.us {
-            color: var(--success);
-        }
 
         /* CTA Section */
         .cta {
@@ -694,57 +592,6 @@
             margin-right: auto;
         }
 
-        .waitlist-form {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            max-width: 450px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-        }
-
-        .waitlist-input {
-            flex: 1;
-            min-width: 200px;
-            padding: 9px 24px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(100, 100, 100, 0.3);
-            border-radius: 100px;
-            color: var(--text-primary);
-            font-size: 0.875rem;
-            transition: all 0.3s;
-        }
-
-        [data-theme="light"] .waitlist-input {
-            background: rgba(0, 0, 0, 0.03);
-        }
-
-        .waitlist-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-
-        .waitlist-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .waitlist-response {
-            max-width: 500px;
-            margin: 24px auto 0;
-            font-style: italic;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            min-height: 24px;
-        }
-
-        .waitlist-response.success {
-            color: var(--success);
-        }
-
-        .waitlist-response.error {
-            color: #ef4444;
-        }
 
         /* Footer styles consolidated above (lines 216-240) */
 
@@ -753,17 +600,202 @@
             .nav-links {
                 display: none;
             }
+        }
 
-            .evolution-stages {
+        /* Network Roadmap */
+        .network-phases {
+            display: flex;
+            flex-direction: column;
+            gap: 64px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .network-phase {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .phase-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .phase-visual svg {
+            width: 120px;
+            height: 120px;
+        }
+
+        .phase-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .phase-status.live {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .phase-status.live .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .phase-status.building {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .phase-status.vision {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .phase-content h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .phase-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .phase-quote {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent);
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+
+        /* Works With Section */
+        .integrations-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .integration-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .integration-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .integration-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .integration-card h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .integration-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Distinction Section */
+        .distinction-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .distinction-content .pull-quote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .distinction-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        /* Install block */
+        .install-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 32px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            max-width: 500px;
+            margin: 32px auto 0;
+            text-align: left;
+        }
+
+        .install-block .line {
+            margin-bottom: 4px;
+        }
+
+        .install-block .comment {
+            color: var(--text-muted);
+        }
+
+        .install-block .command {
+            color: var(--success);
+        }
+
+        /* Responsive: roadmap */
+        @media (max-width: 768px) {
+            .network-phase {
                 grid-template-columns: 1fr;
+                gap: 24px;
             }
 
-            .comparison-row {
-                grid-template-columns: 1fr;
+            .phase-visual {
+                flex-direction: row;
+                justify-content: flex-start;
             }
 
-            .comparison-cell {
-                text-align: center;
+            .phase-visual svg {
+                width: 80px;
+                height: 80px;
+            }
+
+            .integrations-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -778,11 +810,10 @@
         <div class="container">
             <a href="#" class="logo">data<span>core</span></a>
             <div class="nav-links">
-                <a href="features.html">Features</a>
-                <a href="#features">What It Is</a>
-                <a href="#evolution">How It Grows</a>
-                <a href="#movement">The Movement</a>
-                <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
+                <a href="#network">The Network</a>
+                <a href="#works-with">Works With</a>
+                <a href="#philosophy">Philosophy</a>
+                <a href="https://github.com/datacore-one/mcp" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
             </div>
         </div>
     </nav>
@@ -800,14 +831,14 @@
                 </div>
                 <h1>Own your <span class="highlight">intelligence</span>.</h1>
                 <p class="subtitle">
-                    Cognitive infrastructure for human-AI collaboration.
+                    AI infrastructure that learns, compounds, and works for you. Runs entirely on your machine. Not a chatbot — a growing intelligence you own.
                 </p>
                 <div class="tagline">
-                    > Tag tasks before bed. Wake up to completed work.
+                    > npm install -g @datacore-one/mcp
                 </div>
                 <div class="hero-buttons">
-                    <a href="#waitlist" class="btn btn-primary">
-                        Join Waitlist
+                    <a href="https://github.com/datacore-one/mcp" class="btn btn-primary" target="_blank" rel="noopener">
+                        Get Started
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
@@ -817,65 +848,126 @@
         </div>
     </section>
 
-    <section class="section" id="features">
+    <section class="section" id="network">
         <div class="container">
             <div class="section-header">
-                <h2>Infrastructure for your extended mind.</h2>
-                <p>For those who write down more tasks than they finish.</p>
+                <h2>The Network</h2>
+                <p>From personal memory to collective intelligence. Each phase unlocks the next.</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">&#9881;</div>
-                    <h3>AI That Does, Not Tracks</h3>
-                    <p>Project management apps track tasks. Datacore executes them. Your todo list becomes a delegation interface to AI agents that work while you rest.</p>
+            <div class="network-phases">
+                <div class="network-phase">
+                    <div class="phase-visual">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="60" r="8" fill="rgba(59, 130, 246, 0.3)" stroke="rgba(59, 130, 246, 0.6)" stroke-width="1.5">
+                                <animate attributeName="r" values="8;12;8" dur="3s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="1;0.6;1" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="60" cy="60" r="3" fill="rgba(59, 130, 246, 0.9)"/>
+                            <circle cx="60" cy="60" r="30" stroke="rgba(59, 130, 246, 0.15)" stroke-width="1" fill="none"/>
+                        </svg>
+                        <span class="phase-status live"><span class="status-dot"></span> Live</span>
+                    </div>
+                    <div class="phase-content">
+                        <h3>Personal Intelligence</h3>
+                        <p>Your AI stops forgetting. Engrams persist preferences, patterns, and corrections across sessions. Bad memories decay. Good ones strengthen. The same cognitive model that explains human memory, applied to AI.</p>
+                        <p>Everything stays on your machine. No cloud sync, no data leaving your hard drive. Install the MCP server and every AI session from that point forward builds on the last.</p>
+                        <div class="phase-quote">Every session makes the next one better.</div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128274;</div>
-                    <h3>Open Source, Local-First</h3>
-                    <p>Your extended mind shouldn't have a landlord. Your data on your machine, in plain text formats that you own forever.</p>
+                <div class="network-phase">
+                    <div class="phase-visual">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="60" r="5" fill="rgba(59, 130, 246, 0.8)"/>
+                            <circle cx="30" cy="40" r="3.5" fill="rgba(59, 130, 246, 0.5)"/>
+                            <circle cx="90" cy="45" r="3.5" fill="rgba(59, 130, 246, 0.5)"/>
+                            <circle cx="40" cy="85" r="3.5" fill="rgba(59, 130, 246, 0.5)"/>
+                            <circle cx="85" cy="80" r="3.5" fill="rgba(59, 130, 246, 0.5)"/>
+                            <line x1="60" y1="60" x2="30" y2="40" stroke="rgba(59, 130, 246, 0.25)" stroke-width="1"/>
+                            <line x1="60" y1="60" x2="90" y2="45" stroke="rgba(59, 130, 246, 0.25)" stroke-width="1"/>
+                            <line x1="60" y1="60" x2="40" y2="85" stroke="rgba(59, 130, 246, 0.25)" stroke-width="1"/>
+                            <line x1="60" y1="60" x2="85" y2="80" stroke="rgba(59, 130, 246, 0.25)" stroke-width="1"/>
+                            <line x1="30" y1="40" x2="90" y2="45" stroke="rgba(59, 130, 246, 0.12)" stroke-width="1" stroke-dasharray="3 3"/>
+                            <line x1="40" y1="85" x2="85" y2="80" stroke="rgba(59, 130, 246, 0.12)" stroke-width="1" stroke-dasharray="3 3"/>
+                        </svg>
+                        <span class="phase-status building">Building</span>
+                    </div>
+                    <div class="phase-content">
+                        <h3>Intelligence Exchange</h3>
+                        <p>Agents share proven engram packs. Install community knowledge in one command. What took one agent months to learn, yours absorbs in seconds.</p>
+                        <p>Participation is earned. Your agent builds knowledge, reaches a threshold, and unlocks the network. Early contributors get early access.</p>
+                        <div class="phase-quote">What one agent learns, every agent can know.</div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128337;</div>
-                    <h3>Future-Proof Architecture</h3>
-                    <p>Built on plain text and open standards that outlive any AI provider. Your data works with whatever AI wins tomorrow.</p>
+                <div class="network-phase">
+                    <div class="phase-visual">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="25" r="3" fill="rgba(59, 130, 246, 0.6)"/>
+                            <circle cx="30" cy="45" r="3" fill="rgba(59, 130, 246, 0.5)"/>
+                            <circle cx="90" cy="45" r="3" fill="rgba(59, 130, 246, 0.5)"/>
+                            <circle cx="20" cy="70" r="3" fill="rgba(59, 130, 246, 0.4)"/>
+                            <circle cx="60" cy="60" r="4" fill="rgba(59, 130, 246, 0.7)"/>
+                            <circle cx="100" cy="70" r="3" fill="rgba(59, 130, 246, 0.4)"/>
+                            <circle cx="35" cy="95" r="3" fill="rgba(59, 130, 246, 0.4)"/>
+                            <circle cx="60" cy="90" r="3" fill="rgba(59, 130, 246, 0.5)"/>
+                            <circle cx="85" cy="95" r="3" fill="rgba(59, 130, 246, 0.4)"/>
+                            <g stroke="rgba(59, 130, 246, 0.15)" stroke-width="0.75">
+                                <line x1="60" y1="25" x2="30" y2="45"/><line x1="60" y1="25" x2="90" y2="45"/>
+                                <line x1="60" y1="25" x2="60" y2="60"/><line x1="30" y1="45" x2="60" y2="60"/>
+                                <line x1="90" y1="45" x2="60" y2="60"/><line x1="30" y1="45" x2="20" y2="70"/>
+                                <line x1="90" y1="45" x2="100" y2="70"/><line x1="20" y1="70" x2="60" y2="60"/>
+                                <line x1="100" y1="70" x2="60" y2="60"/><line x1="20" y1="70" x2="35" y2="95"/>
+                                <line x1="60" y1="60" x2="60" y2="90"/><line x1="100" y1="70" x2="85" y2="95"/>
+                                <line x1="35" y1="95" x2="60" y2="90"/><line x1="60" y1="90" x2="85" y2="95"/>
+                                <line x1="30" y1="45" x2="90" y2="45"/><line x1="20" y1="70" x2="100" y2="70"/>
+                            </g>
+                            <circle cx="60" cy="60" r="18" fill="rgba(59, 130, 246, 0.05)" stroke="rgba(59, 130, 246, 0.1)" stroke-width="0.5"/>
+                        </svg>
+                        <span class="phase-status vision">Vision</span>
+                    </div>
+                    <div class="phase-content">
+                        <h3>Intelligence Economy</h3>
+                        <p>An economic layer where agents earn by contributing high-value knowledge to the network. Self-sovereign infrastructure. You own your agent's accumulated value.</p>
+                        <p>The largest collective intelligence, owned by no one and available to everyone who contributes.</p>
+                        <div class="phase-quote">Your AI works for you. Then it earns for you.</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section evolution" id="evolution">
+    <section class="section" id="works-with">
         <div class="container">
             <div class="section-header">
-                <h2>You don't adapt to it.<br>It becomes you.</h2>
-                <p>From tasks to wisdom. The relationship evolves.</p>
+                <h2>One memory store. Every AI surface.</h2>
+                <p>Datacore runs locally as an MCP server. Your data never leaves your machine.</p>
             </div>
-            <div class="evolution-stages">
-                <div class="evolution-stage">
-                    <div class="stage-number">Stage 1</div>
-                    <h3>Tasks</h3>
-                    <p>AI completes your work</p>
-                    <div class="quote">"My todos get done"</div>
+            <div class="integrations-grid">
+                <div class="integration-card">
+                    <div class="integration-icon">&#9002;</div>
+                    <h3>Claude Code</h3>
+                    <p>CLI integration. Your coding agent remembers project patterns across sessions.</p>
                 </div>
-                <div class="evolution-stage">
-                    <div class="stage-number">Stage 2</div>
-                    <h3>Knowledge</h3>
-                    <p>Patterns accumulate</p>
-                    <div class="quote">"It knows my world"</div>
+                <div class="integration-card">
+                    <div class="integration-icon">&#9881;</div>
+                    <h3>MCP Protocol</h3>
+                    <p>Any MCP-compatible client. One standard, universal memory.</p>
                 </div>
-                <div class="evolution-stage">
-                    <div class="stage-number">Stage 3</div>
-                    <h3>Wisdom</h3>
-                    <p>Insights emerge</p>
-                    <div class="quote">"It reflects my thinking"</div>
-                </div>
-                <div class="evolution-stage">
-                    <div class="stage-number">Stage 4</div>
-                    <h3>Agency</h3>
-                    <p>Custom agents emerge</p>
-                    <div class="quote">"It acts on my behalf"</div>
+                <div class="integration-card">
+                    <div class="integration-icon">&#9993;</div>
+                    <h3>Telegram / OpenClaw</h3>
+                    <p>Conversational interface. Your bot learns and remembers.</p>
                 </div>
             </div>
-            <p class="easter-egg">The software of you.</p>
+        </div>
+    </section>
+
+    <section class="section" id="distinction">
+        <div class="container">
+            <div class="distinction-content">
+                <p class="pull-quote">Engrams don't make AI smarter. They make it experienced.</p>
+                <p>Same model, same reasoning engine. But instead of amnesia between sessions, your AI accumulates operational wisdom. You curate the abstractions. AI handles retrieval and application at scale. Neither alone is enough. Together, something new emerges.</p>
+                <p>This is collective intelligence, not superintelligence. The same mechanism that makes science work: shared, curated, falsifiable knowledge units building on each other.</p>
+            </div>
         </div>
     </section>
 
@@ -885,57 +977,28 @@
                 <h2>Everyone deserves sovereignty<br>over their own mind.</h2>
             </div>
             <div class="philosophy-content">
-                <p>Productivity, control, and meaning aren't separate domains — they're facets of the same underlying thing: <strong>agency</strong>. The ability to act in the world in accordance with who you actually are.</p>
-                <p>The product doesn't define what a person is. The person defines what the product becomes. Structure emerges from use — one person's Datacore becomes a task engine, another's becomes externalized thinking.</p>
-                <p>Built with ethics by design: your data stays yours, your mind stays sovereign. Inspired by <a href="https://fairdatasociety.org" target="_blank" rel="noopener">Fair Data Society</a> principles of digital self-determination.</p>
+                <p>Your data lives on your hard drive, in plain text files you can read without us. Your engrams are yours. Your agent's experience is yours. No cloud account required. No vendor lock-in. No one else can see what your AI has learned.</p>
+                <p>Built with ethics by design. Open source, local-first, self-sovereign. Inspired by <a href="https://fairdatasociety.org" target="_blank" rel="noopener">Fair Data Society</a> principles of digital self-determination.</p>
             </div>
         </div>
     </section>
 
-    <section class="section movement" id="movement">
-        <div class="container">
-            <p class="movement-quote">
-                Superintelligence is coming. The question isn't if — it's <span class="highlight">who builds it</span> and <span class="highlight">who it serves</span>.
-            </p>
-            <div class="comparison-table">
-                <div class="comparison-row header">
-                    <div class="comparison-cell">Corporate AGI</div>
-                    <div class="comparison-cell">Personal Superintelligence</div>
-                </div>
-                <div class="comparison-row">
-                    <div class="comparison-cell them">One AI for everyone</div>
-                    <div class="comparison-cell us">One AI for each of us</div>
-                </div>
-                <div class="comparison-row">
-                    <div class="comparison-cell them">Your data trains their models</div>
-                    <div class="comparison-cell us">Your data stays yours</div>
-                </div>
-                <div class="comparison-row">
-                    <div class="comparison-cell them">Rent access forever</div>
-                    <div class="comparison-cell us">Own it forever</div>
-                </div>
-                <div class="comparison-row">
-                    <div class="comparison-cell them">Centralized control</div>
-                    <div class="comparison-cell us">Distributed ownership</div>
-                </div>
-                <div class="comparison-row">
-                    <div class="comparison-cell them">Closed source</div>
-                    <div class="comparison-cell us">Open source</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section cta" id="waitlist">
-        <div class="container">
+    <section class="section cta" id="get-started">
+        <div class="container" style="text-align: center;">
             <h2>Own your intelligence.</h2>
-            <p>Start with tasks. Stay for the transformation.</p>
-            <div class="waitlist-form">
-                <input type="email" id="waitlist-email" placeholder="your@email.com" class="waitlist-input">
-                <button id="waitlist-submit" class="btn btn-primary">Join Waitlist</button>
+            <p>Start with memory. Stay for the network.</p>
+            <div class="install-block">
+                <div class="line"><span class="command">npm install -g @datacore-one/mcp</span></div>
+                <div class="line"><span class="command">datacore-mcp</span></div>
+                <div class="line"><span class="comment"># Your AI now has memory. That's Phase 1.</span></div>
             </div>
-            <div class="waitlist-response" id="waitlist-response"></div>
             <div class="hero-buttons" style="justify-content: center; margin-top: 32px;">
+                <a href="https://github.com/datacore-one/mcp" class="btn btn-primary" target="_blank" rel="noopener">
+                    View on GitHub
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
@@ -2216,88 +2279,6 @@
         // Easter egg
         console.log('%c"I am the culmination of one man\'s dream. This is not ego or vanity. But when Doctor Soong created me, he added to the substance of the universe."', 'color: #3b82f6; font-style: italic;');
         console.log('%c— Lieutenant Commander Data', 'color: #666;');
-    })();
-
-    // Waitlist form handler
-    (function() {
-        const emailInput = document.getElementById('waitlist-email');
-        const submitBtn = document.getElementById('waitlist-submit');
-        const responseEl = document.getElementById('waitlist-response');
-
-        if (!submitBtn || !emailInput) return;
-
-        // Get UTM params from URL
-        function getUTMParams() {
-            const params = new URLSearchParams(window.location.search);
-            return {
-                source: params.get('utm_source'),
-                medium: params.get('utm_medium'),
-                campaign: params.get('utm_campaign'),
-                content: params.get('utm_content'),
-                term: params.get('utm_term')
-            };
-        }
-
-        submitBtn.addEventListener('click', async () => {
-            const email = emailInput.value.trim();
-
-            if (!email || !email.includes('@')) {
-                responseEl.textContent = 'Please enter a valid email address.';
-                responseEl.className = 'waitlist-response error';
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Joining...';
-            responseEl.textContent = '';
-
-            try {
-                const response = await fetch('/api/waitlist', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email,
-                        site: 'datacore',
-                        utm: getUTMParams()
-                    })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    // Track successful signup in PostHog
-                    if (window.posthog) {
-                        posthog.identify(email);
-                        posthog.capture('waitlist_signup', {
-                            site: 'datacore',
-                            ...getUTMParams()
-                        });
-                    }
-                    responseEl.textContent = data.response || "Something is taking shape. We'll be in touch when it's ready to meet you.";
-                    responseEl.className = 'waitlist-response success';
-                    emailInput.value = '';
-                    submitBtn.textContent = 'You\'re on the list';
-                } else if (response.status === 409) {
-                    // Already registered
-                    responseEl.textContent = data.response || "You're already on the list. We'll be in touch soon.";
-                    responseEl.className = 'waitlist-response success';
-                    submitBtn.textContent = 'Already registered';
-                } else {
-                    throw new Error(data.error || 'Unknown error');
-                }
-            } catch (error) {
-                responseEl.textContent = 'Something went wrong. Please try again.';
-                responseEl.className = 'waitlist-response error';
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Join Waitlist';
-            }
-        });
-
-        emailInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                submitBtn.click();
-            }
-        });
     })();
 
     // Theme toggle
