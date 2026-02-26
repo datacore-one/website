@@ -314,40 +314,67 @@
         }
 
         /* Hero */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         .hero {
             position: relative;
             z-index: 1;
-            min-height: 70vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: 100px;
+            padding-top: 64px;
+            overflow: hidden;
         }
 
-        .hero-category {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 16px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 20px;
+        .hero-content {
+            position: relative;
+            z-index: 1;
             max-width: 800px;
         }
 
-        .hero .subtitle {
-            font-size: 1.15rem;
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            max-width: 520px;
-            margin: 0 auto;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
         }
 
         /* Before/After Split Screen */
@@ -909,8 +936,8 @@
                 padding: 5px 10px;
             }
 
-            .hero { min-height: 60vh; padding-top: 80px; }
-            .hero h1 { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+            .hero { min-height: auto; padding-top: 80px; padding-bottom: 60px; }
+            .hero h1 { font-size: clamp(1.8rem, 6vw, 2.8rem); }
 
             .comparison-split { grid-template-columns: 1fr; }
             .comparison-toggle { display: block; }
@@ -980,9 +1007,14 @@
         <!-- Hero -->
         <section class="hero" id="hero">
             <div class="container">
-                <p class="hero-category">AI second brain</p>
-                <h1>Every AI session starts from zero.<br>This one doesn't.</h1>
-                <p class="subtitle">Datacore remembers. So your AI never starts from zero.</p>
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="dot"></span>
+                        AI second brain
+                    </div>
+                    <h1>Every AI session starts from zero.<br>This one <span class="highlight">doesn't</span>.</h1>
+                    <p class="subtitle">Datacore remembers. So your AI never starts from zero.</p>
+                </div>
             </div>
         </section>
 
