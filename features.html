@@ -631,6 +631,17 @@
 
         .diff-link a:hover { color: var(--accent); }
 
+        .phase-status {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 12px; border-radius: 100px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem; font-weight: 500;
+            letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px;
+        }
+        .phase-status.live { background: rgba(16,185,129,0.15); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
+        .phase-status.building { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+        .phase-status.vision { background: rgba(59,130,246,0.15); color: var(--accent); border: 1px solid rgba(59,130,246,0.3); }
+
         /* How It Learns section */
         .science-grid {
             display: grid;
@@ -979,8 +990,9 @@
             <a href="index.html" class="logo">data<span>core</span></a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="#workflow" class="active">Workflow</a>
                 <a href="#different">Differentiators</a>
+                <a href="#workflow">Workflow</a>
+                <a href="#network">Network</a>
                 <a href="#extend">Modules</a>
                 <a href="#get-started" class="btn btn-primary">Get Early Access</a>
             </div>
@@ -995,9 +1007,10 @@
     <!-- Section nav pills -->
     <nav class="section-nav" id="section-nav" aria-label="Page sections">
         <a href="#hero">Top</a>
+        <a href="#different">Differentiators</a>
         <a href="#workflow">Workflow</a>
-        <a href="#different">Different</a>
         <a href="#how-it-learns">Science</a>
+        <a href="#network">Network</a>
         <a href="#extend">Extend</a>
         <a href="#get-started">Start</a>
     </nav>
@@ -1013,7 +1026,7 @@
                         AI second brain
                     </div>
                     <h1>Every AI session starts from zero.<br>This one <span class="highlight">doesn't</span>.</h1>
-                    <p class="subtitle">Datacore remembers. So your AI never starts from zero.</p>
+                    <p class="subtitle">Datacore gives your AI a memory it keeps &mdash; across sessions, across tools, across time. One install. Every session smarter than the last.</p>
                 </div>
             </div>
         </section>
@@ -1032,7 +1045,7 @@
                         <div class="comparison-label">Every other AI tool</div>
                         <div class="comparison-text">
                             "Hi! How can I help you today?"<br><br>
-                            Starting from zero. Again. You explain your project, your preferences, your context. For the fourth time this week.
+                            Starting from zero. Again. You explain your project, your preferences, your context. Every. Single. Session.
                         </div>
                     </div>
                     <div class="comparison-panel comparison-after">
@@ -1046,8 +1059,34 @@
             </div>
         </section>
 
+        <!-- Three Things That Make This Different -->
+        <section class="section section-with-bg" id="different">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Three things that make Datacore different.</h2>
+                </div>
+                <div class="diff-grid">
+                    <div class="diff-card">
+                        <h3>You explain your project once.</h3>
+                        <p>A month later, your AI surfaces that exact insight in the meeting where you need it. Not because it has a chat history - because it learned your preferences, your project context, your communication style as structured knowledge that compounds with every session.</p>
+                    </div>
+                    <div class="diff-card">
+                        <h3>You tag a task. You go to sleep. You wake up to finished work.</h3>
+                        <p>Research, writing, analysis done overnight. Each output reviewed by 20 evaluator personas - Hemingway checks clarity, Feynman checks first principles. Quality work, not hallucinations.</p>
+                    </div>
+                    <div class="diff-card">
+                        <h3>Your AI accumulates value you can share and sell.</h3>
+                        <p>The knowledge your AI builds is yours. Plain text files on your machine, in formats you can read in any editor for the next 50 years. And when your engrams are proven enough, you contribute them to the network &mdash; and earn from what your AI learned. Your intelligence, your upside.</p>
+                    </div>
+                </div>
+                <div class="diff-link">
+                    <a href="https://github.com/datacore-one/datacore-dips" target="_blank" rel="noopener">See how it works: Open specifications on GitHub &rarr;</a>
+                </div>
+            </div>
+        </section>
+
         <!-- A Day with Datacore -->
-        <section class="section section-with-bg" id="workflow">
+        <section class="section" id="workflow">
             <div class="container">
                 <div class="section-header">
                     <h2>A day with Datacore</h2>
@@ -1091,7 +1130,7 @@
                         <div class="terminal-body">
                             <span class="muted">142 emails scanned. 38 tasks extracted. 7 need your decision.</span><br>
                             <span class="prompt">&rarr;</span> "Review investor deck" <span class="muted">&mdash; next action?</span> <span class="highlight">"Draft 3 key slides"</span><br>
-                            <span class="prompt">&rarr;</span> "Quarterly report feedback" <span class="muted">&mdash;</span> tagged <span class="success">:AI:research:</span> for tonight<br>
+                            <span class="prompt">&rarr;</span> "Quarterly report feedback" <span class="muted">&mdash;</span> <span class="success">queued for overnight research</span><br>
                             <span class="muted">5 more routed.</span> <span class="success">Inbox clear.</span>
                         </div>
                     </div>
@@ -1144,38 +1183,12 @@
             </div>
         </section>
 
-        <!-- Three Things That Make This Different -->
-        <section class="section" id="different">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Three things that make this different</h2>
-                </div>
-                <div class="diff-grid">
-                    <div class="diff-card">
-                        <h3>You explain your project once.</h3>
-                        <p>A month later, your AI surfaces that exact insight in the meeting where you need it. Not because it has a chat history - because it learned your preferences, your project context, your communication style as structured knowledge that compounds with every session.</p>
-                    </div>
-                    <div class="diff-card">
-                        <h3>You tag a task. You go to sleep. You wake up to finished work.</h3>
-                        <p>Research, writing, analysis done overnight. Each output reviewed by 20 evaluator personas - Hemingway checks clarity, Feynman checks first principles. Quality work, not hallucinations.</p>
-                    </div>
-                    <div class="diff-card">
-                        <h3>Your knowledge stays yours. Forever.</h3>
-                        <p>Plain text files on your machine. Markdown and org-mode you can read in any editor, in 50 years. Your insight from six months ago surfaces when it matters. The intelligence layer is open-source software you can inspect, modify, and host yourself.</p>
-                    </div>
-                </div>
-                <div class="diff-link">
-                    <a href="https://github.com/datacore-one/datacore-dips" target="_blank" rel="noopener">See how it works: Open specifications on GitHub &rarr;</a>
-                </div>
-            </div>
-        </section>
-
         <!-- How It Learns -->
         <section class="section section-with-bg" id="how-it-learns">
             <div class="container">
                 <div class="section-header">
-                    <h2>Built on proven science. Not hype.</h2>
-                    <p>Datacore combines decades of cognitive science, knowledge management research, and productivity methodology into a system that actually works.</p>
+                    <h2>How Datacore learns what you care about</h2>
+                    <p>Built on decades of cognitive science and productivity research. No hallucinations, no guesswork &mdash; structured memory that sharpens with every session.</p>
                 </div>
                 <div class="science-grid">
                     <div class="science-text">
@@ -1187,8 +1200,7 @@
                             <li><strong>Progressive summarization</strong> (Tiago Forte) &mdash; Layer highlights on highlights. Each pass distills signal from noise. Your literature notes work the same way.</li>
                         </ul>
                         <h3>How Datacore learns: Engrams</h3>
-                        <p>Every session, Datacore observes your decisions, preferences, and corrections. It distills them into <strong>engrams</strong> &mdash; structured memory units inspired by neuroscience. Engrams are not chat history. They are compressed knowledge with activation thresholds, decay curves, and domain tags.</p>
-                        <p>You can also install community-contributed engram packs &mdash; curated knowledge for specific domains like writing, programming patterns, or research methodologies.</p>
+                        <p>Every session, Datacore observes your decisions, preferences, and corrections. It distills them into <strong>engrams</strong> &mdash; structured memory units. Engrams are not chat history. They are compressed knowledge with activation thresholds, decay curves, and domain tags. The system sharpens itself over time.</p>
                     </div>
                     <div>
                         <div class="engram-demo">
@@ -1214,8 +1226,32 @@
                         </div>
                     </div>
                 </div>
-                <div class="install-note">
-                    <p>The full learning pipeline, nightshift execution, and module ecosystem require the complete Datacore installation. <a href="https://github.com/datacore-one/datacore" target="_blank" rel="noopener">Get started on GitHub &rarr;</a></p>
+            </div>
+        </section>
+
+        <!-- Network -->
+        <section class="section section-with-bg" id="network">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Memory is the start. Here's where it goes.</h2>
+                    <p>As your AI learns, it unlocks new capabilities &mdash; and new value.</p>
+                </div>
+                <div class="diff-grid">
+                    <div class="diff-card">
+                        <span class="phase-status live">Live</span>
+                        <h3>Install the MCP server. AI stops forgetting.</h3>
+                        <p>Thirty seconds to install. Every session from that point builds on the last. Engrams persist your preferences and patterns. Works with any MCP-compatible AI tool.</p>
+                    </div>
+                    <div class="diff-card">
+                        <span class="phase-status building">Building</span>
+                        <h3>Gain access to the Intelligence Exchange.</h3>
+                        <p>When your agent reaches a knowledge threshold, it joins the peer network. Install community engram packs in one command. Contribute your proven patterns. What took months to learn transfers in seconds.</p>
+                    </div>
+                    <div class="diff-card">
+                        <span class="phase-status vision">Vision</span>
+                        <h3>Your AI earns for you.</h3>
+                        <p>High-value knowledge has economic value. When your agent contributes proven engrams to the network, it earns &mdash; automatically. The smarter your AI becomes, the more it generates. You own your agent's accumulated value.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1225,7 +1261,7 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Extend it</h2>
-                    <p>Modules for your domain. Open specifications for everything.</p>
+                    <p>Modules for your domain. Open specifications for everything. Build for yourself, share with the network.</p>
                 </div>
                 <div class="extend-grid">
                     <div class="extend-modules">
@@ -1259,7 +1295,7 @@
                     </div>
                     <div class="extend-governance">
                         <h3>Built on open specifications</h3>
-                        <p>A growing library of Datacore Improvement Proposals defines every system behavior. 4 privacy layers protect your data. Designed for community governance &mdash; and we're building that community now.</p>
+                        <p>A growing library of open specifications &mdash; Datacore Improvement Proposals (DIPs) &mdash; defines every system behavior. 4 privacy layers protect your data. Designed for community governance &mdash; and we're building that community now.</p>
                         <p>Every agent, every command, every workflow is documented, reviewable, and modifiable. Open source. Nothing is hidden. Nothing is proprietary.</p>
                         <p>
                             <a href="https://github.com/datacore-one/datacore-dips" target="_blank" rel="noopener">Read the DIPs &rarr;</a><br>
@@ -1273,11 +1309,12 @@
         <!-- Get Started -->
         <section class="cta" id="get-started">
             <div class="container">
-                <h2>Own your intelligence.</h2>
+                <h2>Start with memory. Scale to autonomous.</h2>
+                <p style="color: var(--text-secondary); margin-top: 8px; margin-bottom: 0;">Install the MCP server and your AI stops forgetting. Go further and it starts earning.</p>
                 <div class="cta-pathways">
                     <div class="cta-pathway">
-                        <h3>Get early access</h3>
-                        <p>No migration. No data import. Start a session, do your work. Datacore learns as you go.</p>
+                        <h3>Start with memory</h3>
+                        <p>MCP server install takes 30 seconds. No migration. No data import. Your next session will already be smarter than your last.</p>
                         <div class="waitlist-form">
                             <input type="email" placeholder="your@email.com" class="waitlist-input" data-waitlist-email>
                             <button class="btn btn-primary" data-waitlist-submit>Get Early Access</button>
@@ -1285,8 +1322,8 @@
                         <div class="waitlist-response" data-waitlist-response></div>
                     </div>
                     <div class="cta-pathway">
-                        <h3>Explore the code</h3>
-                        <p>Open source. Clone the repo. Read the specs. Build a module. Inspect, modify, and host it yourself.</p>
+                        <h3>Go further</h3>
+                        <p>Open source. Clone the repo. Read the DIPs (Datacore Improvement Proposals). Build a module and share it. Full system installation unlocks the network and nightshift execution.</p>
                         <a href="https://github.com/datacore-one/datacore" class="code-link" target="_blank" rel="noopener">View on GitHub &rarr;</a>
                     </div>
                 </div>
