@@ -727,26 +727,6 @@
             line-height: 1.6;
         }
 
-        .install-note {
-            text-align: center;
-            margin-top: 32px;
-            padding: 20px;
-            border: 1px dashed var(--border);
-            border-radius: 12px;
-        }
-
-        .install-note p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .install-note a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .install-note a:hover { text-decoration: underline; }
-
         /* Extend It section */
         .extend-grid {
             display: grid;
@@ -814,6 +794,12 @@
             font-size: 2rem;
             font-weight: 600;
             margin-bottom: 8px;
+        }
+
+        .cta-subtext {
+            color: var(--text-secondary);
+            margin-top: 8px;
+            margin-bottom: 0;
         }
 
         .cta-pathways {
@@ -1230,7 +1216,7 @@
         </section>
 
         <!-- Network -->
-        <section class="section section-with-bg" id="network">
+        <section class="section" id="network">
             <div class="container">
                 <div class="section-header">
                     <h2>Memory is the start. Here's where it goes.</h2>
@@ -1310,7 +1296,7 @@
         <section class="cta" id="get-started">
             <div class="container">
                 <h2>Start with memory. Scale to autonomous.</h2>
-                <p style="color: var(--text-secondary); margin-top: 8px; margin-bottom: 0;">Install the MCP server and your AI stops forgetting. Go further and it starts earning.</p>
+                <p class="cta-subtext">Install the MCP server and your AI stops forgetting. Go further and it starts earning.</p>
                 <div class="cta-pathways">
                     <div class="cta-pathway">
                         <h3>Start with memory</h3>
