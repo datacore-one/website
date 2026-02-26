@@ -28,7 +28,7 @@ The current features.html fails to tell this story. It's a feature dump: 99 agen
 Immediately after the hero. This is the single element people screenshot and share. Full width, visually dominant.
 
 **Left panel (muted/grey):** Generic AI chat bubble: "Hi! How can I help you today?"
-**Right panel (vibrant/accent):** Datacore session: "Good morning. Your board deck is priority - I've drafted 3 slides based on yesterday's token economics work."
+**Right panel (vibrant/accent):** Datacore session: "Good morning. Your board deck is priority - I've drafted 3 slides based on yesterday's pricing strategy work."
 
 This is the Purple Cow. The contrast is visceral, not explained. On mobile, this becomes a tap-to-toggle interaction: tap to flip between the two states, preserving the simultaneous comparison that makes it powerful.
 
@@ -40,9 +40,9 @@ Alternating text+terminal mockup pairs. Every annotation focuses on what YOU ach
 
 Terminal: `/today` — **HERO-SIZED** (full-width, largest element on page)
 ```
-Overnight: Research on Filecoin vs Arweave complete. Draft blog ready.
+Overnight: Competitive analysis complete. Draft blog ready.
 Priority: Board deck (Thursday). 3 key slides need your decision.
-From yesterday: Your token economics insight → ready to cite.
+From yesterday: Your pricing strategy insight → ready to cite.
 ```
 The emotional payoff. You slept, and your work moved forward. This terminal is the centerpiece of the entire page.
 
