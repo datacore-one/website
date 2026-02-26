@@ -641,6 +641,13 @@
         .phase-status.live { background: rgba(16,185,129,0.15); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
         .phase-status.building { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
         .phase-status.vision { background: rgba(59,130,246,0.15); color: var(--accent); border: 1px solid rgba(59,130,246,0.3); }
+        .phase-status.live .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
 
         /* How It Learns section */
         .science-grid {
@@ -1224,7 +1231,7 @@
                 </div>
                 <div class="diff-grid">
                     <div class="diff-card">
-                        <span class="phase-status live">Live</span>
+                        <span class="phase-status live"><span class="status-dot"></span> Live</span>
                         <h3>Install the MCP server. AI stops forgetting.</h3>
                         <p>Thirty seconds to install. Every session from that point builds on the last. Engrams persist your preferences and patterns. Works with any MCP-compatible AI tool.</p>
                     </div>
