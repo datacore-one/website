@@ -84,7 +84,7 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.45;
         }
 
         /* Navigation */
@@ -604,6 +604,111 @@
 
         .diff-link a:hover { color: var(--accent); }
 
+        /* How It Learns section */
+        .science-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .science-text h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .science-text p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .methodology-list {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .methodology-list li {
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .methodology-list li:last-child { border-bottom: none; }
+
+        .methodology-list strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .engram-demo {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .engram-demo h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+
+        .engram-example {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
+            line-height: 1.6;
+            color: #c9d1d9;
+            margin-bottom: 16px;
+        }
+
+        [data-theme="light"] .engram-example {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .engram-example .key { color: #7ee787; }
+        .engram-example .value { color: #c9d1d9; }
+        .engram-example .comment { color: #6e7681; }
+
+        .engram-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .install-note {
+            text-align: center;
+            margin-top: 32px;
+            padding: 20px;
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+        }
+
+        .install-note p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .install-note a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .install-note a:hover { text-decoration: underline; }
+
         /* Extend It section */
         .extend-grid {
             display: grid;
@@ -821,6 +926,8 @@
 
             .diff-grid { grid-template-columns: 1fr; }
 
+            .science-grid { grid-template-columns: 1fr; }
+
             .extend-grid { grid-template-columns: 1fr; }
 
             .cta-pathways { grid-template-columns: 1fr; }
@@ -863,6 +970,7 @@
         <a href="#hero">Top</a>
         <a href="#workflow">Workflow</a>
         <a href="#different">Different</a>
+        <a href="#how-it-learns">Science</a>
         <a href="#extend">Extend</a>
         <a href="#get-started">Start</a>
     </nav>
@@ -874,7 +982,7 @@
             <div class="container">
                 <p class="hero-category">AI second brain</p>
                 <h1>Every AI session starts from zero.<br>This one doesn't.</h1>
-                <p class="subtitle">Datacore remembers everything. So your AI never starts from zero.</p>
+                <p class="subtitle">Datacore remembers. So your AI never starts from zero.</p>
             </div>
         </section>
 
@@ -938,8 +1046,8 @@
                 <!-- Midday -->
                 <div class="workflow-step reverse">
                     <div class="workflow-annotation">
-                        <h3>Seven things in your inbox. Two minutes later, zero.</h3>
-                        <p>You make the quick decisions. The system handles the routing. What's the next action? Where does it go? Done.</p>
+                        <h3>142 emails. 38 tasks. 7 that actually need you. Two minutes later, zero.</h3>
+                        <p>Datacore processes the noise, surfaces what matters, and asks the only question that counts: what's the next action?</p>
                     </div>
                     <div class="terminal-window terminal-standard">
                         <div class="terminal-header">
@@ -949,8 +1057,9 @@
                             <span class="terminal-title">process inbox</span>
                         </div>
                         <div class="terminal-body">
+                            <span class="muted">142 emails scanned. 38 tasks extracted. 7 need your decision.</span><br>
                             <span class="prompt">&rarr;</span> "Review investor deck" <span class="muted">&mdash; next action?</span> <span class="highlight">"Draft 3 key slides"</span><br>
-                            <span class="prompt">&rarr;</span> "Check staking rates" <span class="muted">&mdash;</span> tagged <span class="success">:AI:research:</span> for tonight<br>
+                            <span class="prompt">&rarr;</span> "Quarterly report feedback" <span class="muted">&mdash;</span> tagged <span class="success">:AI:research:</span> for tonight<br>
                             <span class="muted">5 more routed.</span> <span class="success">Inbox clear.</span>
                         </div>
                     </div>
@@ -1029,8 +1138,58 @@
             </div>
         </section>
 
+        <!-- How It Learns -->
+        <section class="section section-with-bg" id="how-it-learns">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Built on proven science. Not hype.</h2>
+                    <p>Datacore combines decades of cognitive science, knowledge management research, and productivity methodology into a system that actually works.</p>
+                </div>
+                <div class="science-grid">
+                    <div class="science-text">
+                        <h3>Standing on the shoulders of giants</h3>
+                        <ul class="methodology-list">
+                            <li><strong>GTD</strong> (David Allen) &mdash; Capture everything, clarify next actions, review weekly. The system that frees your mind from open loops.</li>
+                            <li><strong>Zettelkasten</strong> (Niklas Luhmann) &mdash; Atomic notes linked by meaning, not hierarchy. 70,000 notes became 70 books. Your knowledge connects the same way.</li>
+                            <li><strong>Spaced repetition</strong> &mdash; Memory research shows that knowledge decays without reinforcement. Engrams surface at the right moment, strengthening what matters.</li>
+                            <li><strong>Progressive summarization</strong> (Tiago Forte) &mdash; Layer highlights on highlights. Each pass distills signal from noise. Your literature notes work the same way.</li>
+                        </ul>
+                        <h3>How Datacore learns: Engrams</h3>
+                        <p>Every session, Datacore observes your decisions, preferences, and corrections. It distills them into <strong>engrams</strong> &mdash; structured memory units inspired by neuroscience. Engrams are not chat history. They are compressed knowledge with activation thresholds, decay curves, and domain tags.</p>
+                        <p>You can also install community-contributed engram packs &mdash; curated knowledge for specific domains like writing, programming patterns, or research methodologies.</p>
+                    </div>
+                    <div>
+                        <div class="engram-demo">
+                            <h4>Example engram</h4>
+                            <div class="engram-example">
+                                <span class="comment"># Learned after 3 sessions</span><br>
+                                <span class="key">statement:</span> <span class="value">"User prefers bullet points over</span><br>
+                                <span class="value">&nbsp;&nbsp;paragraphs for research output"</span><br>
+                                <span class="key">type:</span> <span class="value">behavioral</span><br>
+                                <span class="key">domain:</span> <span class="value">research.formatting</span><br>
+                                <span class="key">activation:</span> <span class="value">0.89</span><br>
+                                <span class="key">source:</span> <span class="value">3 corrections across sessions</span>
+                            </div>
+                            <div class="engram-example">
+                                <span class="comment"># Installed from community pack</span><br>
+                                <span class="key">statement:</span> <span class="value">"When writing docs, lead with</span><br>
+                                <span class="value">&nbsp;&nbsp;the outcome, not the process"</span><br>
+                                <span class="key">type:</span> <span class="value">procedural</span><br>
+                                <span class="key">domain:</span> <span class="value">writing.documentation</span><br>
+                                <span class="key">pack:</span> <span class="value">technical-writing-v1</span>
+                            </div>
+                            <p class="engram-note">Engrams decay over time unless reinforced. High-activation engrams surface automatically. Low-activation ones are retired. The system sharpens itself.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="install-note">
+                    <p>The full learning pipeline, nightshift execution, and module ecosystem require the complete Datacore installation. <a href="https://github.com/datacore-one/datacore" target="_blank" rel="noopener">Get started on GitHub &rarr;</a></p>
+                </div>
+            </div>
+        </section>
+
         <!-- Extend It -->
-        <section class="section section-with-bg" id="extend">
+        <section class="section" id="extend">
             <div class="container">
                 <div class="section-header">
                     <h2>Extend it</h2>
@@ -1045,6 +1204,7 @@
                                 <li><strong>Mail</strong> &mdash; classify and prioritize</li>
                                 <li><strong>CRM</strong> &mdash; track relationship health</li>
                                 <li><strong>Campaigns</strong> &mdash; plan, execute, measure</li>
+                                <li><strong>Slides</strong> &mdash; generate presentations from context</li>
                             </ul>
                         </div>
                         <div class="module-category">
@@ -1063,7 +1223,7 @@
                                 <li><strong>Finance</strong> &mdash; portfolio tracking</li>
                             </ul>
                         </div>
-                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">11 of 23+ modules shown</p>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">12 of 23+ modules shown</p>
                     </div>
                     <div class="extend-governance">
                         <h3>Built on open specifications</h3>
