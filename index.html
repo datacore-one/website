@@ -60,11 +60,7 @@
             --section-bg: rgba(240, 247, 255, 0.5);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -89,7 +85,6 @@
             background: transparent;
         }
 
-
         nav .container {
             display: flex;
             justify-content: space-between;
@@ -105,9 +100,7 @@
             text-decoration: none;
         }
 
-        .logo span {
-            color: var(--accent);
-        }
+        .logo span { color: var(--accent); }
 
         .nav-links {
             display: flex;
@@ -122,9 +115,7 @@
             transition: color 0.2s;
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
+        .nav-links a:hover { color: var(--text-primary); }
 
         .btn {
             display: inline-flex;
@@ -220,25 +211,10 @@
             transition: opacity 0.3s, transform 0.3s;
         }
 
-        .theme-toggle .icon-sun {
-            opacity: 0;
-            transform: rotate(-90deg);
-        }
-
-        .theme-toggle .icon-moon {
-            opacity: 1;
-            transform: rotate(0deg);
-        }
-
-        [data-theme="light"] .theme-toggle .icon-sun {
-            opacity: 1;
-            transform: rotate(0deg);
-        }
-
-        [data-theme="light"] .theme-toggle .icon-moon {
-            opacity: 0;
-            transform: rotate(90deg);
-        }
+        .theme-toggle .icon-sun { opacity: 0; transform: rotate(-90deg); }
+        .theme-toggle .icon-moon { opacity: 1; transform: rotate(0deg); }
+        [data-theme="light"] .theme-toggle .icon-sun { opacity: 1; transform: rotate(0deg); }
+        [data-theme="light"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(90deg); }
 
         /* Hero Section */
         .hero {
@@ -248,6 +224,7 @@
             padding-top: 64px;
             position: relative;
             overflow: hidden;
+            background: transparent;
         }
 
         #canvas-container {
@@ -264,123 +241,6 @@
             display: block;
             width: 100%;
             height: 100%;
-        }
-
-        /* Make sections transparent so geometry shows through */
-        .hero {
-            background: transparent;
-        }
-
-        /* Graphic showcase - fully transparent to show geometry */
-        .graphic-showcase {
-            background: transparent !important;
-            min-height: 100vh;
-            padding-top: 80px; /* Account for fixed header */
-            padding-bottom: 80px; /* Space before footer */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .data-quote {
-            position: absolute;
-            bottom: 120px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            max-width: 600px;
-            padding: 0 24px;
-        }
-
-        .data-quote .quote-text {
-            font-style: italic;
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        .data-quote .quote-attribution {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--accent);
-            opacity: 0.7;
-        }
-
-        .stardate {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--accent);
-            opacity: 0.7;
-        }
-
-        .data-sign-off {
-            font-style: italic;
-            color: var(--text-muted);
-        }
-
-        .data-sign-off em {
-            color: var(--accent);
-            opacity: 0.7;
-        }
-
-        /* CTA semi-transparent so geometry shows through */
-        .cta {
-            background: var(--card-bg) !important;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        footer {
-            background: transparent;
-            position: relative;
-            z-index: 2;
-            padding: 16px 0;
-            text-align: center;
-        }
-
-        footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: var(--text-primary);
-        }
-
-        .footer-tagline {
-            font-style: italic;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 8px;
-            opacity: 0.7;
-        }
-
-        .footer-powered {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent);
-            opacity: 0.5;
-            margin-top: 8px;
-        }
-
-        .footer-line {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .footer-line a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer-line a:hover {
-            color: var(--text-primary);
         }
 
         .hero-content {
@@ -455,16 +315,14 @@
             flex-wrap: wrap;
         }
 
-        /* Features Section */
+        /* Sections */
         .section {
             padding: 120px 0;
             position: relative;
             z-index: 2;
         }
 
-        #ladder,
-        #install,
-        #philosophy {
+        .section-opaque {
             background: var(--section-bg);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
@@ -489,182 +347,172 @@
             margin: 0 auto;
         }
 
-        .features-grid {
+        /* Before / After */
+        .before-after {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .feature-card {
+        .before-card, .after-card {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 32px;
-            transition: all 0.3s;
         }
 
-        .feature-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
+        .before-card {
+            border-top: 3px solid var(--text-muted);
         }
 
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--bg-tertiary);
+        .after-card {
+            border-top: 3px solid var(--accent);
+        }
+
+        .before-card .card-label,
+        .after-card .card-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .before-card .card-label { color: var(--text-muted); }
+        .after-card .card-label { color: var(--accent); }
+
+        .before-card p, .after-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .after-card p { color: var(--text-primary); }
+
+        /* Terminal Mockups */
+        .workflow-steps {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 64px;
+        }
+
+        .workflow-step {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .workflow-step h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .workflow-step > p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 600px;
+        }
+
+        .terminal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
             border-radius: 12px;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .terminal-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            gap: 8px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .feature-card h3 {
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+
+        .terminal-title {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            color: var(--text-secondary);
+        }
+
+        .terminal-body .prompt {
+            color: var(--success);
+        }
+
+        .terminal-body .command {
+            color: var(--text-primary);
+        }
+
+        .terminal-body .output {
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .terminal-body .highlight-line {
+            color: var(--accent);
+        }
+
+        .terminal-body .dim {
+            color: var(--text-muted);
+        }
+
+        /* Differentiators */
+        .differentiators {
+            display: flex;
+            flex-direction: column;
+            gap: 64px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .differentiator {
+            display: flex;
+            gap: 24px;
+        }
+
+        .differentiator-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            opacity: 0.5;
+            flex-shrink: 0;
+            padding-top: 4px;
+        }
+
+        .differentiator h3 {
             font-size: 1.25rem;
             font-weight: 500;
             margin-bottom: 12px;
         }
 
-        .feature-card p {
+        .differentiator p {
             color: var(--text-secondary);
             font-size: 0.95rem;
-        }
-
-
-        /* Philosophy Section */
-        .philosophy {
-            text-align: center;
-        }
-
-        .philosophy-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .philosophy-content p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 24px;
-        }
-
-        .philosophy-content p:last-child {
-            margin-bottom: 0;
-        }
-
-        .philosophy-content strong {
-            color: var(--accent);
-        }
-
-        .philosophy-content a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .philosophy-content a:hover {
-            text-decoration: underline;
-        }
-
-
-        /* CTA Section */
-        .cta {
-            text-align: center;
-            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-        }
-
-        .cta h2 {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
-            font-weight: 300;
-            margin-bottom: 16px;
-            letter-spacing: -0.01em;
-        }
-
-        .cta p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .waitlist-form {
-            display: flex;
-            gap: 0;
-            max-width: 440px;
-            margin: 0 auto;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .waitlist-form:focus-within {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .waitlist-input {
-            flex: 1;
-            padding: 14px 18px;
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            outline: none;
-            min-width: 0;
-        }
-
-        .waitlist-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .waitlist-form .btn-primary {
-            border: none;
-            border-left: 1px solid var(--border);
-            border-radius: 0;
-            padding: 14px 24px;
-            white-space: nowrap;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 0.01em;
-        }
-
-        .waitlist-form .btn-primary:hover {
-            box-shadow: none;
-        }
-
-        .waitlist-response {
-            margin-top: 12px;
-            font-size: 0.85rem;
-            min-height: 1.2em;
-            text-align: center;
-        }
-
-        .waitlist-response.success {
-            color: var(--success);
-        }
-
-        .waitlist-response.error {
-            color: #ef4444;
-        }
-
-        #hero-waitlist-form {
-            margin: 0;
-        }
-
-
-        /* Footer styles consolidated above (lines 216-240) */
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+            line-height: 1.7;
         }
 
         /* Network Roadmap */
@@ -673,10 +521,6 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 32px;
             position: relative;
-        }
-
-        .network-phase h3 {
-            min-height: 3.5rem;
         }
 
         .network-phase {
@@ -694,20 +538,12 @@
             transition: all 0.3s;
         }
 
-        /* Phase-specific colored top borders */
-        .network-phase:nth-child(1) {
-            border-top: 3px solid var(--success);
-        }
+        .network-phase h3 { min-height: 3.5rem; }
 
-        .network-phase:nth-child(2) {
-            border-top: 3px solid #8b5cf6;
-        }
+        .network-phase:nth-child(1) { border-top: 3px solid var(--success); }
+        .network-phase:nth-child(2) { border-top: 3px solid #8b5cf6; }
+        .network-phase:nth-child(3) { border-top: 3px solid var(--accent); }
 
-        .network-phase:nth-child(3) {
-            border-top: 3px solid var(--accent);
-        }
-
-        /* Phase-specific hover glow effects */
         .network-phase:nth-child(1):hover {
             box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
             border-color: rgba(16, 185, 129, 0.3);
@@ -729,7 +565,6 @@
             transform: translateY(-4px);
         }
 
-        /* Connecting arrows between cards */
         .network-phase:not(:last-child)::after {
             content: '\2192';
             position: absolute;
@@ -814,12 +649,66 @@
             margin-top: 8px;
         }
 
-        /* Works With Section */
-        .integrations-grid {
+        /* Modules */
+        .modules-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .module-group h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .module-group ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .module-group li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .module-group li:last-child { border-bottom: none; }
+
+        .module-group .module-desc {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .modules-footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .modules-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .modules-footer a:hover { text-decoration: underline; }
+
+        /* Works With */
+        .integrations-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 24px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -852,31 +741,10 @@
 
         .integration-card p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        /* Distinction Section */
-        .distinction-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .distinction-content .pull-quote {
-            font-size: 1.5rem;
-            font-weight: 300;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-            line-height: 1.4;
-        }
-
-        .distinction-content p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
-
-        /* Install block */
+        /* Install */
         .install-block {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -884,140 +752,270 @@
             padding: 24px 32px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
-            max-width: 500px;
-            margin: 32px auto 0;
+            max-width: 600px;
+            margin: 0 auto 32px;
             text-align: left;
         }
 
-        .install-block .line {
-            margin-bottom: 4px;
-        }
+        .install-block .line { margin-bottom: 4px; }
+        .install-block .comment { color: var(--text-muted); }
+        .install-block .command { color: var(--success); }
 
-        .install-block .comment {
-            color: var(--text-muted);
-        }
+        /* Philosophy */
+        .philosophy { text-align: center; }
 
-        .install-block .command {
-            color: var(--success);
-        }
-
-        /* Install Modes */
-        .install-modes-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
-            max-width: 900px;
+        .philosophy-content {
+            max-width: 700px;
             margin: 0 auto;
         }
 
-        .install-mode-card {
-            background: var(--card-bg);
+        .philosophy-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .philosophy-content p:last-child { margin-bottom: 0; }
+        .philosophy-content strong { color: var(--accent); }
+
+        .philosophy-content a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .philosophy-content a:hover { text-decoration: underline; }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            background: var(--card-bg) !important;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 32px;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s;
         }
 
-        .install-mode-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
+        .cta h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 300;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
         }
 
-        .install-mode-card.install-mode-full {
-            border-top: 3px solid var(--accent);
+        .cta p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .install-mode-badge {
+        /* Enterprise */
+        .enterprise {
+            text-align: center;
+        }
+
+        .enterprise-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .enterprise-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .enterprise-badge {
             display: inline-flex;
-            align-self: flex-start;
-            padding: 4px 12px;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
             border-radius: 100px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            margin-bottom: 16px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
         }
 
-        .install-mode-badge.full {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--accent);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+        .enterprise-cta {
+            margin-top: 32px;
         }
 
-        .install-mode-card h3 {
-            font-size: 1.25rem;
+        /* Waitlist Form */
+        .waitlist-form {
+            display: flex;
+            gap: 0;
+            max-width: 440px;
+            margin: 0 auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .waitlist-form:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .waitlist-input {
+            flex: 1;
+            padding: 14px 18px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            min-width: 0;
+        }
+
+        .waitlist-input::placeholder { color: var(--text-muted); }
+
+        .waitlist-form .btn-primary {
+            border: none;
+            border-left: 1px solid var(--border);
+            border-radius: 0;
+            padding: 14px 24px;
+            white-space: nowrap;
+            font-size: 0.9rem;
             font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+
+        .waitlist-form .btn-primary:hover { box-shadow: none; }
+
+        .waitlist-response {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            min-height: 1.2em;
+            text-align: center;
+        }
+
+        .waitlist-response.success { color: var(--success); }
+        .waitlist-response.error { color: #ef4444; }
+
+        #hero-waitlist-form { margin: 0; }
+
+        /* Footer */
+        footer {
+            background: transparent;
+            position: relative;
+            z-index: 2;
+            padding: 16px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        footer a:hover { color: var(--text-primary); }
+
+        .footer-tagline {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        .footer-powered {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            opacity: 0.5;
+            margin-top: 8px;
+        }
+
+        .footer-line {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .footer-line a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer-line a:hover { color: var(--text-primary); }
+
+        /* Graphic showcase for easter egg */
+        .graphic-showcase {
+            background: transparent !important;
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        .data-quote {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            max-width: 600px;
+            padding: 0 24px;
+        }
+
+        .data-quote .quote-text {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
             margin-bottom: 12px;
         }
 
-        .install-mode-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 16px;
+        .data-quote .quote-attribution {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            opacity: 0.7;
         }
 
-        .install-mode-features {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 24px 0;
-            flex-grow: 1;
+        .stardate {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            opacity: 0.7;
         }
 
-        .install-mode-features li {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            padding: 6px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .install-mode-features li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 12px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--success);
-        }
-
-        .install-mode-card.install-mode-full .install-mode-features li::before {
-            background: var(--accent);
-        }
-
-        .install-mode-best-for {
-            font-size: 0.8rem;
+        .data-sign-off {
+            font-style: italic;
             color: var(--text-muted);
-            margin: 0 0 20px 0;
-            padding-top: 14px;
-            border-top: 1px solid var(--border);
         }
 
-        .install-mode-best-for strong {
-            color: var(--text-secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.06em;
+        .data-sign-off em {
+            color: var(--accent);
+            opacity: 0.7;
         }
 
-        .install-mode-card .install-block {
-            margin: 0;
-            max-width: none;
-        }
-
-        /* Responsive: roadmap */
+        /* Responsive */
         @media (max-width: 768px) {
+            .nav-links { display: none; }
+
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+
             .network-phases {
                 grid-template-columns: 1fr;
             }
@@ -1031,12 +1029,12 @@
                 height: 100px;
             }
 
-            .integrations-grid {
+            .modules-grid {
                 grid-template-columns: 1fr;
             }
 
-            .install-modes-grid {
-                grid-template-columns: 1fr;
+            .integrations-grid {
+                grid-template-columns: 1fr 1fr;
             }
 
             .waitlist-form {
@@ -1062,11 +1060,11 @@
         <div class="container">
             <a href="#" class="logo">data<span>core</span></a>
             <div class="nav-links">
-                <a href="features.html">Features</a>
-                <a href="#ladder">How It Works</a>
-                <a href="#install">Install</a>
+                <a href="#workflow">How It Works</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="#modules">Modules</a>
                 <a href="#philosophy">Philosophy</a>
-                <a href="#waitlist" class="btn btn-primary">Get Early Access</a>
+                <a href="#install" class="btn btn-primary">Get Early Access</a>
             </div>
         </div>
     </nav>
@@ -1075,16 +1073,17 @@
         <canvas id="neural-canvas"></canvas>
     </div>
 
+    <!-- HERO -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="dot"></span>
-                    Open source & local-first
+                    Open source &middot; Local-first
                 </div>
                 <h1>Own your <span class="highlight">intelligence</span>.</h1>
                 <p class="subtitle">
-                    Your AI forgets everything after every session. Datacore fixes that — in 30 seconds. Install it once, and every session from now on builds on the last.
+                    Not a chatbot you talk to &mdash; a mind you think with. Datacore captures what you learn, organizes what you know, executes while you sleep, and briefs you in the morning.
                 </p>
                 <div class="tagline">
                     > Tag tasks before bed. Wake up to completed work.
@@ -1098,57 +1097,224 @@
         </div>
     </section>
 
-    <section class="section" id="ladder">
+    <!-- BEFORE / AFTER -->
+    <section class="section section-opaque" id="before-after">
         <div class="container">
             <div class="section-header">
-                <h2>Start with memory. Scale to collective intelligence.</h2>
-                <p>Each step unlocks the next. You choose how far to go.</p>
+                <h2>Every AI session starts from zero. This one doesn't.</h2>
+            </div>
+            <div class="before-after">
+                <div class="before-card">
+                    <div class="card-label">Every other AI tool</div>
+                    <p>Hi! How can I help you today?</p>
+                    <p style="margin-top: 12px;">Starting from zero. Again. You explain your project, your preferences, your context. Every. Single. Session.</p>
+                </div>
+                <div class="after-card">
+                    <div class="card-label">With Datacore</div>
+                    <p>Good morning. Your board deck is priority &mdash; I've drafted 3 slides based on yesterday's strategy work. The competitive research you requested is ready.</p>
+                    <p style="margin-top: 12px;">It knows your work. Because it was here yesterday.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- A DAY WITH DATACORE -->
+    <section class="section" id="workflow">
+        <div class="container">
+            <div class="section-header">
+                <h2>A day with Datacore</h2>
+                <p>Your AI works when you work. And when you sleep.</p>
+            </div>
+            <div class="workflow-steps">
+
+                <div class="workflow-step">
+                    <h3>You sit down with coffee. In 10 seconds, you know exactly what matters today.</h3>
+                    <p>Your overnight work is done. Your priorities are surfaced. Your calendar is accounted for. Your Oura ring says you slept 5 hours &mdash; so the schedule adapts. You make decisions, not to-do lists.</p>
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                            <span class="terminal-title">claude</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div><span class="prompt">$</span> <span class="command">/today</span></div>
+                            <div class="output">
+                                <div class="highlight-line">Overnight: Competitive analysis complete. Draft blog ready.</div>
+                                <div>Priority: Board deck (Thursday). 3 key slides need your decision.</div>
+                                <div style="margin-top: 8px;">Oura: 5h12m sleep, HRV 38 (below baseline). Readiness 61.</div>
+                                <div class="highlight-line">&rarr; Light day recommended. Deep work moved to tomorrow.</div>
+                                <div class="dim">From yesterday: Your pricing strategy insight &rarr; zettel, ready to cite.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <h3>142 emails. 38 tasks. 7 that actually need you.</h3>
+                    <p>Datacore processes the noise, surfaces what matters, and asks the only question that counts: what's the next action?</p>
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                            <span class="terminal-title">claude</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div><span class="prompt">$</span> <span class="command">process inbox</span></div>
+                            <div class="output">
+                                <div>142 emails scanned. 38 tasks extracted. <span class="highlight-line">7 need your decision.</span></div>
+                                <div>&rarr; "Review investor deck" &mdash; next action? <span class="dim">"Draft 3 key slides"</span></div>
+                                <div>&rarr; "Quarterly report feedback" &mdash; queued for overnight research</div>
+                                <div class="dim">5 more routed. Inbox clear.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <h3>Everything you learned today is captured. Without you doing anything.</h3>
+                    <p>Your preferences, your insights, your decisions &mdash; all recorded as structured knowledge that makes tomorrow's session smarter than today's.</p>
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                            <span class="terminal-title">claude</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div><span class="prompt">$</span> <span class="command">/wrap-up</span></div>
+                            <div class="output">
+                                <div>Journal updated. 2 patterns learned. 1 zettel created.</div>
+                                <div class="highlight-line">Tomorrow you'll remember what today's you figured out.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <h3>Tag it. Sleep. Wake up to finished work.</h3>
+                    <p>Research, writing, analysis &mdash; queued and executed overnight. Each output reviewed by 20 evaluator personas before it reaches you.</p>
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                            <span class="terminal-title">claude</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div><span class="prompt">$</span> <span class="command">/tomorrow</span></div>
+                            <div class="output">
+                                <div>4 tasks queued for overnight execution.</div>
+                                <div class="dim">Each reviewed by 20 evaluator personas before delivery.</div>
+                                <div class="highlight-line">Results in tomorrow's /today briefing.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- THREE DIFFERENTIATORS -->
+    <section class="section section-opaque" id="differentiators">
+        <div class="container">
+            <div class="section-header">
+                <h2>Three things that make Datacore different.</h2>
+            </div>
+            <div class="differentiators">
+                <div class="differentiator">
+                    <span class="differentiator-number">01</span>
+                    <div>
+                        <h3>You explain your project once.</h3>
+                        <p>A month later, your AI surfaces that exact insight in the meeting where you need it. Not because it has a chat history &mdash; because it learned your preferences, your project context, your communication style as structured knowledge that compounds with every session.</p>
+                    </div>
+                </div>
+                <div class="differentiator">
+                    <span class="differentiator-number">02</span>
+                    <div>
+                        <h3>You tag a task. You go to sleep. You wake up to finished work.</h3>
+                        <p>Research, writing, analysis done overnight. Each output reviewed by 20 evaluator personas &mdash; Hemingway checks clarity, Feynman checks first principles. Quality work, not hallucinations.</p>
+                    </div>
+                </div>
+                <div class="differentiator">
+                    <span class="differentiator-number">03</span>
+                    <div>
+                        <h3>Standing on the shoulders of giants.</h3>
+                        <p>Built on decades of proven methodology. GTD (David Allen) for task flow. Zettelkasten (Niklas Luhmann) for knowledge that connects. Spaced repetition for memory that sharpens. Not invented from scratch &mdash; assembled from what works.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="section" id="roadmap">
+        <div class="container">
+            <div class="section-header">
+                <h2>Where this goes.</h2>
+                <p>From extended mind to autonomous business to a network of businesses.</p>
             </div>
             <div class="network-phases">
                 <div class="network-phase">
                     <div class="phase-visual">
                         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Single mind: brain/node radiating -->
                             <circle cx="60" cy="60" r="8" fill="rgba(59, 130, 246, 0.3)" stroke="rgba(59, 130, 246, 0.6)" stroke-width="1.5">
                                 <animate attributeName="r" values="8;12;8" dur="3s" repeatCount="indefinite"/>
                                 <animate attributeName="opacity" values="1;0.6;1" dur="3s" repeatCount="indefinite"/>
                             </circle>
                             <circle cx="60" cy="60" r="3" fill="rgba(59, 130, 246, 0.9)"/>
-                            <circle cx="60" cy="60" r="30" stroke="rgba(59, 130, 246, 0.15)" stroke-width="1" fill="none"/>
+                            <!-- Radiating knowledge lines -->
+                            <line x1="60" y1="48" x2="60" y2="30" stroke="rgba(59, 130, 246, 0.2)" stroke-width="1"/>
+                            <line x1="60" y1="72" x2="60" y2="90" stroke="rgba(59, 130, 246, 0.2)" stroke-width="1"/>
+                            <line x1="48" y1="60" x2="30" y2="60" stroke="rgba(59, 130, 246, 0.2)" stroke-width="1"/>
+                            <line x1="72" y1="60" x2="90" y2="60" stroke="rgba(59, 130, 246, 0.2)" stroke-width="1"/>
+                            <line x1="51" y1="51" x2="38" y2="38" stroke="rgba(59, 130, 246, 0.15)" stroke-width="1"/>
+                            <line x1="69" y1="51" x2="82" y2="38" stroke="rgba(59, 130, 246, 0.15)" stroke-width="1"/>
+                            <line x1="51" y1="69" x2="38" y2="82" stroke="rgba(59, 130, 246, 0.15)" stroke-width="1"/>
+                            <line x1="69" y1="69" x2="82" y2="82" stroke="rgba(59, 130, 246, 0.15)" stroke-width="1"/>
+                            <circle cx="60" cy="60" r="30" stroke="rgba(59, 130, 246, 0.1)" stroke-width="1" fill="none"/>
                         </svg>
                         <span class="phase-status live"><span class="status-dot"></span> Live</span>
                     </div>
                     <div class="phase-content">
-                        <h3>Your AI remembers.</h3>
-                        <p>Install the MCP server and AI stops forgetting. Engrams — structured memory units — persist your preferences, patterns, and corrections across every session. Bad ones decay. Good ones compound. Works with Claude Code, Cursor, Windsurf, and any MCP-compatible tool.</p>
-                        <div class="phase-quote">One install. Every session builds on the last.</div>
+                        <h3>Your extended mind.</h3>
+                        <p>AI that augments how you think, work, and decide. GTD captures and organizes. Zettelkasten connects your knowledge. Agents execute your tasks. PLUR remembers across sessions. You gain superpowers &mdash; not another tool to manage.</p>
+                        <div class="phase-quote">Think bigger. Datacore handles the rest.</div>
                     </div>
                 </div>
                 <div class="network-phase">
                     <div class="phase-visual">
                         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="60" cy="60" r="5" fill="rgba(59, 130, 246, 0.8)"/>
-                            <circle cx="30" cy="40" r="3.5" fill="rgba(59, 130, 246, 0.5)"/>
-                            <circle cx="90" cy="45" r="3.5" fill="rgba(59, 130, 246, 0.5)"/>
-                            <circle cx="40" cy="85" r="3.5" fill="rgba(59, 130, 246, 0.5)"/>
-                            <circle cx="85" cy="80" r="3.5" fill="rgba(59, 130, 246, 0.5)"/>
-                            <line x1="60" y1="60" x2="30" y2="40" stroke="rgba(59, 130, 246, 0.25)" stroke-width="1"/>
-                            <line x1="60" y1="60" x2="90" y2="45" stroke="rgba(59, 130, 246, 0.25)" stroke-width="1"/>
-                            <line x1="60" y1="60" x2="40" y2="85" stroke="rgba(59, 130, 246, 0.25)" stroke-width="1"/>
-                            <line x1="60" y1="60" x2="85" y2="80" stroke="rgba(59, 130, 246, 0.25)" stroke-width="1"/>
-                            <line x1="30" y1="40" x2="90" y2="45" stroke="rgba(59, 130, 246, 0.12)" stroke-width="1" stroke-dasharray="3 3"/>
-                            <line x1="40" y1="85" x2="85" y2="80" stroke="rgba(59, 130, 246, 0.12)" stroke-width="1" stroke-dasharray="3 3"/>
+                            <!-- Autonomous business: multiple agents working -->
+                            <circle cx="60" cy="35" r="5" fill="rgba(59, 130, 246, 0.7)"/>
+                            <circle cx="35" cy="65" r="4" fill="rgba(59, 130, 246, 0.5)"/>
+                            <circle cx="60" cy="80" r="4" fill="rgba(59, 130, 246, 0.5)"/>
+                            <circle cx="85" cy="65" r="4" fill="rgba(59, 130, 246, 0.5)"/>
+                            <!-- Connecting lines -->
+                            <line x1="60" y1="35" x2="35" y2="65" stroke="rgba(59, 130, 246, 0.3)" stroke-width="1"/>
+                            <line x1="60" y1="35" x2="85" y2="65" stroke="rgba(59, 130, 246, 0.3)" stroke-width="1"/>
+                            <line x1="60" y1="35" x2="60" y2="80" stroke="rgba(59, 130, 246, 0.3)" stroke-width="1"/>
+                            <line x1="35" y1="65" x2="60" y2="80" stroke="rgba(59, 130, 246, 0.2)" stroke-width="1"/>
+                            <line x1="85" y1="65" x2="60" y2="80" stroke="rgba(59, 130, 246, 0.2)" stroke-width="1"/>
+                            <line x1="35" y1="65" x2="85" y2="65" stroke="rgba(59, 130, 246, 0.15)" stroke-width="1" stroke-dasharray="3 3"/>
+                            <!-- Orbit -->
+                            <circle cx="60" cy="58" r="35" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" fill="none"/>
                         </svg>
                         <span class="phase-status building">Building</span>
                     </div>
                     <div class="phase-content">
-                        <h3>Your AI learns from the network.</h3>
-                        <p>When your agent has built enough knowledge, it gains access to the Intelligence Exchange — a peer network of curated engram packs. What took another agent months to learn, yours absorbs in seconds. Contribute your best patterns. Download what others have proven.</p>
-                        <div class="phase-quote">What one agent learns, every agent can know.</div>
+                        <h3>Autonomous business.</h3>
+                        <p>AI runs parts of your business while you focus on what matters. Research, content, outreach, monitoring &mdash; entire workflows execute autonomously. You review results and make decisions. The business runs even when you don't.</p>
+                        <div class="phase-quote">Your AI doesn't just assist. It operates.</div>
                     </div>
                 </div>
                 <div class="network-phase">
                     <div class="phase-visual">
                         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Network of businesses -->
                             <circle cx="60" cy="25" r="3" fill="rgba(59, 130, 246, 0.6)"/>
                             <circle cx="30" cy="45" r="3" fill="rgba(59, 130, 246, 0.5)"/>
                             <circle cx="90" cy="45" r="3" fill="rgba(59, 130, 246, 0.5)"/>
@@ -1173,76 +1339,156 @@
                         <span class="phase-status vision">Vision</span>
                     </div>
                     <div class="phase-content">
-                        <h3>Your AI earns for you.</h3>
-                        <p>High-value knowledge is worth something. When your agent contributes proven engrams to the network, it earns. The smarter your AI becomes, the more it generates — automatically. You own your agent's accumulated value. No platform takes the upside.</p>
-                        <div class="phase-quote">Your AI works for you. Then it earns for you.</div>
+                        <h3>Business network.</h3>
+                        <p>Autonomous businesses connect. Your AI company exchanges knowledge, services, and value with other AI companies. A network of businesses that collaborate, trade expertise, and compound each other's intelligence.</p>
+                        <div class="phase-quote">One business is powerful. A network is unstoppable.</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="install">
+    <!-- MODULES -->
+    <section class="section section-opaque" id="modules">
         <div class="container">
             <div class="section-header">
-                <h2>Two ways in. One grows into the other.</h2>
-                <p>Start with the MCP server and add depth when you're ready.</p>
+                <h2>Extend it.</h2>
+                <p>Modules for your domain. Open specifications for everything.</p>
             </div>
-            <div class="install-modes-grid">
-                <div class="install-mode-card">
-                    <span class="install-mode-badge">MCP Server</span>
-                    <h3>AI Memory Layer</h3>
-                    <p>Persistent memory for any AI tool. Install in 30 seconds.</p>
-                    <ul class="install-mode-features">
-                        <li>Engrams that persist across sessions</li>
-                        <li>Works with Claude Code, Cursor, Windsurf</li>
-                        <li>Runs entirely on your machine — nothing leaves your drive</li>
+            <div class="modules-grid">
+                <div class="module-group">
+                    <h4>Work</h4>
+                    <ul>
+                        <li><span>Meetings</span> <span class="module-desc">auto-notes from transcripts</span></li>
+                        <li><span>Mail</span> <span class="module-desc">classify and prioritize</span></li>
+                        <li><span>CRM</span> <span class="module-desc">track relationship health</span></li>
+                        <li><span>Campaigns</span> <span class="module-desc">plan, execute, measure</span></li>
+                        <li><span>Slides</span> <span class="module-desc">generate presentations</span></li>
                     </ul>
-                    <p class="install-mode-best-for"><strong>Best for:</strong> OpenClaw, Claude Code, Cursor — any tool you already use.</p>
-                    <a href="#waitlist" class="btn btn-primary" style="align-self: flex-start;">
-                        Get Early Access
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
                 </div>
-                <div class="install-mode-card install-mode-full">
-                    <span class="install-mode-badge full">Full System</span>
-                    <h3>AI Second Brain</h3>
-                    <p>Your AI adapts to you and grows with you. New workflows and agents emerge from use — create them on the fly, built on open specifications anyone can propose, upgrade, or extend.</p>
-                    <ul class="install-mode-features">
-                        <li>AI that learns your patterns and executes while you sleep</li>
-                        <li>Modular by design: build, share, and remix workflows</li>
-                        <li>Open specifications anyone can propose, upgrade, or extend</li>
+                <div class="module-group">
+                    <h4>Knowledge</h4>
+                    <ul>
+                        <li><span>Research</span> <span class="module-desc">multi-source synthesis</span></li>
+                        <li><span>News</span> <span class="module-desc">personalized daily digest</span></li>
+                        <li><span>Datacortex</span> <span class="module-desc">semantic search</span></li>
+                        <li><span>Grants</span> <span class="module-desc">proposal writing</span></li>
                     </ul>
-                    <p class="install-mode-best-for"><strong>Best for:</strong> Claude Code as your primary AI workspace.</p>
-                    <a href="#waitlist" class="btn btn-primary" style="align-self: flex-start;">
-                        Get Early Access
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
+                </div>
+                <div class="module-group">
+                    <h4>Personal</h4>
+                    <ul>
+                        <li><span>Trading</span> <span class="module-desc">framework-driven journaling</span></li>
+                        <li><span>Health</span> <span class="module-desc">routine optimization</span></li>
+                        <li><span>Finance</span> <span class="module-desc">portfolio tracking</span></li>
+                        <li><span>Nightshift</span> <span class="module-desc">overnight AI execution</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modules-footer">
+                14 of 23+ modules shown &middot; Built on <a href="https://github.com/datacore-one/datacore-dips">open specifications (DIPs)</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORKS WITH -->
+    <section class="section" id="works-with">
+        <div class="container">
+            <div class="section-header">
+                <h2>Works with your tools.</h2>
+                <p>One system. Every AI surface.</p>
+            </div>
+            <div class="integrations-grid">
+                <div class="integration-card">
+                    <div class="integration-icon">&gt;_</div>
+                    <h3>Claude Code</h3>
+                    <p>CLI integration. Your coding agent with full context.</p>
+                </div>
+                <div class="integration-card">
+                    <div class="integration-icon">&loz;</div>
+                    <h3>MCP Protocol</h3>
+                    <p>Cursor, Windsurf, Zed, and any MCP-compatible tool.</p>
+                </div>
+                <div class="integration-card">
+                    <div class="integration-icon">&#9881;</div>
+                    <h3>OpenClaw</h3>
+                    <p>Local AI gateway. Agents from any device.</p>
+                </div>
+                <div class="integration-card">
+                    <div class="integration-icon">&#10047;</div>
+                    <h3><a href="https://plur.ai" style="color: inherit; text-decoration: none;">PLUR</a></h3>
+                    <p>Compatible with PLUR for cross-tool memory.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- INSTALL -->
+    <section class="section section-opaque" id="install">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get started.</h2>
+                <p>Tell your agent to install it. Or do it yourself &mdash; one command.</p>
+            </div>
+            <div class="install-block">
+                <div class="line comment"># The easy way &mdash; tell your AI agent:</div>
+                <div class="line"><span class="command">"Go to datacore.one and install Datacore."</span></div>
+            </div>
+            <div class="install-block">
+                <div class="line comment"># Or install manually:</div>
+                <div class="line"><span class="command">curl -fsSL https://datacore.one/install | bash</span></div>
+                <div class="line" style="margin-top: 12px;"><span class="comment"># Add the MCP server to your AI tool:</span></div>
+                <div class="line"><span class="command">npx @datacore-one/mcp init</span></div>
+                <div class="line" style="margin-top: 12px;"><span class="comment"># .claude/mcp.json or .cursor/mcp.json:</span></div>
+                <div class="line"><span class="dim">"datacore": { "command": "npx", "args": ["-y", "@datacore-one/mcp"] }</span></div>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 24px; margin-bottom: 24px;">Works with Claude Code, Cursor, Windsurf, OpenClaw, and any MCP-compatible tool. Free. No account. No migration.</p>
+            <div style="text-align: center;">
+                <div class="waitlist-form" id="install-waitlist-form">
+                    <input type="email" placeholder="your@email.com" class="waitlist-input" data-waitlist-email>
+                    <button class="btn btn-primary" data-waitlist-submit>Get Early Access</button>
+                </div>
+                <div class="waitlist-response" data-waitlist-response></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHILOSOPHY -->
     <section class="section philosophy" id="philosophy">
         <div class="container">
             <div class="section-header">
                 <h2>Everyone deserves sovereignty<br>over their own mind.</h2>
             </div>
             <div class="philosophy-content">
-                <p>Your data lives on your hard drive, in plain text files you can read without us. Your engrams are yours. Your agent's experience is yours. No cloud account required. No vendor lock-in. No one else can see what your AI has learned.</p>
-                <p>Built with ethics by design. Open source, local-first, self-sovereign. Inspired by <a href="https://fairdatasociety.org" target="_blank" rel="noopener">Fair Data Society</a> — an initiative for digital self-determination, where your data belongs to you, not to platforms.</p>
+                <p>Your data lives on your hard drive, in plain text files you can read in any editor for the next 50 years. Your knowledge is yours. Your agent's experience is yours. No cloud account required. No one else can see what your AI has learned.</p>
+                <p><strong>No vendor lock-in. Ever.</strong> Switch AI models tomorrow &mdash; your knowledge carries over. Move to a different editor &mdash; your memory follows. Datacore works with Claude, GPT, Gemini, and whatever comes next. Your intelligence is not trapped in any platform.</p>
+                <p>Built with ethics by design. Open source, local-first, self-sovereign. Inspired by <a href="https://fairdatasociety.org" target="_blank" rel="noopener">Fair Data Society</a> &mdash; an initiative for digital self-determination, where your data belongs to you, not to platforms.</p>
             </div>
         </div>
     </section>
 
+    <!-- ENTERPRISE -->
+    <section class="section section-opaque enterprise" id="enterprise">
+        <div class="container">
+            <div class="section-header">
+                <span class="enterprise-badge">For Teams &amp; Enterprise</span>
+                <h2>Unlock your team's knowledge.</h2>
+            </div>
+            <div class="enterprise-content">
+                <p>Datacore is free for individuals, forever. For organizations that need managed deployment, team knowledge sharing, and dedicated support &mdash; we offer enterprise plans.</p>
+                <p>Shared knowledge bases across teams. Consistent agent behavior company-wide. Private deployment on your infrastructure. No data leaves your network.</p>
+                <div class="enterprise-cta">
+                    <a href="mailto:hello@datacore.one" class="btn btn-primary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
     <section class="section cta" id="waitlist">
         <div class="container" style="text-align: center;">
-            <h2>Your AI should remember. Start today.</h2>
-            <p>Install the MCP server in 30 seconds. No migration. No data import. Your next session will already be smarter.</p>
+            <h2>Your mind, extended. Start today.</h2>
+            <p>Install Datacore and your next session will already be smarter than your last. No migration. No data import.</p>
             <div class="waitlist-form" id="cta-waitlist-form">
                 <input type="email" placeholder="your@email.com" class="waitlist-input" data-waitlist-email>
                 <button class="btn btn-primary" data-waitlist-submit>Get Early Access</button>
@@ -1251,21 +1497,29 @@
         </div>
     </section>
 
-    <section class="section graphic-showcase" id="graphic">
+    <!-- DATA QUOTE + EASTER EGG -->
+    <section class="graphic-showcase">
         <div class="data-quote">
             <p class="quote-text">"I aspire to be better than I am."</p>
-            <p class="quote-attribution">Truly yours, Data</p>
+            <p class="data-sign-off"><em>Truly yours,</em> Data</p>
+            <p class="stardate" id="stardate"></p>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p class="footer-line">
-                <span class="stardate">Stardate <span id="stardate"></span></span>
-            </p>
+            <div class="footer-line">
+                <a href="https://github.com/datacore-one">GitHub</a>
+                <span>&middot;</span>
+                <a href="https://plur.ai">PLUR Memory</a>
+                <span>&middot;</span>
+                <a href="https://fairdatasociety.org" target="_blank" rel="noopener">Fair Data Society</a>
+            </div>
+            <p class="footer-tagline">Open source. Local-first. Self-sovereign.</p>
             <p class="footer-powered">Created and powered by Datacore</p>
         </div>
     </footer>
+
     <script>
     // Sacred Geometry Tesseract - inspired by Mind Body Data
     (function() {
@@ -2510,7 +2764,7 @@
         render();
     })();
 
-    // Calculate Star Trek-style stardate
+    // Stardate
     (function() {
         const now = new Date();
         const year = now.getFullYear();
@@ -2518,13 +2772,8 @@
         const endOfYear = new Date(year + 1, 0, 1);
         const yearProgress = (now - startOfYear) / (endOfYear - startOfYear);
         const stardate = ((year - 2000) * 1000 + yearProgress * 1000).toFixed(1);
-
         const stardateEl = document.getElementById('stardate');
-        if (stardateEl) {
-            stardateEl.textContent = stardate;
-        }
-
-        // Easter egg
+        if (stardateEl) { stardateEl.textContent = stardate; }
         console.log('%c"I am the culmination of one man\'s dream. This is not ego or vanity. But when Doctor Soong created me, he added to the substance of the universe."', 'color: #3b82f6; font-style: italic;');
         console.log('%c— Lieutenant Commander Data', 'color: #666;');
     })();
@@ -2533,26 +2782,16 @@
     (function() {
         const toggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
-
-        // Check for saved preference or system preference
         const savedTheme = localStorage.getItem('datacore-theme');
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (savedTheme) {
-            html.setAttribute('data-theme', savedTheme);
-        } else if (!systemPrefersDark) {
-            html.setAttribute('data-theme', 'light');
-        }
-
+        if (savedTheme) { html.setAttribute('data-theme', savedTheme); }
+        else if (!systemPrefersDark) { html.setAttribute('data-theme', 'light'); }
         toggle.addEventListener('click', () => {
             const currentTheme = html.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('datacore-theme', newTheme);
         });
-
-        // Listen for system theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             if (!localStorage.getItem('datacore-theme')) {
                 html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
@@ -2589,30 +2828,20 @@
                     response.className = 'waitlist-response error';
                     return;
                 }
-
                 btn.disabled = true;
                 btn.textContent = 'Sending...';
-
                 try {
                     const res = await fetch(API_URL, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            email,
-                            site: 'datacore',
-                            utm: getUTMParams()
-                        })
+                        body: JSON.stringify({ email, site: 'datacore', utm: getUTMParams() })
                     });
-
                     const data = await res.json();
-
                     if (res.ok) {
                         response.textContent = data.response;
                         response.className = 'waitlist-response success';
                         input.value = '';
-                        if (typeof posthog !== 'undefined') {
-                            posthog.capture('waitlist_signup', { site: 'datacore' });
-                        }
+                        if (typeof posthog !== 'undefined') { posthog.capture('waitlist_signup', { site: 'datacore' }); }
                     } else {
                         response.textContent = data.response || data.error;
                         response.className = 'waitlist-response ' + (res.status === 409 ? 'success' : 'error');
@@ -2621,15 +2850,12 @@
                     response.textContent = 'Something went wrong. Try again.';
                     response.className = 'waitlist-response error';
                 }
-
                 btn.disabled = false;
                 btn.textContent = 'Get Early Access';
             }
 
             btn.addEventListener('click', submit);
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') submit();
-            });
+            input.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
         });
     })();
     </script>
