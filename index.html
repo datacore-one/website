@@ -745,6 +745,19 @@
         }
 
         /* Install */
+        .install-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 800px;
+            margin: 0 auto 32px;
+        }
+
+        .install-grid .install-block {
+            margin: 0;
+            max-width: none;
+        }
+
         .install-block {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -1037,15 +1050,8 @@
                 grid-template-columns: 1fr 1fr;
             }
 
-            .waitlist-form {
-                flex-direction: column;
-                border-radius: 8px;
-            }
-
-            .waitlist-form .btn-primary {
-                border-left: none;
-                border-top: 1px solid var(--border);
-                padding: 14px;
+            .install-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1060,11 +1066,12 @@
         <div class="container">
             <a href="#" class="logo">data<span>core</span></a>
             <div class="nav-links">
+                <a href="features.html">Features</a>
                 <a href="#workflow">How It Works</a>
                 <a href="#roadmap">Roadmap</a>
                 <a href="#modules">Modules</a>
                 <a href="#philosophy">Philosophy</a>
-                <a href="#install" class="btn btn-primary">Get Early Access</a>
+                <a href="#install" class="btn btn-primary">Install</a>
             </div>
         </div>
     </nav>
@@ -1088,11 +1095,10 @@
                 <div class="tagline">
                     > Tag tasks before bed. Wake up to completed work.
                 </div>
-                <div class="waitlist-form" id="hero-waitlist-form">
-                    <input type="email" placeholder="your@email.com" class="waitlist-input" data-waitlist-email>
-                    <button class="btn btn-primary" data-waitlist-submit>Get Early Access</button>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <a href="#install" class="btn btn-primary">Install Now</a>
+                    <a href="https://github.com/datacore-one/datacore" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
                 </div>
-                <div class="waitlist-response" data-waitlist-response></div>
             </div>
         </div>
     </section>
@@ -1111,7 +1117,7 @@
                 </div>
                 <div class="after-card">
                     <div class="card-label">With Datacore</div>
-                    <p>Good morning. Your board deck is priority &mdash; I've drafted 3 slides based on yesterday's strategy work. The competitive research you requested is ready.</p>
+                    <p>Good morning. Your board deck is priority &mdash; I've drafted 3 slides based on yesterday's strategy work. The research you requested is ready.</p>
                     <p style="margin-top: 12px;">It knows your work. Because it was here yesterday.</p>
                 </div>
             </div>
@@ -1227,22 +1233,22 @@
                 <div class="differentiator">
                     <span class="differentiator-number">01</span>
                     <div>
-                        <h3>You explain your project once.</h3>
-                        <p>A month later, your AI surfaces that exact insight in the meeting where you need it. Not because it has a chat history &mdash; because it learned your preferences, your project context, your communication style as structured knowledge that compounds with every session.</p>
+                        <h3>Knowledge that compounds.</h3>
+                        <p>Every question you ask, every correction you make, every insight you capture &mdash; it all adds up. Day 30 is smarter than Day 1. Not because the model improved, but because your knowledge base grew. Explorations and queries don't disappear into chat history &mdash; they become structured knowledge you can search, cite, and build on.</p>
                     </div>
                 </div>
                 <div class="differentiator">
                     <span class="differentiator-number">02</span>
                     <div>
-                        <h3>You tag a task. You go to sleep. You wake up to finished work.</h3>
-                        <p>Research, writing, analysis done overnight. Each output reviewed by 20 evaluator personas &mdash; Hemingway checks clarity, Feynman checks first principles. Quality work, not hallucinations.</p>
+                        <h3>Your AI makes you sharper, not dependent.</h3>
+                        <p>Most AI tools do the thinking for you. Datacore does the thinking with you. It surfaces connections you missed, challenges assumptions with your own past insights, and builds a knowledge base that teaches you as much as it serves you. GTD captures your commitments so nothing falls through. Zettelkasten connects your ideas so patterns emerge. Org-mode bridges the gap &mdash; tasks and knowledge in one system, seamlessly linked.</p>
                     </div>
                 </div>
                 <div class="differentiator">
                     <span class="differentiator-number">03</span>
                     <div>
-                        <h3>Standing on the shoulders of giants.</h3>
-                        <p>Built on decades of proven methodology. GTD (David Allen) for task flow. Zettelkasten (Niklas Luhmann) for knowledge that connects. Spaced repetition for memory that sharpens. Not invented from scratch &mdash; assembled from what works.</p>
+                        <h3>Tag it. Sleep. Wake up to finished work.</h3>
+                        <p>Research, writing, analysis &mdash; queued and executed overnight. Each output reviewed by 20 evaluator personas &mdash; Hemingway checks clarity, Feynman checks first principles, your domain expert checks accuracy. Quality work, not hallucinations.</p>
                     </div>
                 </div>
             </div>
@@ -1353,8 +1359,32 @@
         <div class="container">
             <div class="section-header">
                 <h2>Extend it.</h2>
-                <p>Modules for your domain. Open specifications for everything.</p>
+                <p>Describe what you need. Datacore builds the workflow.</p>
             </div>
+
+            <div style="max-width: 700px; margin: 0 auto 40px;">
+                <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem;">You don't configure Datacore &mdash; you talk to it. Say "process my inbox every morning" and it creates an agent. Say "research this topic overnight" and it queues the work. Every workflow you define fits into the framework &mdash; discoverable, composable, and reusable. Your automations grow as naturally as your knowledge base.</p>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 48px; margin-bottom: 40px; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">28</div>
+                    <div style="color: var(--text-muted); font-size: 0.85rem;">modules</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">43</div>
+                    <div style="color: var(--text-muted); font-size: 0.85rem;">agents</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">40+</div>
+                    <div style="color: var(--text-muted); font-size: 0.85rem;">commands</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">15</div>
+                    <div style="color: var(--text-muted); font-size: 0.85rem;">open specs (DIPs)</div>
+                </div>
+            </div>
+
             <div class="modules-grid">
                 <div class="module-group">
                     <h4>Work</h4>
@@ -1386,7 +1416,10 @@
                 </div>
             </div>
             <div class="modules-footer">
-                14 of 23+ modules shown &middot; Built on <a href="https://github.com/datacore-one/datacore-dips">open specifications (DIPs)</a>
+                These ship with Datacore &mdash; but the real power is building your own. Every module is a folder with a YAML manifest. Every agent is a markdown file. <a href="https://github.com/datacore-one/datacore-dips">Open specifications (DIPs)</a> define the patterns so your extensions are first-class citizens from day one.
+            </div>
+            <div style="text-align: center; margin-top: 24px;">
+                <a href="https://github.com/datacore-one/datacore-dips" class="btn btn-secondary" target="_blank" rel="noopener">Build Your Own</a>
             </div>
         </div>
     </section>
@@ -1430,25 +1463,34 @@
                 <h2>Get started.</h2>
                 <p>Tell your agent to install it. Or do it yourself &mdash; one command.</p>
             </div>
-            <div class="install-block">
-                <div class="line comment"># The easy way &mdash; tell your AI agent:</div>
-                <div class="line"><span class="command">"Go to datacore.one and install Datacore."</span></div>
-            </div>
-            <div class="install-block">
-                <div class="line comment"># Or install manually:</div>
-                <div class="line"><span class="command">curl -fsSL https://datacore.one/install | bash</span></div>
-                <div class="line" style="margin-top: 12px;"><span class="comment"># Add the MCP server to your AI tool:</span></div>
-                <div class="line"><span class="command">npx @datacore-one/mcp init</span></div>
-                <div class="line" style="margin-top: 12px;"><span class="comment"># .claude/mcp.json or .cursor/mcp.json:</span></div>
-                <div class="line"><span class="dim">"datacore": { "command": "npx", "args": ["-y", "@datacore-one/mcp"] }</span></div>
-            </div>
-            <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 24px; margin-bottom: 24px;">Works with Claude Code, Cursor, Windsurf, OpenClaw, and any MCP-compatible tool. Free. No account. No migration.</p>
-            <div style="text-align: center;">
-                <div class="waitlist-form" id="install-waitlist-form">
-                    <input type="email" placeholder="your@email.com" class="waitlist-input" data-waitlist-email>
-                    <button class="btn btn-primary" data-waitlist-submit>Get Early Access</button>
+
+            <div class="install-grid">
+                <div class="install-block">
+                    <div class="line comment"># The easy way &mdash; tell your AI agent:</div>
+                    <div class="line"><span class="command">"Go to datacore.one and install Datacore."</span></div>
+                    <div class="line" style="margin-top: 8px;"><span class="comment">Works with Claude Code, Cursor, Windsurf, OpenClaw</span></div>
                 </div>
-                <div class="waitlist-response" data-waitlist-response></div>
+                <div class="install-block">
+                    <div class="line comment"># Clone the repo:</div>
+                    <div class="line"><span class="command">git clone https://github.com/datacore-one/datacore ~/Data</span></div>
+                    <div class="line" style="margin-top: 8px;"><span class="comment"># Add the MCP server:</span></div>
+                    <div class="line"><span class="command">npx @datacore-one/mcp init</span></div>
+                </div>
+            </div>
+
+            <div style="max-width: 800px; margin: 0 auto 32px;">
+                <div class="install-block">
+                    <div class="line comment"># MCP config (.claude/mcp.json or .cursor/mcp.json):</div>
+                    <div class="line"><span class="dim">"datacore": { "command": "npx", "args": ["-y", "@datacore-one/mcp"] }</span></div>
+                </div>
+            </div>
+
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Free. Open source. No account. No migration. Your next session is already smarter.</p>
+
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <a href="https://github.com/datacore-one/datacore" class="btn btn-primary" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/datacore-one/datacore-dips" class="btn btn-secondary" target="_blank" rel="noopener">Read the DIPs</a>
+                <a href="features.html" class="btn btn-secondary">See All Features</a>
             </div>
         </div>
     </section>
@@ -1489,11 +1531,10 @@
         <div class="container" style="text-align: center;">
             <h2>Your mind, extended. Start today.</h2>
             <p>Install Datacore and your next session will already be smarter than your last. No migration. No data import.</p>
-            <div class="waitlist-form" id="cta-waitlist-form">
-                <input type="email" placeholder="your@email.com" class="waitlist-input" data-waitlist-email>
-                <button class="btn btn-primary" data-waitlist-submit>Get Early Access</button>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <a href="https://github.com/datacore-one/datacore" class="btn btn-primary" target="_blank" rel="noopener">Install Now</a>
+                <a href="features.html" class="btn btn-secondary">Features</a>
             </div>
-            <div class="waitlist-response" data-waitlist-response></div>
         </div>
     </section>
 
