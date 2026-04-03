@@ -1461,7 +1461,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>Get started.</h2>
-                <p>Tell your agent to install it. Or do it yourself &mdash; one command.</p>
+                <p>Tell your agent to install it. Or do it yourself &mdash; one npm command.</p>
             </div>
 
             <div class="install-grid">
@@ -1471,16 +1471,17 @@
                     <div class="line" style="margin-top: 8px;"><span class="comment">Works with Claude Code, Cursor, Windsurf, OpenClaw</span></div>
                 </div>
                 <div class="install-block">
-                    <div class="line comment"># Clone the repo:</div>
-                    <div class="line"><span class="command">git clone https://github.com/datacore-one/datacore ~/Data</span></div>
-                    <div class="line" style="margin-top: 8px;"><span class="comment"># Add the MCP server:</span></div>
-                    <div class="line"><span class="command">npx @datacore-one/mcp init</span></div>
+                    <div class="line comment"># Install via npm:</div>
+                    <div class="line"><span class="command">npx @datacore-one/cli init</span></div>
+                    <div class="line" style="margin-top: 8px;"><span class="comment"># Sets up ~/Data, clones modules, configures MCP</span></div>
                 </div>
             </div>
 
             <div style="max-width: 800px; margin: 0 auto 32px;">
                 <div class="install-block">
-                    <div class="line comment"># MCP config (.claude/mcp.json or .cursor/mcp.json):</div>
+                    <div class="line comment"># Or add just the MCP server to your editor:</div>
+                    <div class="line"><span class="command">npx @datacore-one/mcp init</span></div>
+                    <div class="line" style="margin-top: 8px;"><span class="comment"># Config (.claude/mcp.json or .cursor/mcp.json):</span></div>
                     <div class="line"><span class="dim">"datacore": { "command": "npx", "args": ["-y", "@datacore-one/mcp"] }</span></div>
                 </div>
             </div>
