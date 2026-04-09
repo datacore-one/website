@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="bingbot" content="noindex, nofollow">
+    <title>Services - Datacore</title>
+
+    <!-- PostHog Analytics -->
+    <script src="https://eu-assets.i.posthog.com/static/array.js"></script>
+    <script>
+        posthog.init('phc_g3ufMVvHNkKydA8vas97Del135UNYEFUuM2Sp0bzDoD', {
+            api_host: 'https://eu.i.posthog.com',
+            capture_pageview: true,
+            capture_pageleave: 'if_capture_pageview'
+        });
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --border: #222222;
+            --success: #10b981;
+            --geometry-color: 59, 130, 246;
+            --card-bg: rgba(17, 17, 17, 0.6);
+            --card-border: rgba(34, 34, 34, 0.5);
+            --section-bg: rgba(10, 10, 10, 0.7);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f0f7ff;
+            --bg-secondary: #e6f0fa;
+            --bg-tertiary: #dbe8f5;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-glow: rgba(37, 99, 235, 0.15);
+            --border: #c7d9ed;
+            --success: #10b981;
+            --geometry-color: 59, 130, 246;
+            --card-bg: linear-gradient(135deg, rgba(224, 237, 255, 0.9) 0%, rgba(237, 244, 255, 0.95) 100%);
+            --card-border: rgba(199, 217, 237, 0.3);
+            --section-bg: rgba(240, 247, 255, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Canvas - hidden on services page for cleaner business feel */
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: transparent;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 24px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(100, 100, 100, 0.5);
+            color: var(--text-secondary) !important;
+        }
+
+        .btn-primary:hover {
+            background: rgba(59, 130, 246, 0.4);
+            border-color: rgba(59, 130, 246, 0.6);
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border-color: rgba(100, 100, 100, 0.3);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .btn-primary {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(100, 100, 100, 0.3);
+            color: var(--text-secondary) !important;
+        }
+
+        [data-theme="light"] .btn-primary:hover {
+            background: rgba(37, 99, 235, 0.15);
+            border-color: rgba(37, 99, 235, 0.4);
+            color: var(--accent) !important;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+        }
+
+        [data-theme="light"] .btn-secondary {
+            background: transparent;
+            border-color: rgba(100, 100, 100, 0.2);
+        }
+
+        [data-theme="light"] .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 12px;
+            right: 24px;
+            z-index: 101;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: rotate(15deg);
+        }
+
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            position: absolute;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .theme-toggle .icon-sun { opacity: 0; transform: rotate(-90deg); }
+        .theme-toggle .icon-moon { opacity: 1; transform: rotate(0deg); }
+        [data-theme="light"] .theme-toggle .icon-sun { opacity: 1; transform: rotate(0deg); }
+        [data-theme="light"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(90deg); }
+
+        /* Hero */
+        .hero {
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            padding-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-opaque {
+            background: var(--bg-primary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 300;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        [data-theme="light"] .tier-card,
+        [data-theme="light"] .stack-item,
+        [data-theme="light"] .audience-card,
+        [data-theme="light"] .waitlist-box {
+            background: #ffffff;
+            border-color: #d0daea;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Tiers */
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tier-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px 28px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .tier-card:nth-child(1) { border-top: 3px solid var(--success); }
+        .tier-card:nth-child(2) { border-top: 3px solid #8b5cf6; }
+        .tier-card:nth-child(3) { border-top: 3px solid var(--accent); }
+
+        .tier-card:nth-child(1):hover {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+            border-top-color: var(--success);
+            transform: translateY(-4px);
+        }
+
+        .tier-card:nth-child(2):hover {
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
+            border-color: rgba(139, 92, 246, 0.3);
+            border-top-color: #8b5cf6;
+            transform: translateY(-4px);
+        }
+
+        .tier-card:nth-child(3):hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+            border-top-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .tier-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .tier-card:nth-child(1) .tier-label { color: var(--success); }
+        .tier-card:nth-child(2) .tier-label { color: #8b5cf6; }
+        .tier-card:nth-child(3) .tier-label { color: var(--accent); }
+
+        .tier-card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .tier-best-for {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .tier-features {
+            list-style: none;
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        .tier-features li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tier-features li:last-child { border-bottom: none; }
+
+        .tier-features .check {
+            color: var(--success);
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .tiers-cta {
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        /* Process Steps */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '\2192';
+            position: absolute;
+            right: -18px;
+            top: 36px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            z-index: 3;
+        }
+
+        .process-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .process-step h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* Stack / Credibility */
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stack-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+        }
+
+        .stack-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+        }
+
+        .stack-item h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .stack-item p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .stack-item a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .stack-item a:hover { text-decoration: underline; }
+
+        /* Desktop App Waitlist */
+        .waitlist-box {
+            max-width: 500px;
+            margin: 48px auto 0;
+            text-align: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .waitlist-box h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .waitlist-box p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .waitlist-form {
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .waitlist-form input {
+            flex: 1;
+            padding: 10px 16px;
+            background: var(--bg-primary);
+            border: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .waitlist-form input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .waitlist-form button {
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .waitlist-form button:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Audience Columns */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .audience-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 36px;
+        }
+
+        .audience-card .card-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .audience-card h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .audience-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            background: var(--bg-secondary) !important;
+        }
+
+        .cta h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 300;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .cta p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        footer a:hover { color: var(--text-primary); }
+
+        .footer-tagline {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 16px;
+        }
+
+        .footer-powered {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-top: 8px;
+            opacity: 0.5;
+        }
+
+        .footer-line {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-line span {
+            color: var(--text-muted);
+            opacity: 0.3;
+        }
+
+        .footer-line a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .footer-line a:hover { color: var(--text-primary); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+
+            .tiers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+
+            .stack-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .audience-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span class="icon-sun">&#9728;</span>
+        <span class="icon-moon">&#9790;</span>
+    </button>
+
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">data<span>core</span></a>
+            <div class="nav-links">
+                <a href="features.html">Features</a>
+                <a href="services.html" style="color: var(--text-primary);">Services</a>
+                <a href="index.html#modules">Modules</a>
+                <a href="index.html#philosophy">Philosophy</a>
+                <a href="https://github.com/datacore-one/datacore" class="btn btn-primary" target="_blank" rel="noopener">Install</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">Services</span>
+                <h1>Your second brain.<br><span class="highlight">Built for you.</span></h1>
+                <p class="subtitle">A meta-harness for knowledge workers and autonomous businesses.</p>
+                <p class="description">You have years of knowledge scattered across Slack, Drive, email, and call transcripts. We turn it into a system that remembers, organizes, and works while you sleep.</p>
+                <div class="hero-buttons">
+                    <a href="mailto:hello@datacore.one" class="btn btn-primary" onclick="posthog.capture('services_hero_contact')">Get in touch</a>
+                    <a href="https://github.com/datacore-one/datacore" class="btn btn-secondary" target="_blank" rel="noopener" onclick="posthog.capture('services_hero_install')">Install it yourself</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT YOU GET -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Do more. Work less.</h2>
+                <p>Three tiers, each building on the last. Start where it makes sense, grow as you need.</p>
+            </div>
+            <div class="tiers-grid">
+                <div class="tier-card">
+                    <div class="tier-label">Tier 1</div>
+                    <h3>Knowledge Vault</h3>
+                    <p class="tier-best-for">Best for solo creators and researchers</p>
+                    <ul class="tier-features">
+                        <li><span class="check">&#10003;</span> Spaces configured to your workflow</li>
+                        <li><span class="check">&#10003;</span> Existing data ingested and organized</li>
+                        <li><span class="check">&#10003;</span> Semantic search across everything</li>
+                        <li><span class="check">&#10003;</span> Weekly health checks</li>
+                        <li><span class="check">&#10003;</span> Walkthrough session</li>
+                    </ul>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-label">Tier 2</div>
+                    <h3>Productivity System</h3>
+                    <p class="tier-best-for">Best for consultants and freelancers</p>
+                    <ul class="tier-features">
+                        <li><span class="check">&#10003;</span> Everything in Knowledge Vault</li>
+                        <li><span class="check">&#10003;</span> GTD task management</li>
+                        <li><span class="check">&#10003;</span> AI inbox processing</li>
+                        <li><span class="check">&#10003;</span> Daily briefings and journals</li>
+                        <li><span class="check">&#10003;</span> AI-powered task execution</li>
+                    </ul>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-label">Tier 3</div>
+                    <h3>Autonomous Operations</h3>
+                    <p class="tier-best-for">Best for agencies running on autopilot</p>
+                    <ul class="tier-features">
+                        <li><span class="check">&#10003;</span> Everything in Productivity System</li>
+                        <li><span class="check">&#10003;</span> Custom modules for your domain</li>
+                        <li><span class="check">&#10003;</span> Overnight autonomous processing</li>
+                        <li><span class="check">&#10003;</span> CRM and client intelligence</li>
+                        <li><span class="check">&#10003;</span> Ongoing tuning and new sources</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-top: 32px; font-style: italic;">A system that compounds.</p>
+            <div class="tiers-cta">
+                <a href="mailto:hello@datacore.one" class="btn btn-primary" onclick="posthog.capture('services_tiers_contact')">Get in touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section section-opaque">
+        <div class="container">
+            <div class="section-header">
+                <h2>How it works</h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="process-number">1</div>
+                    <h3>Call</h3>
+                    <p>We learn your workflow, tools, and pain points. Understand what data matters and where it lives.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">2</div>
+                    <h3>Build</h3>
+                    <p>We configure your spaces, ingest your data, set up your schema. Your system is ready in days, not months.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">3</div>
+                    <h3>Handoff</h3>
+                    <p>You get a working system with a walkthrough session. Start using it immediately, ask anything.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">4</div>
+                    <h3>Grow</h3>
+                    <p>Optional retainer: ongoing ingestion, new sources, health checks, module additions. Your system gets smarter over time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE STACK -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What powers this</h2>
+            </div>
+            <div class="stack-grid">
+                <div class="stack-item">
+                    <div class="stack-icon">&loz;</div>
+                    <div>
+                        <h4>Open source</h4>
+                        <p>Fully open. Inspect, modify, extend. No vendor lock-in, ever. <a href="https://github.com/datacore-one/datacore" target="_blank" rel="noopener">View on GitHub</a></p>
+                    </div>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-icon">&#9670;</div>
+                    <div>
+                        <h4>Local-first</h4>
+                        <p>Your data stays on your machine. Nothing leaves unless you send it. Privacy by architecture, not policy.</p>
+                    </div>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-icon">&#10047;</div>
+                    <div>
+                        <h4>Persistent memory</h4>
+                        <p>Powered by PLUR &mdash; the system literally learns from corrections, preferences, and patterns. It gets smarter every session.</p>
+                    </div>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-icon">&gt;_</div>
+                    <div>
+                        <h4>Works with Claude Code</h4>
+                        <p>Currently optimized for Claude Code. Desktop app coming soon for those who prefer a visual interface.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop App Waitlist -->
+            <div class="waitlist-box">
+                <h4>Desktop app coming soon</h4>
+                <p>A visual interface for Datacore. No terminal required. Join the waitlist to get early access.</p>
+                <div class="waitlist-form">
+                    <input type="email" id="waitlist-email" placeholder="you@example.com" aria-label="Email address">
+                    <button type="button" id="waitlist-submit">Join waitlist</button>
+                </div>
+                <p id="waitlist-success" style="display: none; color: var(--success); margin-top: 12px; margin-bottom: 0;">You're on the list. We'll be in touch.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHO THIS IS FOR -->
+    <section class="section section-opaque">
+        <div class="container">
+            <div class="section-header">
+                <h2>Who this is for</h2>
+            </div>
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <div class="card-label">Knowledge Workers</div>
+                    <h3>Researchers, writers, analysts</h3>
+                    <p>You read 50 articles a week and forget 49. Your second brain captures, connects, and resurfaces what matters &mdash; automatically. Stop re-finding things. Start building on what you already know.</p>
+                </div>
+                <div class="audience-card">
+                    <div class="card-label">Agencies &amp; Consultants</div>
+                    <h3>Years of scattered client work</h3>
+                    <p>Competitive intel, client knowledge, content &mdash; organized into searchable vaults that get smarter over time. Your team's collective intelligence, compounding instead of disappearing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER CTA -->
+    <section class="section cta">
+        <div class="container">
+            <h2>Do more. Work less. 10x yourself.</h2>
+            <p>Your next AI session should already know everything your last one learned.</p>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <a href="mailto:hello@datacore.one" class="btn btn-primary" onclick="posthog.capture('services_footer_contact')">Get in touch</a>
+                <a href="https://github.com/datacore-one/datacore" class="btn btn-secondary" target="_blank" rel="noopener" onclick="posthog.capture('services_footer_install')">Install Datacore</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-line">
+                <a href="https://github.com/datacore-one">GitHub</a>
+                <span>&middot;</span>
+                <a href="https://plur.ai">PLUR Memory</a>
+                <span>&middot;</span>
+                <a href="https://fairdatasociety.org" target="_blank" rel="noopener">Fair Data Society</a>
+            </div>
+            <p class="footer-tagline">Open source. Local-first. Self-sovereign.</p>
+            <p class="footer-powered">Created and powered by Datacore</p>
+        </div>
+    </footer>
+
+    <script>
+    // Theme toggle
+    (function() {
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        const savedTheme = localStorage.getItem('datacore-theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+        } else if (!systemPrefersDark) {
+            html.setAttribute('data-theme', 'light');
+        }
+
+        toggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('datacore-theme', next);
+        });
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('datacore-theme')) {
+                html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
+    })();
+
+    // Waitlist form
+    (function() {
+        const form = document.getElementById('waitlist-submit');
+        const input = document.getElementById('waitlist-email');
+        const success = document.getElementById('waitlist-success');
+
+        form.addEventListener('click', () => {
+            const email = input.value.trim();
+            if (!email || !email.includes('@')) return;
+
+            posthog.capture('services_desktop_waitlist', { email: email });
+            input.style.display = 'none';
+            form.style.display = 'none';
+            success.style.display = 'block';
+            input.parentElement.style.border = 'none';
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') form.click();
+        });
+    })();
+
+    </script>
+</body>
+</html>

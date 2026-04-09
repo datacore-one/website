@@ -323,9 +323,7 @@
         }
 
         .section-opaque {
-            background: var(--section-bg);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            background: var(--bg-primary);
         }
 
         .section-header {
@@ -357,9 +355,7 @@
         }
 
         .before-card, .after-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--bg-secondary);
             border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 32px;
@@ -528,9 +524,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--bg-secondary);
             border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 32px;
@@ -713,9 +707,7 @@
         }
 
         .integration-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--bg-secondary);
             border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 32px 24px;
@@ -802,9 +794,7 @@
         /* CTA */
         .cta {
             text-align: center;
-            background: var(--card-bg) !important;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--bg-secondary) !important;
         }
 
         .cta h2 {
@@ -1067,6 +1057,7 @@
             <a href="#" class="logo">data<span>core</span></a>
             <div class="nav-links">
                 <a href="features.html">Features</a>
+                <a href="services.html">Services</a>
                 <a href="#workflow">How It Works</a>
                 <a href="#roadmap">Roadmap</a>
                 <a href="#modules">Modules</a>
@@ -1372,15 +1363,15 @@
                     <div style="color: var(--text-muted); font-size: 0.85rem;">modules</div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">43</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">44</div>
                     <div style="color: var(--text-muted); font-size: 0.85rem;">agents</div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">40+</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">77</div>
                     <div style="color: var(--text-muted); font-size: 0.85rem;">commands</div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">15</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">26</div>
                     <div style="color: var(--text-muted); font-size: 0.85rem;">open specs (DIPs)</div>
                 </div>
             </div>
@@ -1502,9 +1493,25 @@
             <div class="section-header">
                 <h2>Everyone deserves sovereignty<br>over their own mind.</h2>
             </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 40px;">
+                <div style="padding: 20px; border: 1px solid var(--border); border-radius: 8px;">
+                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">Explicit.</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Your knowledge is an inspectable artifact &mdash; not implicit in some AI's weights. You see exactly what your agent knows and doesn't know.</div>
+                </div>
+                <div style="padding: 20px; border: 1px solid var(--border); border-radius: 8px;">
+                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">Yours.</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Your data lives on your hard drive, in plain text files you can read in any editor for the next 50 years. No cloud account. No one sees what your AI has learned.</div>
+                </div>
+                <div style="padding: 20px; border: 1px solid var(--border); border-radius: 8px;">
+                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">File over app.</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Markdown, org-mode, universal formats. Use Obsidian, VS Code, vim, or anything. Agents apply the entire Unix toolkit over your files. Interoperable by design.</div>
+                </div>
+                <div style="padding: 20px; border: 1px solid var(--border); border-radius: 8px;">
+                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">BYOAI.</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Plug in any AI &mdash; Claude, GPT, Gemini, OpenClaw, Hermes, whatever comes next. Your intelligence is not trapped in any platform. No vendor lock-in. Ever.</div>
+                </div>
+            </div>
             <div class="philosophy-content">
-                <p>Your data lives on your hard drive, in plain text files you can read in any editor for the next 50 years. Your knowledge is yours. Your agent's experience is yours. No cloud account required. No one else can see what your AI has learned.</p>
-                <p><strong>No vendor lock-in. Ever.</strong> Switch AI models tomorrow &mdash; your knowledge carries over. Move to a different editor &mdash; your memory follows. Datacore works with Claude, GPT, Gemini, and whatever comes next. Your intelligence is not trapped in any platform.</p>
                 <p>Built with ethics by design. Open source, local-first, self-sovereign. Inspired by <a href="https://fairdatasociety.org" target="_blank" rel="noopener">Fair Data Society</a> &mdash; an initiative for digital self-determination, where your data belongs to you, not to platforms.</p>
             </div>
         </div>
@@ -1514,14 +1521,15 @@
     <section class="section section-opaque enterprise" id="enterprise">
         <div class="container">
             <div class="section-header">
-                <span class="enterprise-badge">For Teams &amp; Enterprise</span>
-                <h2>Unlock your team's knowledge.</h2>
+                <span class="enterprise-badge">Built for individuals. Used by teams.</span>
+                <h2>Datacore grows with you.</h2>
             </div>
             <div class="enterprise-content">
-                <p>Datacore is free for individuals, forever. For organizations that need managed deployment, team knowledge sharing, and dedicated support &mdash; we offer enterprise plans.</p>
-                <p>Shared knowledge bases across teams. Consistent agent behavior company-wide. Private deployment on your infrastructure. No data leaves your network.</p>
+                <p>Datacore is free, open source, and built for individuals. First teams are already using it daily to automate research, manage projects, and coordinate across spaces.</p>
+                <p>Each space is its own world &mdash; shared knowledge bases, consistent agent behavior, private by default. No data leaves your machine. Want to use it with your team? Just add a space.</p>
                 <div class="enterprise-cta">
-                    <a href="mailto:hello@datacore.one" class="btn btn-primary">Contact Us</a>
+                    <a href="mailto:hello@datacore.one" class="btn btn-primary">Get in touch</a>
+                    <a href="services.html" class="btn btn-secondary" style="margin-left: 12px;">Learn more</a>
                 </div>
             </div>
         </div>
@@ -1580,10 +1588,13 @@
             mouse.targetY = e.clientY / window.innerHeight;
         });
 
-        // Theme-aware color function
+        // Theme-aware color function (cached - getComputedStyle is expensive per frame)
+        let cachedGeometryColor = null;
         function getGeometryColor() {
+            if (cachedGeometryColor) return cachedGeometryColor;
             const style = getComputedStyle(document.documentElement);
-            return style.getPropertyValue('--geometry-color').trim() || '59, 130, 246';
+            cachedGeometryColor = style.getPropertyValue('--geometry-color').trim() || '59, 130, 246';
+            return cachedGeometryColor;
         }
 
         function isLightTheme() {
@@ -1594,6 +1605,7 @@
 
         // Listen for theme changes
         const observer = new MutationObserver(() => {
+            cachedGeometryColor = null;
             geometryColor = getGeometryColor();
         });
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -1877,7 +1889,25 @@
             return { outermost, outer, mid, inner, core, center };
         }
 
-        function render() {
+        let lastRenderTime = 0;
+        let isScrolling = false;
+        let scrollTimeout;
+        const originalScrollHandler = updateScrollProgress;
+        function updateScrollProgress() {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress = Math.min(1, window.scrollY / scrollHeight);
+            isScrolling = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => { isScrolling = false; }, 150);
+        }
+
+        function render(timestamp) {
+            // Throttle to ~30fps during scroll to reduce jank
+            if (isScrolling && timestamp - lastRenderTime < 33) {
+                requestAnimationFrame(render);
+                return;
+            }
+            lastRenderTime = timestamp;
             time += 0.003;
 
             // Smooth mouse movement
@@ -2793,12 +2823,7 @@
             requestAnimationFrame(render);
         }
 
-        function updateScrollProgress() {
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            scrollProgress = Math.min(1, window.scrollY / scrollHeight);
-        }
-
-        window.addEventListener('scroll', updateScrollProgress);
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
         window.addEventListener('resize', resize);
 
         resize();
