@@ -190,6 +190,64 @@
             color: var(--accent);
         }
 
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 102;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 6px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links.mobile-open {
+                display: flex !important;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--bg-primary);
+                justify-content: center;
+                align-items: center;
+                gap: 24px;
+                z-index: 101;
+            }
+
+            .nav-links.mobile-open a {
+                font-size: 1.25rem;
+                color: var(--text-primary);
+            }
+        }
+
         /* Theme Toggle */
         .theme-toggle {
             position: fixed;
@@ -752,13 +810,18 @@
     <nav>
         <div class="container">
             <a href="index.html" class="logo">data<span>core</span></a>
-            <div class="nav-links">
+            <div class="nav-links" id="nav-links">
                 <a href="features.html">Features</a>
                 <a href="services.html" style="color: var(--text-primary);">Services</a>
                 <a href="index.html#modules">Modules</a>
                 <a href="index.html#philosophy">Philosophy</a>
                 <a href="https://github.com/datacore-one/datacore" class="btn btn-primary" target="_blank" rel="noopener">Install</a>
             </div>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
@@ -1006,6 +1069,25 @@
 
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') form.click();
+        });
+    })();
+
+    // Mobile menu toggle
+    (function() {
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        if (!menuToggle || !navLinks) return;
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('mobile-open');
+            document.body.style.overflow = navLinks.classList.contains('mobile-open') ? 'hidden' : '';
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('mobile-open');
+                document.body.style.overflow = '';
+            });
         });
     })();
 
