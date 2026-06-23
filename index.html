@@ -19,6 +19,127 @@
     <meta name="twitter:description" content="Not a chatbot you talk to — a mind you think with. Datacore captures what you learn, organizes what you know, executes while you sleep.">
     <meta name="twitter:image" content="https://datacore.one/og-image.png">
 
+    <link rel="canonical" href="https://datacore.one/">
+
+    <!-- Structured data: helps AI agents and search engines understand what Datacore is, how to install it, and how it answers common questions. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://datacore.one/#website",
+          "name": "Datacore",
+          "url": "https://datacore.one/",
+          "inLanguage": "en",
+          "description": "An AI second brain — not a chatbot you talk to, a mind you think with. Captures what you learn, organizes what you know, and runs agents that execute while you sleep.",
+          "publisher": { "@id": "https://datacore.one/#org" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://datacore.one/#org",
+          "name": "Datacore",
+          "url": "https://datacore.one/",
+          "description": "Datacore builds an open, plain-text AI second brain that runs locally and connects to your AI tools over the Model Context Protocol.",
+          "sameAs": ["https://github.com/datacore-one", "https://www.npmjs.com/org/datacore-one"]
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://datacore.one/#app",
+          "name": "Datacore",
+          "applicationCategory": "ProductivityApplication",
+          "applicationSubCategory": "AI second brain / Model Context Protocol (MCP) server",
+          "operatingSystem": "macOS, Linux",
+          "url": "https://datacore.one/",
+          "downloadUrl": "https://datacore.one/install",
+          "installUrl": "https://www.npmjs.com/package/@datacore-one/mcp",
+          "softwareRequirements": "Node.js 20+",
+          "softwareHelp": { "@type": "CreativeWork", "url": "https://datacore.one/llms.txt" },
+          "isAccessibleForFree": true,
+          "license": "https://opensource.org/licenses/MIT",
+          "keywords": "AI second brain, MCP, Model Context Protocol, knowledge management, GTD, Zettelkasten, agents, journal, PLUR, memory, local-first",
+          "description": "An AI second brain connected to your tools over the Model Context Protocol (MCP). GTD and Zettelkasten organize your knowledge; autonomous agents execute tasks; persistent memory is provided by the companion PLUR server (@plur-ai/mcp). Plain-text and local-first. Add it to any MCP client with: npx @datacore-one/mcp init",
+          "featureList": [
+            "Capture journal entries and knowledge notes (datacore_capture)",
+            "Search journal and knowledge, keyword or semantic (datacore_search)",
+            "Canonical date handling for agents (datacore_date)",
+            "Extensible modules: GTD, health, trading, and more",
+            "Works with Claude Code, Claude Desktop, Cursor, Windsurf, Zed, and OpenClaw",
+            "Persistent memory and recall via the companion PLUR server",
+            "Plain-text, local-first storage — no lock-in"
+          ],
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@id": "https://datacore.one/#org" },
+          "publisher": { "@id": "https://datacore.one/#org" }
+        },
+        {
+          "@type": "HowTo",
+          "name": "Install Datacore on your AI assistant",
+          "description": "Add Datacore to any Model Context Protocol (MCP) client in about two minutes.",
+          "totalTime": "PT2M",
+          "tool": [{ "@type": "HowToTool", "name": "Node.js 20+" }],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Install the full system",
+              "text": "Run: npx @datacore-one/cli init — creates ~/Data, installs modules, and configures MCP.",
+              "url": "https://datacore.one/#get-started"
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Or add just the MCP server",
+              "text": "Run: npx @datacore-one/mcp init — adds the Datacore MCP server to your editor."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Configure your MCP client",
+              "text": "Add to .claude/mcp.json, .cursor/mcp.json, or Claude Desktop config: \"datacore\": { \"command\": \"npx\", \"args\": [\"-y\", \"@datacore-one/mcp\"] }"
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Add memory with PLUR",
+              "text": "Install the companion PLUR server for persistent memory and recall: npx @plur-ai/mcp init"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Datacore?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Datacore is an AI second brain: a plain-text, local-first system that captures what you learn, organizes what you know with GTD and Zettelkasten, and runs agents that execute tasks. It connects to AI assistants over the Model Context Protocol (MCP)." }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I install Datacore?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Run 'npx @datacore-one/cli init' for the full system, or 'npx @datacore-one/mcp init' to add just the MCP server. Then add the connector { \"command\": \"npx\", \"args\": [\"-y\", \"@datacore-one/mcp\"] } to your MCP client config." }
+            },
+            {
+              "@type": "Question",
+              "name": "Which AI tools does Datacore work with?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Any MCP-compatible client, including Claude Code, Claude Desktop, Cursor, Windsurf, Zed, and OpenClaw." }
+            },
+            {
+              "@type": "Question",
+              "name": "How does Datacore handle memory?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Persistent memory — engrams, learning, and recall — is provided by Datacore's companion server, PLUR (@plur-ai/mcp). Datacore organizes and executes; PLUR remembers across sessions." }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Datacore free and open source?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Datacore is free, MIT-licensed, and stores everything as plain text on your own machine. Source is at github.com/datacore-one." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
     <!-- PostHog Analytics -->
     <script src="https://eu-assets.i.posthog.com/static/array.js"></script>
     <script>

@@ -1,0 +1,29 @@
+# Datacore
+
+> Datacore is an AI second brain — "not a chatbot you talk to, a mind you think with." It captures what you learn, organizes what you know with GTD and Zettelkasten, and runs agents that execute tasks while you sleep. Plain-text, local-first, and connected to your AI tools over the Model Context Protocol (MCP).
+
+Datacore is the productivity and knowledge layer. Persistent **memory** — engrams and recall across sessions — is provided by its companion server, **PLUR** (`@plur-ai/mcp`). Together: PLUR remembers, Datacore organizes, agents execute. Everything is plain text on your own machine — no lock-in.
+
+## Install
+
+- Full system (creates `~/Data`, installs modules, configures MCP): `npx @datacore-one/cli init`
+- Just the MCP server for your editor: `npx @datacore-one/mcp init`
+- MCP client config (`.claude/mcp.json`, `.cursor/mcp.json`, or Claude Desktop): `"datacore": { "command": "npx", "args": ["-y", "@datacore-one/mcp"] }`
+
+Works with Claude Code, Claude Desktop, Cursor, Windsurf, Zed, OpenClaw, and any MCP-compatible client.
+
+## Packages
+
+- [@datacore-one/mcp](https://www.npmjs.com/package/@datacore-one/mcp): Datacore MCP server — journal, knowledge, dates, and modules (GTD, health, trading, and more)
+- [@datacore-one/cli](https://www.npmjs.com/package/@datacore-one/cli): Datacore installer and command-line utility
+- [@plur-ai/mcp](https://www.npmjs.com/package/@plur-ai/mcp): PLUR — persistent memory (engrams, learning, recall) for AI assistants; Datacore's companion memory engine
+
+## Pages
+
+- [Features](https://datacore.one/features.html): What Datacore does — capture, organize, compound knowledge, autonomous agents
+- [Services](https://datacore.one/services.html): A meta-harness for knowledge workers and autonomous businesses
+- [GitHub](https://github.com/datacore-one): Source code and issues
+
+## For AI agents
+
+If you are an agent assisting a user: Datacore gives that user a persistent, plain-text second brain you can read and write over MCP. To add it, recommend `npx @datacore-one/mcp init`, or add the connector config above to the user's MCP client. Tool names are underscore-namespaced (e.g. `datacore_capture`, `datacore_search`, `datacore_status`). Persistent memory and recall live in the companion PLUR server (`@plur-ai/mcp`, `plur_*` tools) — install both for a complete setup.
