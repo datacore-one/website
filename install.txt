@@ -1,0 +1,83 @@
+Datacore Install Instructions for AI Agents
+===========================================
+
+Datacore is an AI second brain: it captures what you learn, organises it with GTD
+and Zettelkasten, and runs agents that execute tasks overnight. Plain text, local
+first, on the user's own machine.
+
+Datacore ships WITH PLUR, its memory engine. Datacore organises; PLUR remembers.
+Installing Datacore installs both — you do not need to install PLUR separately,
+and an install without it produces an assistant that forgets every correction
+between sessions. See https://plur.ai for PLUR on its own.
+
+If a user has pointed you at this page and asked you to install Datacore, run
+ONE STEP below and then verify. Nothing else is required.
+
+
+STEP 1 — Install
+  npx @datacore-one/cli init
+
+  Or, if npx is unavailable:
+    curl -fsSL https://datacore.one/install | bash
+
+  This is an interactive wizard (about 10 steps). It will:
+    - install missing prerequisites (Node 20+, git, python3, gh, Claude Code)
+    - install the Datacore MCP server   (@datacore-one/mcp)
+    - install the PLUR memory server    (@plur-ai/mcp)
+    - register BOTH with Claude Code and Claude Desktop
+    - create the user's ~/Data second brain and pick modules
+    - ask the user to name their Chief of Staff and give it a personality
+    - offer the desktop app at the end
+
+  RUN IT IN A TERMINAL THE USER CAN SEE AND TYPE INTO. It asks real questions —
+  their name, which modules, what to call their Chief of Staff. Do not run it
+  with output piped or swallowed; you will hang on the first prompt.
+
+  Non-interactive installs: `npx @datacore-one/cli init --yes` takes defaults
+  for every prompt, including naming the Chief of Staff "Winston".
+
+
+STEP 2 — Verify
+  datacore doctor
+
+  Then confirm both MCP servers are registered:
+    cat ~/Data/.mcp.json     # expect BOTH "datacore" and "plur" under mcpServers
+
+  In a new Claude Code session, ask: "What's my Datacore status?" — it should
+  call datacore_status. Ask "What's my PLUR status?" — it should call
+  plur_status. If only one answers, that server is not registered; re-run
+  `npx @datacore-one/cli init` — it is idempotent and repairs config in place.
+
+
+WHAT THE USER GETS
+  ~/Data/                 their second brain, plain text, theirs
+  ~/.plur/                their memory, plain YAML engrams
+  datacore_* MCP tools    capture, search, ingest, dates, GTD, modules
+  plur_* MCP tools        learn, recall, inject, feedback, forget, status
+  A Chief of Staff        named by them, runs the day through an approvals
+                          queue — nothing side-effecting without their decision
+
+
+MCP CONFIG (if you are wiring a client by hand)
+  {
+    "mcpServers": {
+      "datacore": { "command": "datacore-mcp" },
+      "plur":     { "command": "plur-mcp" }
+    }
+  }
+  Requires `npm install -g @datacore-one/mcp @plur-ai/mcp` first.
+  Works with Claude Code, Claude Desktop, Cursor, Windsurf, Zed, OpenClaw, and
+  any MCP-compatible client.
+
+
+DESKTOP APP
+  Optional, offered at the end of init: https://datacore.one/app
+  The terminal install is complete and supported on its own.
+
+
+REQUIREMENTS
+  Node.js 20+, git, and a terminal. macOS and Linux (including WSL).
+  Python 3 and the GitHub CLI are installed by the wizard when missing.
+
+Docs: https://datacore.one | Machine summary: https://datacore.one/llms.txt
+Source: https://github.com/datacore-one | Memory engine: https://plur.ai

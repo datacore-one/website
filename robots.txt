@@ -3,6 +3,8 @@
 User-agent: *
 Allow: /
 
-# Agent-readable summary of what Datacore is and how to install it:
+# Agent-readable summary of what Datacore is:
 #   https://datacore.one/llms.txt
+# Step-by-step install instructions for agents (installs Datacore + PLUR):
+#   https://datacore.one/install.txt
 Sitemap: https://datacore.one/sitemap.xml
