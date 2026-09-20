@@ -14,8 +14,17 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     OS="linux"
 else
-    echo "Unsupported OS: $OSTYPE"
-    echo "Please install manually: npm install -g @datacore-one/cli"
+    echo ""
+    echo "  This script only runs on macOS and Linux (including WSL)."
+    echo "  Detected: $OSTYPE"
+    echo ""
+    echo "  On Windows, install through npm instead — it works the same:"
+    echo ""
+    echo "    npm install -g @datacore-one/cli"
+    echo "    datacore init"
+    echo ""
+    echo "  Requires Node.js 20+. Or run this script inside WSL."
+    echo ""
     exit 1
 fi
 

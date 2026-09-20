@@ -71,13 +71,41 @@ MCP CONFIG (if you are wiring a client by hand)
 
 
 DESKTOP APP
-  Optional, offered at the end of init: https://datacore.one/app
+  Optional, offered at the end of init: https://datacore.one/app.html
   The terminal install is complete and supported on its own.
 
 
 REQUIREMENTS
-  Node.js 20+, git, and a terminal. macOS and Linux (including WSL).
+  Node.js 20+, git, and a terminal.
+  Node 18 will install and appear to work, then fail later — check first:
+    node --version
+
+  macOS and Linux: either install path above works.
+  Windows: use the npm path, not the curl script (which needs bash):
+    npm install -g @datacore-one/cli
+    datacore init
+  Or run the curl script inside WSL.
+
   Python 3 and the GitHub CLI are installed by the wizard when missing.
+
+IF SOMETHING GOES WRONG
+  "Not a terminal" — you piped the output. The wizard would have skipped every
+  question and taken every default silently, so it refuses. Run it where the
+  user can type, or pass --yes to accept defaults on purpose.
+
+  "npm's global directory is not writable" — the installer retries into
+  ~/.datacore/npm automatically and records absolute paths in the MCP config,
+  so it should still work. If it reports the fallback failed, use sudo.
+
+  "MCP server binary not found" — the install did NOT succeed and exits
+  non-zero. Claude Code will start with no Datacore or PLUR tools. Install the
+  named package and re-run `datacore init`; it is idempotent.
+
+  "~/Data exists and is not empty" — you have files there already. Move them
+  or pass --force. The installer will not write over them.
+
+  Modules reported as not installed are usually private repos you do not have
+  access to. Datacore works without them.
 
 Docs: https://datacore.one | Machine summary: https://datacore.one/llms.txt
 Source: https://github.com/datacore-one | Memory engine: https://plur.ai

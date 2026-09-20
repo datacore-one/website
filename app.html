@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop App - Datacore</title>
+    <meta name="description" content="The Datacore desktop app — your second brain, chat and Chief of Staff in one window. Built from source today; packaged builds are coming.">
+    <meta property="og:title" content="Desktop App - Datacore">
+    <meta property="og:description" content="The Datacore desktop app — your second brain, chat and Chief of Staff in one window.">
+    <meta property="og:url" content="https://datacore.one/app.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://datacore.one/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a; --bg-secondary: #111111; --bg-tertiary: #1a1a1a;
+            --text-primary: #ffffff; --text-secondary: #a0a0a0; --text-muted: #666666;
+            --accent: #3b82f6; --accent-hover: #2563eb; --border: #222222; --success: #10b981;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg-primary); color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+            line-height: 1.65; -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+        nav { border-bottom: 1px solid var(--border); padding: 20px 0; }
+        nav .container { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-weight: 700; font-size: 1.25rem; color: var(--text-primary); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        nav a.back { color: var(--text-secondary); text-decoration: none; font-size: .95rem; }
+        nav a.back:hover { color: var(--text-primary); }
+        header { padding: 72px 0 40px; }
+        h1 { font-size: 2.5rem; line-height: 1.15; letter-spacing: -0.02em; }
+        .lede { color: var(--text-secondary); font-size: 1.1rem; margin-top: 16px; }
+        .status {
+            display: inline-block; margin-top: 28px; padding: 6px 12px; border-radius: 999px;
+            background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.35);
+            color: var(--accent); font-size: .82rem; font-weight: 600;
+        }
+        section { padding: 28px 0; border-top: 1px solid var(--border); }
+        h2 { font-size: 1.25rem; margin-bottom: 12px; }
+        p { color: var(--text-secondary); }
+        ul { color: var(--text-secondary); margin: 12px 0 0 20px; }
+        li { margin-bottom: 8px; }
+        pre {
+            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px;
+            padding: 16px; overflow-x: auto; margin-top: 14px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88rem;
+            color: var(--text-primary);
+        }
+        code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text-primary); }
+        .note {
+            background: var(--bg-tertiary); border-left: 3px solid var(--accent);
+            padding: 14px 16px; border-radius: 0 8px 8px 0; margin-top: 16px; color: var(--text-secondary);
+        }
+        footer { padding: 48px 0 64px; color: var(--text-muted); font-size: .9rem; }
+        a { color: var(--accent); }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo">data<span>core</span></a>
+            <a href="/" class="back">← Back to datacore.one</a>
+        </div>
+    </nav>
+
+    <header class="container">
+        <h1>The Datacore desktop app</h1>
+        <p class="lede">Your second brain, your chat and your Chief of Staff in one window —
+           the same <code>~/Data</code> the terminal uses, nothing duplicated.</p>
+        <span class="status">Build from source · packaged downloads coming</span>
+    </header>
+
+    <section class="container">
+        <h2>There is no download yet</h2>
+        <p>The app is real and in daily use, but it is not yet published as a signed,
+           notarised download. Until it is, you build it from source. We would rather
+           say that plainly than hand you a link that installs nothing.</p>
+        <div class="note">
+            <strong>You do not need the app.</strong> The terminal install is complete and
+            supported on its own — the desktop app is a different front end onto the same
+            second brain, not a missing piece of it.
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Install Datacore first</h2>
+        <p>If you have not already:</p>
+        <pre>npx @datacore-one/cli init</pre>
+        <p style="margin-top:14px">That installs Datacore and PLUR together, registers both
+           MCP servers, and sets up your Chief of Staff. Full instructions for agents:
+           <a href="/install.txt">datacore.one/install.txt</a>.</p>
+    </section>
+
+    <section class="container">
+        <h2>Build the app</h2>
+        <p>Requires Go 1.22+, Node 20+, Python 3.11+ and
+           <a href="https://wails.io/docs/gettingstarted/installation">Wails</a>.</p>
+        <pre>git clone https://github.com/datacore-one/datacore-app
+cd datacore-app
+bash scripts/build.sh</pre>
+        <p style="margin-top:14px">The build lands at
+           <code>shell/build/bin/datacore-app.app</code>. Move it to
+           <code>/Applications</code> and launch it; it finds your existing
+           <code>~/Data</code> and daemon on its own.</p>
+        <div class="note">
+            The repository is currently private. If you cannot clone it, you are not missing
+            a step — access is not open yet.
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>What it adds over the terminal</h2>
+        <ul>
+            <li>Panels for today, tasks, knowledge, ventures and agents</li>
+            <li>Chat with your Chief of Staff beside your work, not in another window</li>
+            <li>Live updates as agents act, instead of re-running a command to look</li>
+            <li>An approvals queue you can act on without typing</li>
+        </ul>
+    </section>
+
+    <footer class="container">
+        Datacore · <a href="/">datacore.one</a> ·
+        <a href="/install.txt">install.txt</a> ·
+        <a href="https://github.com/datacore-one">GitHub</a>
+    </footer>
+</body>
+</html>
