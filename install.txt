@@ -37,6 +37,29 @@ STEP 1 — Install
   for every prompt, including naming the Chief of Staff "Winston".
 
 
+STEP 1b — IF YOU ARE AN AGENT, ASK THE QUESTIONS YOURSELF (preferred)
+  A person being helped by an assistant should not have to drive a CLI wizard.
+  Ask them in conversation instead, then hand the answers over:
+
+    npx @datacore-one/cli init --print-questions     # JSON: the questions
+    # ...ask the user, write their answers to answers.json...
+    npx @datacore-one/cli init --answers answers.json
+
+  --print-questions returns each question with its key, its default, and a note
+  on why it matters, plus a filled example. Ask them in your own words. Every
+  field is optional; anything omitted takes its default.
+
+  Two worth asking rather than defaulting: what to call their Chief of Staff
+  (it is the name they will address every day), and which modules they want.
+  Naming defaults to Winston.
+
+  For the email, use one attached to their GitHub account, or let it default:
+  with `gh` signed in the installer offers that account's noreply address,
+  which always attributes their commits correctly.
+
+  This path does not need a TTY and will not hang on a prompt.
+
+
 STEP 2 — Verify
   datacore doctor
 
@@ -76,9 +99,13 @@ DESKTOP APP
 
 
 REQUIREMENTS
-  Node.js 20+, git, and a terminal.
-  Node 18 will install and appear to work, then fail later — check first:
+  Node.js 20+, Python 3.10+, git, and a terminal.
+
+  Both versions are now CHECKED AND REFUSED, not warned about: the installer
+  stops and names the upgrade. Older Node and Python 3.9 used to pass and fail
+  much later, which is how one install spent hours getting nowhere.
     node --version
+    python3 --version
 
   macOS and Linux: either install path above works.
   Windows: use the npm path, not the curl script (which needs bash):
@@ -89,6 +116,14 @@ REQUIREMENTS
   Python 3 and the GitHub CLI are installed by the wizard when missing.
 
 IF SOMETHING GOES WRONG
+  "node 18.x is older than 20" / "python 3.9 is older than 3.10" — a refusal,
+  not a warning. Install the version named and re-run; nothing was half-built.
+
+  "<user>/datacore is not a fork of datacore-one/datacore" — the user has an
+  unrelated repo of that name. The installer leaves it alone and clones
+  upstream instead; nothing is wrong with the install. To get a real fork,
+  rename that repo first.
+
   "Not a terminal" — you piped the output. The wizard would have skipped every
   question and taken every default silently, so it refuses. Run it where the
   user can type, or pass --yes to accept defaults on purpose.

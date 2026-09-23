@@ -16,19 +16,23 @@ This installs Datacore **and PLUR together** — PLUR is Datacore's memory engin
 
 Run it in a terminal the user can see and type into: it asks real questions. For an unattended install, `npx @datacore-one/cli init --yes` takes defaults throughout.
 
+**Agents: ask the questions yourself rather than making the user drive a wizard.** `npx @datacore-one/cli init --print-questions` returns them as JSON (key, default, and why each matters); ask in your own words, then `npx @datacore-one/cli init --answers answers.json`. No TTY needed, and it cannot hang on a prompt.
+
 - Full machine instructions: https://datacore.one/install.txt
 - Shell alternative: `curl -fsSL https://datacore.one/install | bash`
 - MCP server only, no second brain: `npx @datacore-one/mcp init`
 - MCP client config (`.claude/mcp.json`, `.cursor/mcp.json`, or Claude Desktop):
   `"datacore": { "command": "datacore-mcp" }, "plur": { "command": "plur-mcp" }`
 
-Verify with `datacore doctor`, then ask the assistant "What's my Datacore status?" and "What's my PLUR status?" — both should answer.
+Verify with `datacore doctor`, then check `~/Data/.mcp.json` lists both `datacore` and `plur`, then ask the assistant "What's my Datacore status?" and "What's my PLUR status?" — both should answer.
+
+Requires Node.js 20+ and Python 3.10+. Both are checked and refused, not warned about.
 
 Works with Claude Code, Claude Desktop, Cursor, Windsurf, Zed, OpenClaw, and any MCP-compatible client.
 
 ## Packages
 
-- [@datacore-one/mcp](https://www.npmjs.com/package/@datacore-one/mcp): Datacore MCP server — journal, knowledge, dates, and modules (GTD, health, trading, and more)
+- [@datacore-one/mcp](https://www.npmjs.com/package/@datacore-one/mcp): Datacore MCP server — journal, knowledge, dates, and modules (GTD, research, news, CRM, meetings, mail, comms, and more)
 - [@datacore-one/cli](https://www.npmjs.com/package/@datacore-one/cli): Datacore installer and command-line utility
 - [@plur-ai/mcp](https://www.npmjs.com/package/@plur-ai/mcp): PLUR — persistent memory (engrams, learning, recall) for AI assistants; Datacore's companion memory engine
 

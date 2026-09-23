@@ -53,7 +53,7 @@
           "url": "https://datacore.one/",
           "downloadUrl": "https://datacore.one/install",
           "installUrl": "https://www.npmjs.com/package/@datacore-one/mcp",
-          "softwareRequirements": "Node.js 20+",
+          "softwareRequirements": "Node.js 20+, Python 3.10+",
           "softwareHelp": { "@type": "CreativeWork", "url": "https://datacore.one/llms.txt" },
           "isAccessibleForFree": true,
           "license": "https://opensource.org/licenses/MIT",
@@ -63,7 +63,7 @@
             "Capture journal entries and knowledge notes (datacore_capture)",
             "Search journal and knowledge, keyword or semantic (datacore_search)",
             "Canonical date handling for agents (datacore_date)",
-            "Extensible modules: GTD, health, trading, and more",
+            "Extensible modules: GTD, research, CRM, meetings, mail, and more",
             "Works with Claude Code, Claude Desktop, Cursor, Windsurf, Zed, and OpenClaw",
             "Persistent memory and recall via the companion PLUR server",
             "Plain-text, local-first storage — no lock-in"
@@ -101,8 +101,8 @@
             {
               "@type": "HowToStep",
               "position": 4,
-              "name": "Add memory with PLUR",
-              "text": "Install the companion PLUR server for persistent memory and recall: npx @plur-ai/mcp init"
+              "name": "Verify both servers answer",
+              "text": "PLUR is installed by step 1, not separately. Check ~/Data/.mcp.json lists both \"datacore\" and \"plur\", run datacore doctor, then ask the assistant \"What's my Datacore status?\" and \"What's my PLUR status?\" - both should answer."
             }
           ]
         },
@@ -117,7 +117,7 @@
             {
               "@type": "Question",
               "name": "How do I install Datacore?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Run 'npx @datacore-one/cli init' for the full system, or 'npx @datacore-one/mcp init' to add just the MCP server. Then add the connector { \"command\": \"npx\", \"args\": [\"-y\", \"@datacore-one/mcp\"] } to your MCP client config." }
+              "acceptedAnswer": { "@type": "Answer", "text": "Run 'npx @datacore-one/cli init' for the full system - it installs Datacore and PLUR together and registers both. If an AI assistant is doing it for you, it can read the questions with 'npx @datacore-one/cli init --print-questions', ask you in conversation, and pass them back with '--answers answers.json'. To add only the MCP server: 'npx @datacore-one/mcp init'. Requires Node.js 20+ and Python 3.10+." }
             },
             {
               "@type": "Question",
@@ -127,7 +127,7 @@
             {
               "@type": "Question",
               "name": "How does Datacore handle memory?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Persistent memory — engrams, learning, and recall — is provided by Datacore's companion server, PLUR (@plur-ai/mcp). Datacore organizes and executes; PLUR remembers across sessions." }
+              "acceptedAnswer": { "@type": "Answer", "text": "Persistent memory - engrams, learning, and recall - is provided by PLUR (@plur-ai/mcp), which is installed together with Datacore rather than added separately. Datacore organizes and executes; PLUR remembers across sessions." }
             },
             {
               "@type": "Question",
@@ -1252,6 +1252,7 @@
                 <a href="#roadmap">Roadmap</a>
                 <a href="#modules">Modules</a>
                 <a href="#philosophy">Philosophy</a>
+                <a href="app.html">App</a>
                 <a href="#install" class="btn btn-primary">Install</a>
             </div>
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
@@ -1575,10 +1576,10 @@
                 <div class="module-group">
                     <h4>Work</h4>
                     <ul>
-                        <li><span>Meetings</span> <span class="module-desc">auto-notes from transcripts</span></li>
+                        <li><span>Meetings</span> <span class="module-desc">standups, prep, transcripts</span></li>
                         <li><span>Mail</span> <span class="module-desc">classify and prioritize</span></li>
-                        <li><span>CRM</span> <span class="module-desc">track relationship health</span></li>
-                        <li><span>Campaigns</span> <span class="module-desc">plan, execute, measure</span></li>
+                        <li><span>CRM</span> <span class="module-desc">contacts and relationships</span></li>
+                        <li><span>Comms</span> <span class="module-desc">brand, content, campaigns</span></li>
                         <li><span>Slides</span> <span class="module-desc">generate presentations</span></li>
                     </ul>
                 </div>
@@ -1587,17 +1588,17 @@
                     <ul>
                         <li><span>Research</span> <span class="module-desc">multi-source synthesis</span></li>
                         <li><span>News</span> <span class="module-desc">personalized daily digest</span></li>
-                        <li><span>Datacortex</span> <span class="module-desc">semantic search</span></li>
-                        <li><span>Grants</span> <span class="module-desc">proposal writing</span></li>
+                        <li><span>Outbox</span> <span class="module-desc">route and archive</span></li>
+                        <li><span>Decisions</span> <span class="module-desc">a log you can search</span></li>
                     </ul>
                 </div>
                 <div class="module-group">
                     <h4>Personal</h4>
                     <ul>
-                        <li><span>Trading</span> <span class="module-desc">framework-driven journaling</span></li>
-                        <li><span>Health</span> <span class="module-desc">routine optimization</span></li>
-                        <li><span>Finance</span> <span class="module-desc">portfolio tracking</span></li>
-                        <li><span>Nightshift</span> <span class="module-desc">overnight AI execution</span></li>
+                        <li><span>GTD</span> <span class="module-desc">capture, clarify, review</span></li>
+                        <li><span>Goals</span> <span class="module-desc">OKRs and progress</span></li>
+                        <li><span>Voice</span> <span class="module-desc">wake word, speak to it</span></li>
+                        <li><span>Gigs</span> <span class="module-desc">shows near you, from your library</span></li>
                     </ul>
                 </div>
             </div>
