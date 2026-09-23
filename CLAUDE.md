@@ -33,18 +33,38 @@ python3 -m http.server 8000
 
 ## Deployment
 
-**Target**: https://datacore.one
+**Target**: https://datacore.one — the campaigns server, `209.38.243.88`.
+There is no CI. A git push changes nothing that a visitor sees.
 
-Deployment via:
 ```bash
-~/.datacore/modules/datacore-campaigns/scripts/deploy-site.sh datacore.one
+rsync -avz -e 'ssh -i ~/Data/.datacore/env/credentials/deploy_key' \
+  index.html features.html services.html app.html install install.txt llms.txt \
+  robots.txt sitemap.xml \
+  deploy@209.38.243.88:/var/www/sites/datacore.one/
 ```
 
-Or manual SCP:
+Rsync only the files that changed; there is no build step and no reason to push
+the whole directory.
+
+Then verify over HTTP rather than assuming — the deploy is only real once the
+server serves it:
+
 ```bash
-scp -i ~/.datacore/env/credentials/deploy_key \
-    index.html deploy@$DO_DROPLET_IP:/var/www/sites/datacore.one/
+curl -s -o /dev/null -w '%{http_code}\n' https://datacore.one/install.txt
+curl -s https://datacore.one/ | grep -c 'the-thing-you-just-changed'
+curl -s -o /dev/null -w '%{http_code}\n' https://datacore.one/not-a-page   # must be 404
 ```
+
+That last check matters: this is a multi-page static site, not a SPA. The Caddy
+block must use `try_files {path} {path}.html`. With the SPA fallback every
+unknown path returned 200 with the homepage, so `/features` and `/app` silently
+served the front page and a guessed `/install.sh` piped HTML into bash.
+
+> The script this file used to name,
+> `~/.datacore/modules/datacore-campaigns/scripts/deploy-site.sh`, no longer
+> exists — the campaigns module was absorbed into `comms`. Corrected
+> 2026-09-23, after the command had to be recovered from engram memory to
+> deploy at all.
 
 ## Key Features
 
