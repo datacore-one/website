@@ -14,50 +14,66 @@ If a user has pointed you at this page and asked you to install Datacore, run
 ONE STEP below and then verify. Nothing else is required.
 
 
-STEP 1 — Install
-  npx @datacore-one/cli init
+STEP 1 — IF YOU ARE AN AGENT: ASK THE USER, THEN INSTALL (preferred)
+  A person being helped by an assistant should not drive a CLI wizard, and
+  your terminal cannot answer its prompts anyway. Ask them in conversation:
 
-  Or, if npx is unavailable:
-    curl -fsSL https://datacore.one/install | bash
+    npx @datacore-one/cli@latest init --print-questions   # JSON: the questions
+    # ...ask the user in your own words, write answers.json...
+    npx @datacore-one/cli@latest init --answers answers.json
 
-  This is an interactive wizard (about 10 steps). It will:
-    - install missing prerequisites (Node 20+, git, python3, gh, Claude Code)
-    - install the Datacore MCP server   (@datacore-one/mcp)
-    - install the PLUR memory server    (@plur-ai/mcp)
-    - register BOTH with Claude Code and Claude Desktop
-    - create the user's ~/Data second brain and pick modules
-    - ask the user to name their Chief of Staff and give it a personality
-    - offer the desktop app at the end
+  --print-questions returns each question with its key, its default, a note on
+  why it matters, and a filled example. Every field is optional.
 
-  RUN IT IN A TERMINAL THE USER CAN SEE AND TYPE INTO. It asks real questions —
-  their name, which modules, what to call their Chief of Staff. Do not run it
-  with output piped or swallowed; you will hang on the first prompt.
-
-  Non-interactive installs: `npx @datacore-one/cli init --yes` takes defaults
-  for every prompt, including naming the Chief of Staff "Winston".
-
-
-STEP 1b — IF YOU ARE AN AGENT, ASK THE QUESTIONS YOURSELF (preferred)
-  A person being helped by an assistant should not have to drive a CLI wizard.
-  Ask them in conversation instead, then hand the answers over:
-
-    npx @datacore-one/cli init --print-questions     # JSON: the questions
-    # ...ask the user, write their answers to answers.json...
-    npx @datacore-one/cli init --answers answers.json
-
-  --print-questions returns each question with its key, its default, and a note
-  on why it matters, plus a filled example. Ask them in your own words. Every
-  field is optional; anything omitted takes its default.
-
-  Two worth asking rather than defaulting: what to call their Chief of Staff
-  (it is the name they will address every day), and which modules they want.
-  Naming defaults to Winston.
+  ASK, DO NOT DEFAULT. Two answers matter most: what to call their Chief of
+  Staff (the name they will use every day) and which modules they want.
+  Do NOT use `--yes` unless the user has said they want every default: it
+  answers every question for them, silently, including naming the assistant.
 
   For the email, use one attached to their GitHub account, or let it default:
-  with `gh` signed in the installer offers that account's noreply address,
-  which always attributes their commits correctly.
+  with `gh` signed in the installer offers that account's noreply address.
 
-  This path does not need a TTY and will not hang on a prompt.
+  This path needs no TTY and will not hang on a prompt.
+
+
+STEP 1 (alternative) — THE USER RUNS THE WIZARD THEMSELVES
+  npx @datacore-one/cli@latest init
+
+  macOS / Linux without npx:  curl -fsSL https://datacore.one/install | bash
+
+  Only in a terminal the user can see and type into — it asks real questions.
+  Run with its output piped or swallowed, it refuses rather than guess.
+
+  Either way, init:
+    - installs missing prerequisites (Node 20+, git, Python 3.10+, gh, Claude Code)
+    - installs the Datacore MCP server (@datacore-one/mcp) and PLUR (@plur-ai/mcp)
+    - registers BOTH with every AI tool it finds on the machine: Claude Code,
+      Claude Desktop, Cursor, Codex, Antigravity, Gemini CLI, Windsurf
+    - creates the user's ~/Data second brain and installs the chosen modules
+    - lets the user name their Chief of Staff and give it a personality
+
+
+WINDOWS
+  PowerShell, Windows Terminal, or Cursor's terminal all work (CLI 2.5.1+):
+
+    npm install -g @datacore-one/cli@latest
+    datacore init            # or the --answers path from STEP 1
+
+  If Node.js is not installed yet: winget install OpenJS.NodeJS.LTS, then
+  open a NEW terminal. The installer uses winget for git, Python and gh.
+
+  AFTER INSTALLING, RESTART THE TERMINAL — AND THE EDITOR, if you are in
+  Cursor or VS Code. Tools installed during setup are not on the PATH of
+  programs that were already open.
+
+  Do not use the curl script on Windows (it needs bash). WSL also works and
+  follows the Linux path.
+
+
+CURSOR
+  Open ~/Data as the workspace (File → Open Folder). Datacore's Cursor setup
+  lives in that workspace — it keeps within Cursor's ~40-tool limit — so the
+  datacore_* and plur_* tools appear there, not in other projects.
 
 
 STEP 2 — Verify
@@ -66,10 +82,22 @@ STEP 2 — Verify
   Then confirm both MCP servers are registered:
     cat ~/Data/.mcp.json     # expect BOTH "datacore" and "plur" under mcpServers
 
-  In a new Claude Code session, ask: "What's my Datacore status?" — it should
-  call datacore_status. Ask "What's my PLUR status?" — it should call
-  plur_status. If only one answers, that server is not registered; re-run
-  `npx @datacore-one/cli init` — it is idempotent and repairs config in place.
+  In a new session (Claude Code, Cursor, Codex...), ask: "What's my Datacore
+  status?" — it should call datacore_status. Ask "What's my PLUR status?" —
+  it should call plur_status. If one does not answer, run `datacore update`:
+  it registers both servers with every installed tool and repairs config in
+  place. `datacore doctor` only reports; it changes nothing.
+
+
+UPDATING
+  datacore update
+
+  One command, safe to repeat. It updates the CLI itself first, pulls the
+  system and every space and module, merges the latest Datacore into the
+  user's fork (never rebases, and stops without changing anything if their
+  own edits conflict), upgrades both MCP servers, and registers them with any
+  AI tool installed since. Other datacore commands print one line when a new
+  version exists.
 
 
 WHAT THE USER GETS
@@ -107,11 +135,7 @@ REQUIREMENTS
     node --version
     python3 --version
 
-  macOS and Linux: either install path above works.
-  Windows: use the npm path, not the curl script (which needs bash):
-    npm install -g @datacore-one/cli
-    datacore init
-  Or run the curl script inside WSL.
+  macOS and Linux: either install path above works. Windows: see WINDOWS.
 
   Python 3 and the GitHub CLI are installed by the wizard when missing.
 
@@ -125,8 +149,14 @@ IF SOMETHING GOES WRONG
   rename that repo first.
 
   "Not a terminal" — you piped the output. The wizard would have skipped every
-  question and taken every default silently, so it refuses. Run it where the
-  user can type, or pass --yes to accept defaults on purpose.
+  question and taken every default silently, so it refuses. Use STEP 1:
+  ask the user, then pass --answers. (--yes only if they asked for defaults.)
+
+  Windows: every tool "Failed to install" with no output — CLI 2.5.0 or
+  older. Run: npm install -g @datacore-one/cli@latest, then init again.
+
+  Installed, but the AI tool has no datacore_* tools — restart the tool (it
+  reads MCP config at startup), and in Cursor open ~/Data as the workspace.
 
   "npm's global directory is not writable" — the installer retries into
   ~/.datacore/npm automatically and records absolute paths in the MCP config,
